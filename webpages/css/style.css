@@ -1,3 +1,8 @@
+/*Helper*/
+.hidden{
+	display: none;
+}
+
 /*Main parts - home*/
 html, body{
 	margin: 0;
@@ -15,7 +20,7 @@ body{
 	padding: 0;
 	padding-top: 5px;
 	overflow: hidden;
-	height: 99%;
+	height: 95%;
 }
 
 #contentDiv{
@@ -53,5 +58,32 @@ body{
 /*P2P input page*/
 
 #p2pInputContainer{
+	height: 400px;
+	width: 400px;
+	background-color: orange;
 	margin: 0 auto;
+	display: block;
 }
+
+#p2pInputContainer table{
+	height: 90%;
+	margin: 0 auto;
+	margin-top: 5%;
+}
+
+#p2pInputContainer table tr td{
+	padding: 20px;
+}
+
+#p2pInputContainer table tr:first-child{
+	text-align: right;
+	width: 400px;
+	padding: 20px 0px;
+}
+
+#p2pInputContainer table tr td input{
+	height: 20px;
+}
+
+
+
