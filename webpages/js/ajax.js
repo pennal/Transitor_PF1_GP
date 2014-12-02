@@ -9,7 +9,7 @@ window.addEventListener("hashchange", dealWithHash);
 var contentDiv
 
 // Function to send GET Ajax request
-function sendAjaxRequest (url, requestString, callback) {
+function sendAjaxRequest (url, callback) {
 	if (true) {};
 	var xmlhttp;
 	if (window.XMLHttpRequest)
@@ -35,7 +35,7 @@ function sendAjaxRequest (url, requestString, callback) {
 	  if (xmlhttp.readyState==4 && (xmlhttp.status==200||xmlhttp.status==0)) { //The 0 is just because it seemed to not like it when run locally..
 	  	hideProgressBar();
 	  	updateProgressBar(0);
-	  	window.location.hash = url+requestString
+	  	window.location.hash = url
 	  	callback(xmlhttp.responseText);
 	  }else{
 	  	// console.log('readyState: '+xmlhttp.readyState+', code: '+xmlhttp.status);
@@ -44,7 +44,7 @@ function sendAjaxRequest (url, requestString, callback) {
 	}
 
 	// Build request
-	xmlhttp.open("GET",url+requestString,true);
+	xmlhttp.open("GET",url,true);
 
 	// Show the loading bar
 	showLoadingAjax();
@@ -64,15 +64,15 @@ function replaceHTMLOfElement (element, content) {
 	// Intercept clicks on internal links
 	$('a.internal').click(function(event){
 		event.preventDefault();
-		setupAndSendAjaxRequest($(this).attr('href'), '');
+		setupAndSendAjaxRequest($(this).attr('href'));
 		return false;
 	});
 }
 
 
 // Sends Ajax request and puts returned content into the contentDiv
-function setupAndSendAjaxRequest (requestedPage, requestString) {
-	sendAjaxRequest(requestedPage, requestString, function(data){
+function setupAndSendAjaxRequest (requestedPage) {
+	sendAjaxRequest(requestedPage, function(data){
 		replaceHTMLOfElement(contentDiv, data);
 	});
 }
@@ -103,9 +103,9 @@ function dealWithHash () {
 	var hash = window.location.hash.substr(1);
 	console.log('Hash changed to: '+hash);
 	if (hash != '') {
-		setupAndSendAjaxRequest(hash, '');
+		setupAndSendAjaxRequest(hash);
 	}else{
-		setupAndSendAjaxRequest('pages/home.html', '');
+		setupAndSendAjaxRequest('pages/home.html');
 	}
 }
 
@@ -114,7 +114,7 @@ function documentReady () {
 	contentDiv = $('#contentDiv');
 
 	// Test to get a page's content
-	// setupAndSendAjaxRequest('files/test.txt', '');
+	// setupAndSendAjaxRequest('files/test.txt');
 
 	// When first loaded (after function definitions), check to see if it needs to redirect you because of a hash
 	dealWithHash();
@@ -122,7 +122,7 @@ function documentReady () {
 	// Intercept clicks on internal links
 	$('a.internal').click(function(event){
 		event.preventDefault();
-		setupAndSendAjaxRequest($(this).attr('href'), '');
+		setupAndSendAjaxRequest($(this).attr('href'));
 		return false;
 	});
 }
