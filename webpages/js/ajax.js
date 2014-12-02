@@ -17,17 +17,18 @@ $(document).ready(function(){
 		    if (e.lengthComputable){
 		    	var progress = (e.loaded / e.total) * 100;
 		        updateProgressBar(progress);
-		    	// console.log(progress);
 		    }
 		};
 
 		xmlhttp.onreadystatechange=function(){
 		  
-		  if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-		  	hideProgressBar()
-		  	updateProgressBar(0)
+		  if (xmlhttp.readyState==4 && (xmlhttp.status==200||xmlhttp.status==0)) {
+		  	hideProgressBar();
+		  	updateProgressBar(0);
 		  	callback(xmlhttp.responseText);
-		  };
+		  }else{
+		  	console.log('readyState: '+xmlhttp.readyState+', code: '+xmlhttp.status);
+		  }
 
 		}
 		xmlhttp.open("GET",url,true);
@@ -41,13 +42,14 @@ $(document).ready(function(){
 
 	function setupAndSendAjaxRequest (requestedPage) {
 		sendAjaxRequest(requestedPage, function(data){
+			console.log('data= '+data)
 			replaceHTMLOfElement(contentDiv, data);
 		});
 	}
 
 	function showLoadingAjax () {
 		replaceHTMLOfElement(contentDiv, '');
-		showProgressBar()
+		showProgressBar();
 	}
 
 	function updateProgressBar (percent) {
@@ -62,6 +64,6 @@ $(document).ready(function(){
 		$("#progressDiv").css('display', 'none');
 	}
 
-	setupAndSendAjaxRequest('https://www.gutenberg.org/cache/epub/47512/pg47512.txt')
+	setupAndSendAjaxRequest('files/test.txt');
 
 });
