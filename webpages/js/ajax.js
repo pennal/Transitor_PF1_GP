@@ -103,7 +103,9 @@ function dealWithHash () {
 	var hash = window.location.hash.substr(1);
 	if (hash != '') {
 		setupAndSendAjaxRequest(hash, '');
-	};
+	}else{
+		setupAndSendAjaxRequest('pages/home.html', '');
+	}
 }
 
 // Called when page has loaded
