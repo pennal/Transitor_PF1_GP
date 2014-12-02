@@ -101,6 +101,7 @@ function hideProgressBar () {
 // Parses hash and redirects if needed
 function dealWithHash () {
 	var hash = window.location.hash.substr(1);
+	console.log('Hash changed to: '+hash);
 	if (hash != '') {
 		setupAndSendAjaxRequest(hash, '');
 	}else{

@@ -1,6 +1,10 @@
-/*Helper*/
+/*Helpers*/
 .hidden{
 	display: none;
+}
+
+.noOverflow{
+	overflow: hidden;
 }
 
 /*Main parts - home*/
@@ -58,11 +62,13 @@ body{
 /*P2P input page*/
 
 #p2pInputContainer{
-	height: 400px;
-	width: 400px;
+	height: 80%;
+	width: 50%;
 	background-color: orange;
-	margin: 0 auto;
 	display: block;
+	position: absolute;
+	left: 50%;
+	margin-left: -25%;
 }
 
 #p2pInputContainer table{
@@ -85,5 +91,13 @@ body{
 	height: 20px;
 }
 
+/*Results View*/
 
-
+#resultsView{
+	height: 80%;
+	width: 50%;
+	background-color: orange;
+	position: absolute;
+	left: 150%;
+	margin-left: -25%;
+}
