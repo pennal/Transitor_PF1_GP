@@ -1,3 +1,4 @@
+/*Main parts - home*/
 html, body{
 	margin: 0;
 	padding: 0;
@@ -46,4 +47,11 @@ body{
 	width: 0%;
 	background-color: white;
 	display: block;
+}
+
+
+/*P2P input page*/
+
+#p2pInputContainer{
+	margin: 0 auto;
 }
