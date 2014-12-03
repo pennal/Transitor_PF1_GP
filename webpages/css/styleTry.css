@@ -17,11 +17,7 @@ body{
 #button{
 	width: 850px;
 	/*background-color: black;*/
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	margin-left: -25%;
-	margin-top: -25%;
+	margin: 0 auto;
 }
 #centralContainer{
 	width: 400px;
