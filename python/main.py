@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 import json
 import pointToPoint
+import tableBoard
 
 
 
 
 
-
-print(json.dumps(pointToPoint.getConnectionsPointToPoint("Lugano","Zürich HB"),indent=4))
+tableBoard.getTableBoard("Aarau")
+#print(json.dumps(pointToPoint.getConnectionsPointToPoint("Lugano","Zürich HB"),indent=4))
