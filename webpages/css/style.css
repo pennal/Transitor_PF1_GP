@@ -54,10 +54,15 @@ body{
 #containerDiv{
 	margin: 0;
 	padding: 0;
-	padding-top: 5px;
+	padding-top: 10vh;
 	overflow: hidden;
-	height: 95%;
+	height: 90%;
 	position: relative;
+}
+@media (max-height: 400px) {
+  #containerDiv {
+  	padding-top: 0px;
+  }
 }
 
 #contentDiv, #loadedContentContainer{
@@ -105,15 +110,6 @@ body{
 	height: 140px;
 	margin: 6px;
 }
-
-/*.filler{
-	height: 100%;
-	width: 100%;
-}
-.filler:hover{
-	background: rgba(0, 0, 0, 0.3);
-}*/
-
 .whiteBox{
 	background-color: white;
 }
@@ -247,19 +243,18 @@ body{
 /*P2P input page*/
 
 #p2pInputContainer{
-	height: 80%;
 	width: 50%;
-	background-color: orange;
+	min-width: 500px;
+	box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);
+	background-color: rgb(250,250,250);
+	margin: 0 auto;
 	display: block;
-	position: absolute;
-	left: 50%;
-	margin-left: -25%;
 }
 
 #p2pInputContainer table{
-	height: 90%;
-	margin: 0 auto;
-	margin-top: 5%;
+	height: 80%;
+	margin: 10% auto;
+	padding: 100px;
 }
 
 #p2pInputContainer table tr td{
