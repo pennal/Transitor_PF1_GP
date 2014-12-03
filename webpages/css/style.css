@@ -51,7 +51,7 @@ body{
 	position: relative;
 }
 
-#contentDiv{
+#contentDiv, #loadedContentContainer{
 	margin: 2.5% auto;
 	overflow: scroll;
 	width: 90%;
@@ -86,17 +86,21 @@ body{
 
 /*Home page*/
 
+/*BOX SPECIFICS*/
+.p2pBox{
+	background-image: url(../images/p2p.png);
+	background-color: green;
+	background-size: cover;
+}
+
+
+/*Config*/
 .box {
 	box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);
 	float: left;
 	width: 300px;
 	height: 140px;
 	margin: 6px;
-}
-.p2pBox{
-	background-image: url(../images/p2p.png);
-	background-color: white;
-	background-size: cover;
 }
 
 /*.filler{
@@ -121,21 +125,12 @@ body{
 	margin: 6px;
 }
 
-#button{
+#button, #loadedContent{
 	position: absolute;
 	width: 75%;
 	left: 25%;
 	margin-left: -7.5%;
 	min-width: 630px;
-}
-
-#loadedContent{
-	position: absolute;
-	z-index: 1;
-	/*margin: 2.5% auto;*/
-	overflow: scroll;
-	/*width: 90%;*/
-	/*height: 90%;*/
 }
 
 /*CSS Animations*/
@@ -166,18 +161,18 @@ body{
 .box .front, .box2 .front {
 	z-index: 2;
 	/* for firefox 31 */
-	-webkit-transform: rotateY(0deg) scale(1);
-	-ms-transform: rotateY(0deg) scale(1);
-	-o-transform: rotateY(0deg) scale(1);
-	transform: rotateY(0deg) scale(1);
+	-webkit-transform: rotateY(0deg);
+	-ms-transform: rotateY(0deg);
+	-o-transform: rotateY(0deg);
+	transform: rotateY(0deg);
 }
 
 /* back, initially hidden pane */
 .box .back, .box2 .back {
-	-webkit-transform: rotateY(180deg) scale(1);
-	-ms-transform: rotateY(180deg) scale(1);
-	-o-transform: rotateY(180deg) scale(1);
-	transform: rotateY(180deg) scale(1);
+	-webkit-transform: rotateY(-180deg);
+	-ms-transform: rotateY(-180deg);
+	-o-transform: rotateY(-180deg);
+	transform: rotateY(-180deg);
 }
 
 
@@ -191,16 +186,16 @@ body{
 		transform: rotateY(0deg);
 	}
 	50%{
-		-webkit-transform: rotateY(60deg);
-		-ms-transform: rotateY(60deg);
-		-o-transform: rotateY(60deg);
-		transform: rotateY(60deg);
+		-webkit-transform: rotateY(-60deg);
+		-ms-transform: rotateY(-60deg);
+		-o-transform: rotateY(-60deg);
+		transform: rotateY(-60deg);
 	}
 	100%{
-		-webkit-transform: rotateY(180deg);
-		-ms-transform: rotateY(180deg);
-		-o-transform: rotateY(180deg);
-		transform: rotateY(180deg);
+		-webkit-transform: rotateY(-180deg);
+		-ms-transform: rotateY(-180deg);
+		-o-transform: rotateY(-180deg);
+		transform: rotateY(-180deg);
 	}
 }
 
@@ -212,16 +207,16 @@ body{
 		transform: rotateY(0deg);
 	}
 	50%{
-		-webkit-transform: rotateY(60deg);
-		-ms-transform: rotateY(60deg);
-		-o-transform: rotateY(60deg);
-		transform: rotateY(60deg);
+		-webkit-transform: rotateY(-60deg);
+		-ms-transform: rotateY(-60deg);
+		-o-transform: rotateY(-60deg);
+		transform: rotateY(-60deg);
 	}
 	100%{
-		-webkit-transform: rotateY(180deg);
-		-ms-transform: rotateY(180deg);
-		-o-transform: rotateY(180deg);
-		transform: rotateY(180deg);
+		-webkit-transform: rotateY(-180deg);
+		-ms-transform: rotateY(-180deg);
+		-o-transform: rotateY(-180deg);
+		transform: rotateY(-180deg);
 	}
 }
 

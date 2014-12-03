@@ -1,11 +1,19 @@
 $('a.homepage').click(function(event){
 	event.preventDefault();
 
+	var theLink = $(this).attr('href');
+
 	var flipDiv = $(this).children('div');
 
 	flipDivOffset = flipDiv.offset();
+	$('#containerDiv').prepend("<div id=\"loadedContentContainer\"></div>");
+	$('#loadedContentContainer').append("<div id=\"loadedContent\"></div>")
+	$('#loadedContentContainer #loadedContent').append(flipDiv);
+	// flipDiv = $('#loadedContentContainer #loadedContent div');
 	flipDiv.addClass('flip');
 	$('body').css('overflow', 'hidden');
+	var backgroundColor = flipDiv.children().children('.front').css('background-color');
+	flipDiv.css('background-color', backgroundColor);
 	flipDiv.animate({
 		width: $(document).width(),
 		height: $(document).height(),
@@ -18,14 +26,20 @@ $('a.homepage').click(function(event){
 			'background-repeat':'no-repeat',
 			'background-position':'center'
 		});
-		$('body').css('background-color', flipDiv.data("background-color"));
-	});
-
-	isAnimatingPageChange = true;
-	sendAjaxRequest($(this).attr('href'), function(data){
-		replaceHTMLOfElement ($('#contentDiv'), data, true);
-		$('body').css('overflow', 'initial');
+		setBGColour(backgroundColor);
+		requestThenFadeOut(theLink);
 	});
 
 	return false;
 });
+
+
+function requestThenFadeOut (theLink) {
+	sendAjaxRequest(theLink, function(data){
+		replaceHTMLOfElement ($('#contentDiv'), data);
+		$('#loadedContentContainer').delay(500).fadeOut(400, function(){
+			$('#loadedContentContainer').remove();
+		});
+		$('body').css('overflow', 'initial');
+	});
+}
