@@ -231,9 +231,22 @@ body{
 /*Perform animations*/
 .box.flip, .box2.flip {
 	z-index: 5;
-	-webkit-animation: openPage .8s ease-in 1 normal forwards;
-	-o-animation: openPage .8s ease-in 1 normal forwards;
-	animation: openPage .8s ease-in 1 normal forwards;
+	/*The flip*/
+	-webkit-animation: openPage .5s ease-in 0.2 normal forwards;
+	-o-animation: openPage .5s ease-in 0.2 normal forwards;
+	animation: openPage .5s ease-in 0.2 normal forwards;
+
+	/*Height and width, top and left*/
+	/* For Safari 3.1 to 6.0 */
+    -webkit-transition-property: width, height, top, left;
+    -webkit-transition-duration: 0.5s;
+    -webkit-transition-timing-function: ease-in;
+    -webkit-transition-delay: 0.2s;
+    /* Standard syntax */
+    transition-property: width, height, top, left;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in;
+    transition-delay: 0.2s;
 }
 
 

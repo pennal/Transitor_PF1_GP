@@ -14,21 +14,29 @@ $('a.homepage').click(function(event){
 	$('body').css('overflow', 'hidden');
 	var backgroundColor = flipDiv.children().children('.front').css('background-color');
 	flipDiv.css('background-color', backgroundColor);
-	flipDiv.animate({
+
+	flipDiv.css({
 		width: $(document).width(),
 		height: $(document).height(),
 		left: (-flipDivOffset.left),
 		top: (-flipDivOffset.top)
-	}, 600, function(){
-		flipDiv.children('.flipper').children('.front').css('visibility','hidden');
-		$('.p2pBox').css({
-			'background-size':'initial',
-			'background-repeat':'no-repeat',
-			'background-position':'center'
-		});
-		setBGColour(backgroundColor);
-		requestThenFadeOut(theLink);
 	});
+
+	// flipDiv.animate({
+	// 	width: $(document).width(),
+	// 	height: $(document).height(),
+	// 	left: (-flipDivOffset.left),
+	// 	top: (-flipDivOffset.top)
+	// }, 700, function(){
+	// 	flipDiv.children('.flipper').children('.front').css('visibility','hidden');
+	// 	$('.p2pBox').css({
+	// 		'background-size':'initial',
+	// 		'background-repeat':'no-repeat',
+	// 		'background-position':'center'
+	// 	});
+	// 	setBGColour(backgroundColor);
+	// 	requestThenFadeOut(theLink);
+	// });
 
 	return false;
 });
