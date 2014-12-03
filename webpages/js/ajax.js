@@ -54,10 +54,14 @@ function sendAjaxRequest (url, callback) {
 }
 
 // Helper method to replace an element's HTML
-function replaceHTMLOfElement (element, content) {
+function replaceHTMLOfElement (element, content, animated) {
 
-	// Set the new content
-	element.html(content);
+	// Set the new content either animated or not
+	if (animated) {
+		
+	} else{
+		element.html(content);
+	};
 
 	// Take the title from the webpage
 	var newTitle = $('div.title.hidden').html();
@@ -78,13 +82,13 @@ function replaceHTMLOfElement (element, content) {
 // Sends Ajax request and puts returned content into the contentDiv
 function setupAndSendAjaxRequest (requestedPage) {
 	sendAjaxRequest(requestedPage, function(data){
-		replaceHTMLOfElement(contentDiv, data);
+		replaceHTMLOfElement(contentDiv, data, false);
 	});
 }
 
 // Prepare to show loading screen
 function showLoadingAjax () {
-	replaceHTMLOfElement(contentDiv, '');
+	replaceHTMLOfElement(contentDiv, '', false);
 	showProgressBar();
 }
 
