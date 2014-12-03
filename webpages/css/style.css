@@ -1,3 +1,16 @@
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: url('fonts/OpenSans-light.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  src: url('fonts/OpenSans.ttf') format('truetype');
+}
+
 /*Helpers*/
 .hidden{
 	display: none;
@@ -9,6 +22,7 @@
 
 /*Main parts - home*/
 html, body{
+	font-family: Open Sans;
 	margin: 0;
 	padding: 0;
 	height: 100%;
@@ -58,6 +72,40 @@ body{
 	display: block;
 }
 
+
+/*Home page*/
+
+#box {
+	float: left;
+	width: 200px;
+	height: 100px;
+	margin: 6px;
+}
+.blueBox{
+	background-color: rgb(0,0,180);
+}
+.blueBox:hover{
+	background-color: rgb(0,0,250);
+}
+.whiteBox{
+	background-color: white;
+}
+.whiteBox:hover{
+	background-color: rgb(240,240,240);
+}
+#box2 {
+	float: left;
+	width: 100px;
+	height: 100px;
+	margin: 6px 3px 6px 3px;
+}
+.after-box {
+	clear: left;
+}
+.inputField{
+	padding: 50px;
+	margin: 0 auto;
+}
 
 /*P2P input page*/
 
