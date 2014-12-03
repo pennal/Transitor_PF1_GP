@@ -129,8 +129,8 @@ body{
 	min-width: 630px;
 }
 
-/*CSS Animations*/
 
+/*CSS Animations*/
 .persp{
 	perspective: 1000px;
 	display: relative;
@@ -147,9 +147,7 @@ body{
 }
 
 .box .front, .box .back, .box2 .front, .box2 .back{
-	/*backface-visibility: hidden;*/
 	position: absolute;
-
 	top: 0;
 	left: 0;
 	background-color: white;
@@ -180,30 +178,18 @@ body{
 
 @-webkit-keyframes openPage{
 	0%{
-		/*-webkit-transform: rotateY(0deg) scale(1);
-		-ms-transform: rotateY(0deg) scale(1);
-		-o-transform: rotateY(0deg) scale(1);
-		transform: rotateY(0deg) scale(1);*/
 		-webkit-transform: rotateY(0deg);
 		-ms-transform: rotateY(0deg);
 		-o-transform: rotateY(0deg);
 		transform: rotateY(0deg);
 	}
 	50%{
-		/*-webkit-transform: rotateY(60deg) scale(1.3);
-		-ms-transform: rotateY(60deg) scale(1.3);
-		-o-transform: rotateY(60deg) scale(1.3);
-		transform: rotateY(60deg) scale(1.3);*/
 		-webkit-transform: rotateY(60deg);
 		-ms-transform: rotateY(60deg);
 		-o-transform: rotateY(60deg);
 		transform: rotateY(60deg);
 	}
 	100%{
-		/*-webkit-transform: rotateY(180deg) scale(2);
-		-ms-transform: rotateY(180deg) scale(2);
-		-o-transform: rotateY(180deg) scale(2);
-		transform: rotateY(180deg) scale(2);*/
 		-webkit-transform: rotateY(180deg);
 		-ms-transform: rotateY(180deg);
 		-o-transform: rotateY(180deg);
@@ -213,30 +199,18 @@ body{
 
 @keyframes openPage{
 	0%{
-		/*-webkit-transform: rotateY(0deg) scale(1);
-		-ms-transform: rotateY(0deg) scale(1);
-		-o-transform: rotateY(0deg) scale(1);
-		transform: rotateY(0deg) scale(1);*/
 		-webkit-transform: rotateY(0deg);
 		-ms-transform: rotateY(0deg);
 		-o-transform: rotateY(0deg);
 		transform: rotateY(0deg);
 	}
 	50%{
-		/*-webkit-transform: rotateY(60deg) scale(1.3);
-		-ms-transform: rotateY(60deg) scale(1.3);
-		-o-transform: rotateY(60deg) scale(1.3);
-		transform: rotateY(60deg) scale(1.3);*/
 		-webkit-transform: rotateY(60deg);
 		-ms-transform: rotateY(60deg);
 		-o-transform: rotateY(60deg);
 		transform: rotateY(60deg);
 	}
 	100%{
-		/*-webkit-transform: rotateY(180deg) scale(2);
-		-ms-transform: rotateY(180deg) scale(2);
-		-o-transform: rotateY(180deg) scale(2);
-		transform: rotateY(180deg) scale(2);*/
 		-webkit-transform: rotateY(180deg);
 		-ms-transform: rotateY(180deg);
 		-o-transform: rotateY(180deg);
