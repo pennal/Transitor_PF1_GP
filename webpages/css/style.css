@@ -48,6 +48,7 @@ body{
 	padding-top: 5px;
 	overflow: hidden;
 	height: 95%;
+	position: relative;
 }
 
 #contentDiv{
@@ -94,6 +95,7 @@ body{
 }
 .p2pBox{
 	background-image: url(../images/p2p.png);
+	background-color: white;
 	background-size: cover;
 }
 
@@ -120,8 +122,6 @@ body{
 }
 
 #button{
-	/*width: 936px;
-	margin: 0 auto;*/
 	position: absolute;
 	width: 75%;
 	left: 25%;
@@ -129,6 +129,14 @@ body{
 	min-width: 630px;
 }
 
+#loadedContent{
+	position: absolute;
+	z-index: 1;
+	/*margin: 2.5% auto;*/
+	overflow: scroll;
+	/*width: 90%;*/
+	/*height: 90%;*/
+}
 
 /*CSS Animations*/
 .persp{
@@ -150,7 +158,6 @@ body{
 	position: absolute;
 	top: 0;
 	left: 0;
-	background-color: white;
 	width: 100%;
 	height: 100%;
 }

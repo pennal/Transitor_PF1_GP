@@ -16,12 +16,15 @@ $('a.homepage').click(function(event){
 		$('.p2pBox').css({
 			'background-size':'initial',
 			'background-repeat':'no-repeat',
-			'background-position':'center' 
+			'background-position':'center'
 		});
+		$('body').css('background-color', flipDiv.data("background-color"));
 	});
 
-	sendAjaxRequest(requestedPage, function(data){
-		replaceHTMLOfElement(contentDiv, data);
+	isAnimatingPageChange = true;
+	sendAjaxRequest($(this).attr('href'), function(data){
+		replaceHTMLOfElement ($('#contentDiv'), data, true);
+		$('body').css('overflow', 'initial');
 	});
 
 	return false;
