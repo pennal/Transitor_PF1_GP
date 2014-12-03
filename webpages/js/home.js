@@ -37,7 +37,7 @@ $('a.homepage').click(function(event){
 function requestThenFadeOut (theLink) {
 	sendAjaxRequest(theLink, function(data){
 		replaceHTMLOfElement ($('#contentDiv'), data);
-		$('#loadedContentContainer').delay(500).fadeOut(400, function(){
+		$('#loadedContentContainer').delay(500).fadeOut(800, function(){
 			$('#loadedContentContainer').remove();
 		});
 		$('body').css('overflow', 'initial');

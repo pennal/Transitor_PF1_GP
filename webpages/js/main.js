@@ -1,3 +1,3 @@
 function setBGColour (bgColour) {
-	$('body').css('background-color', bgColour);
+	$('body').css('background', bgColour);
 }

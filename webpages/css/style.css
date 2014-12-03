@@ -1,3 +1,5 @@
+/****************************************************/
+
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
@@ -11,7 +13,10 @@
   src: url('fonts/OpenSans.ttf') format('truetype');
 }
 
+
+/****************************************************/
 /*Helpers*/
+
 .hidden{
 	display: none;
 }
@@ -28,7 +33,11 @@
 	height: 0px;
 }
 
+
+
+/****************************************************/
 /*Main config*/
+
 html, body{
 	font-family: Open Sans;
 	margin: 0;
@@ -84,17 +93,11 @@ body{
 }
 
 
+
+/****************************************************/
 /*Home page*/
-
-/*BOX SPECIFICS*/
-.p2pBox{
-	background-image: url(../images/p2p.png);
-	background-color: green;
-	background-size: cover;
-}
-
-
 /*Config*/
+
 .box {
 	box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);
 	float: left;
@@ -133,7 +136,11 @@ body{
 	min-width: 630px;
 }
 
+
+
+/****************************************************/
 /*CSS Animations*/
+
 .persp{
 	perspective: 1000px;
 	display: relative;
@@ -232,7 +239,7 @@ body{
 
 
 
-
+/****************************************************/
 /*P2P input page*/
 
 #p2pInputContainer{
@@ -265,6 +272,9 @@ body{
 	height: 20px;
 }
 
+
+
+/****************************************************/
 /*Results View*/
 
 #resultsView{
@@ -279,3 +289,6 @@ body{
 	padding: 50px;
 	margin: 0 auto;
 }
+
+
+/****************************************************/
