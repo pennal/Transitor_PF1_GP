@@ -2,13 +2,14 @@ var resultsView = $('#resultsView')
 
 function submitP2PForm (form) {
 	alert('From: '+$('#p2pFrom').val()+' To: '+$('#p2pTo').val());
-	slideSearch(true);
 	return false;
 }
 
+// Set this up
 function getResults () {
 	sendAjaxRequest('url', function(data){
 		replaceHTMLOfElement(resultsView, data);
+		slideSearch(true);
 	})
 }
 
@@ -48,3 +49,29 @@ function slideSearch (offScreen) {
 	    });
 	}
 }
+
+function getUrlParams() {
+	var questionMarkIndex = window.location.href.indexOf('?');
+	var result = {};
+		if (questionMarkIndex !== -1) {
+			var query = window.location.href.substring(questionMarkIndex+1);
+			query.split("&").forEach(function(part) {
+				var item = part.split("=");
+				result[item[0]] = decodeURIComponent(item[1]);
+			});
+		};
+		return result;
+}
+
+function objLength (obj){    
+    var key,len=0;
+    for(key in obj){
+        len += Number( obj.hasOwnProperty(key) );
+    }
+    return len;
+};
+
+// Set this up
+if (objLength(getUrlParams()) > 0) {
+	getResults()
+};
