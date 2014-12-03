@@ -55,14 +55,19 @@ function sendAjaxRequest (url, callback) {
 
 // Helper method to replace an element's HTML
 function replaceHTMLOfElement (element, content) {
+
+	// Set the new content
 	element.html(content);
+
+	// Take the title from the webpage
 	var newTitle = $('div.title.hidden').html();
 	if (newTitle != undefined) {
 		document.title = newTitle
 		$('div.title.hidden').remove();
 	};
-	// Intercept clicks on internal links
-	$('a.internal').click(function(event){
+
+	// Intercept clicks on internal links - new watcher has to be made to apply to the new links
+	$('a.internal:not(.homepage)').click(function(event){
 		event.preventDefault();
 		setupAndSendAjaxRequest($(this).attr('href'));
 		return false;
@@ -118,11 +123,4 @@ function documentReady () {
 
 	// When first loaded (after function definitions), check to see if it needs to redirect you because of a hash
 	dealWithHash();
-
-	// Intercept clicks on internal links
-	$('a.internal').click(function(event){
-		event.preventDefault();
-		setupAndSendAjaxRequest($(this).attr('href'));
-		return false;
-	});
 }

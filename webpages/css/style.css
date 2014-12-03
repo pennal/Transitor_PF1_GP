@@ -20,6 +20,14 @@
 	overflow: hidden;
 }
 
+.clearfix:after{
+	clear: both;
+	visibility: hidden;
+	content: " ";
+	display: block;
+	height: 0px;
+}
+
 /*Main config*/
 html, body{
 	font-family: Open Sans;
@@ -31,7 +39,6 @@ html, body{
 
 body{
 	background-color: rgb(230,230,230);
-	min-width: 1040px;
 	min-height: 715px;
 }
 
@@ -77,7 +84,7 @@ body{
 
 /*Home page*/
 
-#box {
+.box {
 	box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);
 	float: left;
 	width: 300px;
@@ -85,36 +92,89 @@ body{
 	margin: 6px;
 }
 .p2pBox{
-	background-image: url(../immages/p2p.png);
+	background-image: url(../images/p2p.png);
 	background-size: cover;
 }
-.filler{
+
+/*.filler{
 	height: 100%;
 	width: 100%;
 }
 .filler:hover{
 	background: rgba(0, 0, 0, 0.3);
-}
+}*/
+
 .whiteBox{
 	background-color: white;
 }
 .whiteBox:hover{
 	background-color: rgb(240,240,240);
 }
-#box2 {
+.box2 {
 	box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);
 	float: left;
 	width: 144px;
 	height: 140px;
 	margin: 6px;
 }
-.after-box {
-	clear: left;
-}
+
 #button{
-	width: 936px;
-	margin: 0 auto;
+	/*width: 936px;
+	margin: 0 auto;*/
+	position: absolute;
+	width: 75%;
+	left: 25%;
+	margin-left: -7.5%;
 }
+
+/*CSS Animations*/
+
+.persp{
+	perspective: 1000;
+}
+
+.box, .box2{
+	position: relative;
+}
+
+.box .front, .box .back, .box2 .front, .box2 .back{
+	backface-visibility: hidden;
+	position: absolute;
+
+	top: 0;
+	left: 0;
+}
+
+/* front pane, placed above back */
+.box .front, .box2 .front {
+	z-index: 2;
+	/* for firefox 31 */
+	transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.box .back, .box2 .back {
+	transform: rotateY(180deg);
+}
+
+@keyframes openPage{
+	50%{
+		-webkit-transform: rotateY(60deg) scale(1);
+		-ms-transform: rotateY(60deg) scale(1);
+		-o-transform: rotateY(60deg) scale(1);
+		transform: rotateY(60deg) scale(1);
+	}
+}
+
+.box.flip, .box2.flip {
+	-webkit-animation: openPage .8s ease-in 1 normal forwards;
+	-o-animation: openPage .8s ease-in 1 normal forwards;
+	animation: openPage .8s ease-in 1 normal forwards
+}
+
+
+
+
 
 /*P2P input page*/
 
