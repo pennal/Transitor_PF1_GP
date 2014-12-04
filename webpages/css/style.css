@@ -96,11 +96,14 @@ body{
 /*Overlay classes*/
 
 #overlayView{
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
 	height: 100%;
-	position: relative;
+    left: 0;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 400;
 }
 
 

@@ -1,6 +1,11 @@
 $('a.homepage').click(function(event){
 	event.preventDefault();
 
+	$(this).css({
+		width: $(this).children('div').outerWidth(true)+'px',
+		height: $(this).children('div').outerHeight(true)+'px',
+		float: 'left'
+	});
 	var theLink = $(this).attr('href');
 	var overlayView = $('#overlayView');
 	var flipDiv = $(this).children('div');
