@@ -54,22 +54,17 @@ body{
 #containerDiv{
 	margin: 0;
 	padding: 0;
-	padding-top: 10vh;
+	padding-top: 5px;
 	overflow: hidden;
-	height: 80%;
+	height: 95%;
 	position: relative;
-}
-@media (max-height: 400px) {
-  #containerDiv {
-  	padding-top: 0px;
-  }
 }
 
 #contentDiv, #loadedContentContainer{
 	margin: 2.5% auto;
 	overflow: scroll;
 	width: 90%;
-	height: 90%;
+	height: 95%;
 }
 
 #progressDiv{
@@ -248,12 +243,13 @@ body{
 	box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);
 	background-color: rgb(250,250,250);
 	margin: 0 auto;
+	margin-top: 20vh;
 	display: block;
 }
 
 #p2pInputContainer table{
 	height: 80%;
-	margin: 10% auto;
+	margin: 0 auto;
 	padding: 100px;
 }
 
