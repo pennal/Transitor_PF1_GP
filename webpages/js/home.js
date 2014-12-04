@@ -2,15 +2,15 @@ $('a.homepage').click(function(event){
 	event.preventDefault();
 
 	var theLink = $(this).attr('href');
-
+	var overlayView = $('#overlayView');
 	var flipDiv = $(this).children('div');
 
 	flipDivOffset = flipDiv.offset();
 	// $('#containerDiv').prepend("<div id=\"loadedContentContainer\"></div>");
 	// $('#loadedContentContainer').append("<div id=\"loadedContent\"></div>");
 	
-	$('#overlayView').append(flipDiv);
-	$('#overlayView').removeClass('hidden');
+	overlayView.append(flipDiv);
+	overlayView.removeClass('hidden');
 	// flipDiv.css({
 	// 	position: 'absolute',
 	// 	left: (flipDivOffset.left),
@@ -38,9 +38,13 @@ $('a.homepage').click(function(event){
 	// 	'background-position':'center'
 	// });
 
-	// $('body').css('overflow', 'hidden');
-	// var backgroundColor = flipDiv.children().children('.front').css('background-color');
-	// flipDiv.css('background-color', backgroundColor);
+	$('body').css('overflow', 'hidden');
+	var backgroundColor = flipDiv.children().children('.front').css('background-color');
+	flipDiv.css('background-color', backgroundColor);
+	flipDiv.children('.flipper').children('.front').css('visibility','hidden');
+
+	// setBGColour(backgroundColor);
+	// requestThenFadeOut(theLink);
 
 	// flipDiv.animate({
 	// 	width: $(document).width(),
@@ -48,7 +52,6 @@ $('a.homepage').click(function(event){
 	// 	left: (-flipDivOffset.left),
 	// 	top: (-flipDivOffset.top)
 	// }, 700, function(){
-	// 	flipDiv.children('.flipper').children('.front').css('visibility','hidden');
 	// 	$('.p2pBox').css({
 	// 		'background-size':'initial',
 	// 		'background-repeat':'no-repeat',
@@ -63,10 +66,12 @@ $('a.homepage').click(function(event){
 
 
 function requestThenFadeOut (theLink) {
+	var overlayView = $('#overlayView');
 	sendAjaxRequest(theLink, function(data){
 		replaceHTMLOfElement ($('#contentDiv'), data);
-		$('#loadedContentContainer').delay(500).fadeOut(800, function(){
-			$('#loadedContentContainer').remove();
+		overlayView.delay(500).fadeOut(800, function(){
+			overlayView.addClass('hidden');
+			overlayView.html('');
 		});
 		$('body').css('overflow', 'initial');
 	});

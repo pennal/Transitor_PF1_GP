@@ -44,7 +44,17 @@
 }
 
 
+.box.flip div div, .box2.flip div div{
+	background-size: initial;
+	background-repeat: no-repeat;
+	background-position: center
+}
+
+
+/*KEYFRAMES*/
 /*Need 2 keyframes, one for Webkit and one for the rest*/
+
+/*Flip out and grow*/
 
 @-webkit-keyframes openPage{
 	0%{
@@ -68,6 +78,8 @@
 	100%{
 		width: 100%;
 		height: 100%;
+		top: 0;
+		left: 0;
 		-webkit-transform: rotateY(-180deg);
 		-ms-transform: rotateY(-180deg);
 		-o-transform: rotateY(-180deg);
@@ -107,33 +119,50 @@
 }
 
 
+/*Fade out*/
+
+@-webkit-keyframes fadeOut{
+	0%{
+		opacity: 1;
+	}
+	50%{
+		opacity: 0.4;
+	}
+	100%{
+		opacity: 0;
+	}
+}
+
+@keyframes fadeOut{
+	0%{
+		opacity: 1;
+	}
+	50%{
+		opacity: 0.4;
+	}
+	100%{
+		opacity: 0;
+	}
+}
+
+
 /*Perform animations*/
 .box.flip, .box2.flip {
 	z-index: 5;
 	margin: 0;
+
 	/*The flip*/
 	-webkit-animation: openPage .8s ease-in 0s normal forwards;
 	-o-animation: openPage .8s ease-in 0s normal forwards;
 	animation: openPage .8s ease-in 0s normal forwards;
-
-	/*Height and width, top and left*/
-	/* For Safari 3.1 to 6.0 */
-   /* -webkit-transition-property: width, height, top, left;
-    -webkit-transition-duration: 0.5s;
-    -webkit-transition-timing-function: ease-in;
-    -webkit-transition-delay: 0.2s;*/
-    /* Standard syntax */
-    /*transition-property: width, height, top, left;
-    transition-duration: 0.5s;
-    transition-timing-function: ease-in;
-    transition-delay: 0.2s;*/
-
 }
 
-.box.flip div div, .box2.flip div div{
-	background-size: initial;
-	background-repeat: no-repeat;
-	background-position: center
+
+#overlayView .fadeOut{
+	-webkit-animation: fadeOut .8s ease-in 0s normal forwards;
+	-o-animation: fadeOut .8s ease-in 0s normal forwards;
+	animation: fadeOut .8s ease-in 0s normal forwards;
 }
+
 
 
