@@ -1,4 +1,71 @@
 import common
+from flask import Flask #Flask is the base server. use 'sudo pip3 install Flask' to install
+import jinja2 #Used to substitute the tags in the html
+import datetime #Just as a demo
+import os
+
+def returnHTMLTable(data):
+    for i in range(0,len(data["connections"])):
+        stationFrom = data["connections"][i]["from"]["station"]["name"]
+        stationTo = data["connections"][i]["to"]["station"]["name"]
+        departureTime = data["connections"][i]["from"]["departure"]
+        arrivalTime = data["connections"][i]["to"]["arrival"]
+        departurePlatform = data["connections"][i]["from"]["platform"]
+        arrivalPlatform = data["connections"][i]["to"]["platform"]
+
+        templateLoader = jinja2.FileSystemLoader( searchpath="/" )
+        #Get the current path of this file. From here, put togehter the path of the template file
+        basePath = os.path.dirname(os.path.abspath(__file__))
+        # An environment provides the data necessary to read and
+        #   parse our templates.  We pass in the loader object here.
+        templateEnv = jinja2.Environment( loader=templateLoader )
+
+        # This constant string specifies the template file we will use.
+        TEMPLATE_FILE = basePath + "/JinjaTemplates/table.jinja"
+
+        # Read the template file using the environment object.
+        # This also constructs our Template object.
+        template = templateEnv.get_template( TEMPLATE_FILE )
+
+        # Specify any input variables to the template as a dictionary.
+        templateVars = { "stationFrom" : stationFrom,
+                         "stationTo" : stationTo,
+                        "departureTime" : departureTime,
+                        "arrivalTime" : arrivalTime,
+                        "departurePlatform":departurePlatform,
+                        "arrivalPlatform":arrivalPlatform}
+
+        # Finally, process the template to produce our final text.
+        outputText = template.render( templateVars )
+        if i==0:
+            fullPageHTML = outputText
+        else:
+            fullPageHTML += outputText
+
+    templateLoader = jinja2.FileSystemLoader( searchpath="/" )
+    #Get the current path of this file. From here, put togehter the path of the template file
+    basePath = os.path.dirname(os.path.abspath(__file__))
+    # An environment provides the data necessary to read and
+    #   parse our templates.  We pass in the loader object here.
+    templateEnv = jinja2.Environment( loader=templateLoader )
+
+    # This constant string specifies the template file we will use.
+    TEMPLATE_FILE = basePath + "/JinjaTemplates/mainPage.jinja"
+
+    # Read the template file using the environment object.
+    # This also constructs our Template object.
+    template = templateEnv.get_template( TEMPLATE_FILE )
+
+    # Specify any input variables to the template as a dictionary.
+    templateVars = { "title" : stationFrom + " to " + stationTo,
+                     "description" : "Some description",
+                    "textOfWebPage" : fullPageHTML}
+
+    # Finally, process the template to produce our final text.
+    outputText = template.render( templateVars )
+
+
+    return outputText
 
 
 
@@ -29,10 +96,14 @@ def getConnectionsPointToPoint(stationFrom,stationTo,via = None,date=None, time=
 
     # Holds the final input Values
     finalValues = []
+    print(finalValues)
     # Add all items that are not the restricted ones, as well as are not 'None'
     for i in range(0,len(inputElementsKeys)):
         if inputElementsKeys[i] != "stationFrom" and inputElementsKeys[i] != "stationTo" and inputElementsKeys[i] != "urlForRequest" and inputElementsValues[i] != None:
             finalValues.append([inputElementsKeys[i],inputElementsValues[i]])
+
+    # DEBUG: Display final values
+    print(finalValues)
 
     # We start by adding the departure station and the destination
     urlForRequest += "?from=" + common.getCorrectLocationURLFormatted(stationFrom) + "&to=" + common.getCorrectLocationURLFormatted(stationTo)
@@ -43,9 +114,11 @@ def getConnectionsPointToPoint(stationFrom,stationTo,via = None,date=None, time=
         else:
             urlForRequest += "&" + str(finalValues[i][0]) + "=" + str(finalValues[i][1])
 
+    print(urlForRequest)
+
     # HTTP Request with the data needed
     rawJSON = common.doRequest(urlForRequest)
 
     # Do some additional processing
 
-    return rawJSON
+    return returnHTMLTable(rawJSON)
