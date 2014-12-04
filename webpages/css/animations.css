@@ -3,7 +3,6 @@
 
 .persp{
 	perspective: 1000px;
-	display: relative;
 }
 
 .box, .box2{
@@ -58,8 +57,6 @@
 
 @-webkit-keyframes openPage{
 	0%{
-		width: 0%;
-		height: 0%;
 		-webkit-transform: rotateY(0deg);
 		-ms-transform: rotateY(0deg);
 		-o-transform: rotateY(0deg);
@@ -68,12 +65,32 @@
 	50%{
 		width: 60%;
 		height: 60%;
-		top: 0;
-		left: 0;
-		-webkit-transform: rotateY(-60deg);
-		-ms-transform: rotateY(-60deg);
-		-o-transform: rotateY(-60deg);
-		transform: rotateY(-60deg);
+		-webkit-transform: rotateY(-90deg);
+		-ms-transform: rotateY(-90deg);
+		-o-transform: rotateY(-90deg);
+		transform: rotateY(-90deg);
+		top: 20%;
+		left: 20%;
+	}
+	60%{
+		width: 80%;
+		height: 80%;
+		-webkit-transform: rotateY(-110deg);
+		-ms-transform: rotateY(-110deg);
+		-o-transform: rotateY(-110deg);
+		transform: rotateY(-110deg);
+		top: 10%;
+		left: 10%;
+	}
+	75%{
+		width: 90%;
+		height: 90%;
+		-webkit-transform: rotateY(-160deg);
+		-ms-transform: rotateY(-160deg);
+		-o-transform: rotateY(-160deg);
+		transform: rotateY(-160deg);
+		top: 5%;
+		left: 5%;
 	}
 	100%{
 		width: 100%;
@@ -89,8 +106,6 @@
 
 @keyframes openPage{
 	0%{
-		width: 0%;
-		height: 0%;
 		-webkit-transform: rotateY(0deg);
 		-ms-transform: rotateY(0deg);
 		-o-transform: rotateY(0deg);
@@ -99,12 +114,32 @@
 	50%{
 		width: 60%;
 		height: 60%;
-		top: 0;
-		left: 0;
-		-webkit-transform: rotateY(-60deg);
-		-ms-transform: rotateY(-60deg);
-		-o-transform: rotateY(-60deg);
-		transform: rotateY(-60deg);
+		-webkit-transform: rotateY(-90deg);
+		-ms-transform: rotateY(-90deg);
+		-o-transform: rotateY(-90deg);
+		transform: rotateY(-90deg);
+		top: 20%;
+		left: 20%;
+	}
+	60%{
+		width: 80%;
+		height: 80%;
+		-webkit-transform: rotateY(-110deg);
+		-ms-transform: rotateY(-110deg);
+		-o-transform: rotateY(-110deg);
+		transform: rotateY(-110deg);
+		top: 10%;
+		left: 10%;
+	}
+	75%{
+		width: 90%;
+		height: 90%;
+		-webkit-transform: rotateY(-160deg);
+		-ms-transform: rotateY(-160deg);
+		-o-transform: rotateY(-160deg);
+		transform: rotateY(-160deg);
+		top: 5%;
+		left: 5%;
 	}
 	100%{
 		width: 100%;
@@ -120,7 +155,6 @@
 
 
 /*Fade out*/
-
 @-webkit-keyframes fadeOut{
 	0%{
 		opacity: 1;
