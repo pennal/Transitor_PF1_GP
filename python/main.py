@@ -24,7 +24,18 @@ def mainPage():
 def printHelloWorld():
     stationFrom = request.args.get('from')
     stationTo = request.args.get('to')
-    return pointToPoint.getConnectionsPointToPoint(stationFrom,stationTo)
+    via = request.args.get('via')
+    date=request.args.get('date')
+    time=request.args.get('time')
+    isArrivalTime = request.args.get('isArrivalTime')
+    transportations=request.args.get('transportations')
+    limit=request.args.get('limit')
+    direct=request.args.get('direct')
+    sleeper=request.args.get('sleeper')
+    couchette=request.args.get('couchette')
+    bike=request.args.get('bike')
+
+    return pointToPoint.getConnectionsPointToPoint(stationFrom,stationTo,via,time,date,isArrivalTime,transportations,limit,direct,sleeper,couchette,bike)
 
 
 

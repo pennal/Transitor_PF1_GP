@@ -102,6 +102,9 @@ def getConnectionsPointToPoint(stationFrom,stationTo,via = None,date=None, time=
         if inputElementsKeys[i] != "stationFrom" and inputElementsKeys[i] != "stationTo" and inputElementsKeys[i] != "urlForRequest" and inputElementsValues[i] != None:
             finalValues.append([inputElementsKeys[i],inputElementsValues[i]])
 
+    # DEBUG: Display final values
+    print(finalValues)
+
     # We start by adding the departure station and the destination
     urlForRequest += "?from=" + common.getCorrectLocationURLFormatted(stationFrom) + "&to=" + common.getCorrectLocationURLFormatted(stationTo)
 
