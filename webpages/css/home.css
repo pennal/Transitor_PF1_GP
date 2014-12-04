@@ -2,7 +2,6 @@
 
 /*BOX SPECIFICS*/
 .p2pBox{
-	backside-visibility: hidden;
 	background: red;
 	background-image: url(../images/p2p1.png);
 	background-size: cover;

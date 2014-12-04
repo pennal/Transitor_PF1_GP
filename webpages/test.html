@@ -1,0 +1,161 @@
+<html>
+
+<head>
+<script type="text/javascript" src="js/home.js"></script>
+<link rel="stylesheet" type="text/css" href="css/home.css">
+	<style type="text/css">
+		/****************************************************/
+		/*CSS Animations*/
+
+		.persp{
+			perspective: 1000px;
+			display: relative;
+		}
+
+		.box, .box2{
+			position: relative;
+		}
+
+		.flipper{
+			position: relative;
+			height: 100%;
+			width: 100%;
+		}
+
+		.box .front, .box .back, .box2 .front, .box2 .back{
+			backside-visibility: hidden;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+
+		/* front pane, placed above back */
+		.box .front, .box2 .front {
+			z-index: 2;
+			/* for firefox 31 */
+			-webkit-transform: rotateY(0deg);
+			-ms-transform: rotateY(0deg);
+			-o-transform: rotateY(0deg);
+			transform: rotateY(0deg);
+		}
+
+		/* back, initially hidden pane */
+		.box .back, .box2 .back {
+			-webkit-transform: rotateY(-180deg);
+			-ms-transform: rotateY(-180deg);
+			-o-transform: rotateY(-180deg);
+			transform: rotateY(-180deg);
+		}
+
+
+		/*Need 2 keyframes, one for Webkit and one for the rest*/
+
+		@-webkit-keyframes openPage{
+			0%{
+				width: 0%;
+				height: 0%;
+				-webkit-transform: rotateY(0deg);
+				-ms-transform: rotateY(0deg);
+				-o-transform: rotateY(0deg);
+				transform: rotateY(0deg);
+			}
+			50%{
+				width: 60%;
+				height: 60%;
+				top: 0;
+				left: 0;
+				-webkit-transform: rotateY(-60deg);
+				-ms-transform: rotateY(-60deg);
+				-o-transform: rotateY(-60deg);
+				transform: rotateY(-60deg);
+			}
+			100%{
+				width: 100%;
+				height: 100%;
+				-webkit-transform: rotateY(-180deg);
+				-ms-transform: rotateY(-180deg);
+				-o-transform: rotateY(-180deg);
+				transform: rotateY(-180deg);
+			}
+		}
+
+		@keyframes openPage{
+			0%{
+				width: 0%;
+				height: 0%;
+				-webkit-transform: rotateY(0deg);
+				-ms-transform: rotateY(0deg);
+				-o-transform: rotateY(0deg);
+				transform: rotateY(0deg);
+			}
+			50%{
+				width: 60%;
+				height: 60%;
+				top: 0;
+				left: 0;
+				-webkit-transform: rotateY(-60deg);
+				-ms-transform: rotateY(-60deg);
+				-o-transform: rotateY(-60deg);
+				transform: rotateY(-60deg);
+			}
+			100%{
+				width: 100%;
+				height: 100%;
+				top: 0;
+				left: 0;
+				-webkit-transform: rotateY(-180deg);
+				-ms-transform: rotateY(-180deg);
+				-o-transform: rotateY(-180deg);
+				transform: rotateY(-180deg);
+			}
+		}
+
+
+		/*Perform animations*/
+		.box.flip, .box2.flip {
+			z-index: 5;
+			margin: 0;
+			/*The flip*/
+			-webkit-animation: openPage .8s ease-in 0s normal forwards;
+			-o-animation: openPage .8s ease-in 0s normal forwards;
+			animation: openPage .8s ease-in 0s normal forwards;
+
+			/*Height and width, top and left*/
+			/* For Safari 3.1 to 6.0 */
+		   /* -webkit-transition-property: width, height, top, left;
+		    -webkit-transition-duration: 0.5s;
+		    -webkit-transition-timing-function: ease-in;
+		    -webkit-transition-delay: 0.2s;*/
+		    /* Standard syntax */
+		    /*transition-property: width, height, top, left;
+		    transition-duration: 0.5s;
+		    transition-timing-function: ease-in;
+		    transition-delay: 0.2s;*/
+
+		}
+
+		.box.flip div div, .box2.flip div div{
+			background-size: initial;
+			background-repeat: no-repeat;
+			background-position: center
+		}
+
+
+
+	</style>
+</head>
+<body>
+	<div>
+		<a href="pages/p2p/input.html" class="internal homepage">
+            <div class="box persp" style="width:400px; height:200px;">
+                <div class="flipper">
+                	<div class="front p2pBox">Hello</div>
+                	<div class="back p2pBox">Hi</div>
+                </div>
+            </div>
+        </a>
+	</div>
+</body>
+</html>
