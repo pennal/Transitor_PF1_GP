@@ -56,7 +56,7 @@ body{
 	padding: 0;
 	padding-top: 10vh;
 	overflow: hidden;
-	height: 90%;
+	height: 80%;
 	position: relative;
 }
 @media (max-height: 400px) {
