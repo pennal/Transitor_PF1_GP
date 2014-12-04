@@ -48,23 +48,12 @@ $('a.homepage').click(function(event){
 	flipDiv.css('background-color', backgroundColor);
 	flipDiv.children('.flipper').children('.front').css('visibility','hidden');
 
-	// setBGColour(backgroundColor);
-	// requestThenFadeOut(theLink);
 
-	// flipDiv.animate({
-	// 	width: $(document).width(),
-	// 	height: $(document).height(),
-	// 	left: (-flipDivOffset.left),
-	// 	top: (-flipDivOffset.top)
-	// }, 700, function(){
-	// 	$('.p2pBox').css({
-	// 		'background-size':'initial',
-	// 		'background-repeat':'no-repeat',
-	// 		'background-position':'center'
-	// 	});
-	// 	setBGColour(backgroundColor);
-	// 	requestThenFadeOut(theLink);
-	// });
+	setTimeout(function(){
+		setBGColour(backgroundColor);
+		requestThenFadeOut(theLink);
+	}, 800);
+
 
 	return false;
 });
@@ -74,10 +63,7 @@ function requestThenFadeOut (theLink) {
 	var overlayView = $('#overlayView');
 	sendAjaxRequest(theLink, function(data){
 		replaceHTMLOfElement ($('#contentDiv'), data);
-		overlayView.delay(500).fadeOut(800, function(){
-			overlayView.addClass('hidden');
-			overlayView.html('');
-		});
+		overlayView.addClass('fadeOut');
 		$('body').css('overflow', 'initial');
 	});
 }

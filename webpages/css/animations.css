@@ -158,10 +158,10 @@
 }
 
 
-#overlayView .fadeOut{
-	-webkit-animation: fadeOut .8s ease-in 0s normal forwards;
-	-o-animation: fadeOut .8s ease-in 0s normal forwards;
-	animation: fadeOut .8s ease-in 0s normal forwards;
+#overlayView.fadeOut{
+	-webkit-animation: fadeOut .8s ease-in .3s normal forwards;
+	-o-animation: fadeOut .8s ease-in .3s normal forwards;
+	animation: fadeOut .8s ease-in .3s normal forwards;
 }
 
 
