@@ -21,35 +21,7 @@
 	</div>
 </div>
 <div id="resultsView" class="hidden">
-	<div id="result">
-		<div class="{{colorBar}}"></div>
-		<table>
-			<tr>
-				<td colspan="4" class="FromTo">{{ stationFrom }} <a class="grey">to</a><br>{{ stationTo }}</td>
-			</tr>
-			<tr>
-				<td class="grey">Time:</td>
-				<td class="time">{{ departureTime }}</td>
-				<td class="grey">Platform:</td>
-				<td class="platform">{{ departurePlatform }}</td>
-			</tr>
-			<tr>
-				<td class="grey date">Date:</td>
-				<td colspan="2" class="date">{{ departureDate }}</td>
-			</tr>
-			<tr class="important">
-				<td colspan="2">{{ stationFrom }}</td>
-				<td>{{ departureTime }}</td>
-				<td class="platform">{{ departurePlatform }}</td>
-			</tr>
-			{{ transfers }}
-			<tr class="important">
-				<td colspan="2">{{ stationTo }}</td>
-				<td>{{ arrivalTime }}</td>
-				<td class="platform">{{ arrivalPlatform }}</td>
-			</tr>
-		</table>
-	</div>
+
 </div>
 <script type="text/javascript" src="js/p2p.js"></script>
 <script type="text/javascript">setBGColour('red');</script>
