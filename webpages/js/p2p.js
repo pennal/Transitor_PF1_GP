@@ -2,15 +2,16 @@ var resultsView = $('#resultsView')
 
 function submitP2PForm (form) {
 	alert('From: '+$('#p2pFrom').val()+' To: '+$('#p2pTo').val());
+	getResults();
 	return false;
 }
 
 // Set this up
 function getResults () {
-	sendAjaxRequest('url', function(data){
-		replaceHTMLOfElement(resultsView, data);
+	// sendAjaxRequest('url', function(data){
+	// 	replaceHTMLOfElement(resultsView, data);
 		slideSearch(true);
-	})
+	// })
 }
 
 // Animate box on and off the screen
@@ -22,13 +23,13 @@ function slideSearch (offScreen) {
 		$('#contentDiv').addClass('noOverflow')
 		resultsView.removeClass('hidden')
 	    searchDiv.animate({
-	        left: '-50%'
+	        left: '-150%'
 	    }, speed, "swing", function() {
 	        searchDiv.addClass('hidden');
 	    });
 
 	    resultsView.animate({
-	        left: '50%'
+	        left: '25%'
 	    }, speed, "swing", function(){
 	    	$('#contentDiv').removeClass('noOverflow');
 	    });
@@ -43,7 +44,7 @@ function slideSearch (offScreen) {
 	    });
 
 	    searchDiv.animate({
-	        left: '50%'
+	        left: '0%'
 	    }, speed, "swing", function(){
 	    	$('#contentDiv').removeClass('noOverflow');
 	    });
@@ -73,5 +74,5 @@ function objLength (obj){
 
 // Set this up
 if (objLength(getUrlParams()) > 0) {
-	getResults()
+	getResults();
 };
