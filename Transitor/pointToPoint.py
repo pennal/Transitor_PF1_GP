@@ -1,10 +1,12 @@
 import common
-from flask import Flask #Flask is the base server. use 'sudo pip3 install Flask' to install
 import jinja2 #Used to substitute the tags in the html
-import datetime #Just as a demo
 import os
+import json
 
 def returnHTMLTable(data):
+    """
+    DEBUG!!!!!!!!!!!!!!!!!!!
+    """
     for i in range(0,len(data["connections"])):
         stationFrom = data["connections"][i]["from"]["station"]["name"]
         stationTo = data["connections"][i]["to"]["station"]["name"]
@@ -119,6 +121,8 @@ def getConnectionsPointToPoint(stationFrom,stationTo,via = None,date=None, time=
     # HTTP Request with the data needed
     rawJSON = common.doRequest(urlForRequest)
 
-    # Do some additional processing
+
+
+
 
     return returnHTMLTable(rawJSON)

@@ -1,14 +1,7 @@
 # -*- coding: utf-8 -*-
-import json
 import pointToPoint
-import tableBoard
 from flask import request
-
-
 from flask import Flask #Flask is the base server. use 'sudo pip3 install Flask' to install
-import jinja2 #Used to substitute the tags in the html
-import datetime #Just as a demo
-import os
 
 app = Flask(__name__,static_url_path='') 
 
