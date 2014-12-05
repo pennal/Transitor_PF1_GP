@@ -23,8 +23,8 @@ def returnHTMLTable(data):
         templateEnv = jinja2.Environment( loader=templateLoader )
 
         # This constant string specifies the template file we will use.
-        TEMPLATE_FILE = basePath + "/JinjaTemplates/table.jinja"
-
+        #TEMPLATE_FILE = basePath + "/JinjaTemplates/table.jinja"
+        TEMPLATE_FILE = basePath + "/JinjaTemplates/resultsTemplate.jinja"
         # Read the template file using the environment object.
         # This also constructs our Template object.
         template = templateEnv.get_template( TEMPLATE_FILE )
