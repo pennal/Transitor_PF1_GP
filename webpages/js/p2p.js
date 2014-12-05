@@ -1,8 +1,9 @@
 var resultsView = $('#resultsView')
 
 function submitP2PForm (form) {
-	alert('From: '+$('#p2pFrom').val()+' To: '+$('#p2pTo').val());
+	// alert('From: '+$('#p2pFrom').val()+' To: '+$('#p2pTo').val());
 	getResults();
+	setPageTitle($('#p2pFrom').val(), $('#p2pTo').val());
 	return false;
 }
 
@@ -72,7 +73,22 @@ function objLength (obj){
     return len;
 };
 
+function setPageTitle (from, to) {
+	var titleString = "Point-to-Point: "+from+" to "+to;
+
+	if ($('div.title.hidden').length) {
+		$('div.title.hidden').html(titleString);
+	}else{
+		document.title = titleString;
+	}
+	
+	console.log('Title string: '+titleString);
+}
+
 // Set this up
 if (objLength(getUrlParams()) > 0) {
+	var params = getUrlParams();
+	console.log(params);
 	getResults();
+	setPageTitle(params["from"], params["to"]);
 };
