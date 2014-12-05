@@ -8,11 +8,17 @@ function submitP2PForm (form) {
 }
 
 // Set this up
+<<<<<<< Updated upstream
+function getResults () {
+	// sendAjaxRequest('url', function(data){
+	// 	replaceHTMLOfElement(resultsView, data);
+=======
 function getResults (from, to) {
 	sendAjaxRequest('pages/p2p/input.html?from='+from+'&to='+to, function(data){
 		replaceHTMLOfElement(resultsView, data);
+>>>>>>> Stashed changes
 		slideSearch(true);
-	})
+	// })
 }
 
 // Animate box on and off the screen
