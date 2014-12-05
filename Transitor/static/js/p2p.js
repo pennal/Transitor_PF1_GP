@@ -9,10 +9,10 @@ function submitP2PForm (form) {
 
 // Set this up
 function getResults () {
-	sendAjaxRequest('url', function(data){
-		replaceHTMLOfElement(resultsView, data);
+	// sendAjaxRequest('url', function(data){
+	// 	replaceHTMLOfElement(resultsView, data);
 		slideSearch(true);
-	})
+	// })
 }
 
 // Animate box on and off the screen

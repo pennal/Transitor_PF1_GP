@@ -2,6 +2,10 @@ $(document).ready(function(){
 	documentReady()
 });
 
+$(window).unload(function(){
+	resetPage();
+})
+
 // Listen for hash changes
 window.addEventListener("hashchange", dealWithHash);
 
@@ -10,7 +14,7 @@ var contentDiv
 
 // Function to send GET Ajax request
 function sendAjaxRequest (url, callback) {
-	if (true) {};
+	window.location.hash = url;
 	var xmlhttp;
 	if (window.XMLHttpRequest)
 	  {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -35,7 +39,6 @@ function sendAjaxRequest (url, callback) {
 	  if (xmlhttp.readyState==4 && (xmlhttp.status==200||xmlhttp.status==0)) { //The 0 is just because it seemed to not like it when run locally..
 	  	hideProgressBar();
 	  	updateProgressBar(0);
-	  	window.location.hash = url
 	  	callback(xmlhttp.responseText);
 	  }else{
 	  	// console.log('readyState: '+xmlhttp.readyState+', code: '+xmlhttp.status);
@@ -114,12 +117,13 @@ function dealWithHash () {
 	}
 }
 
+function resetPage () {
+	setupAndSendAjaxRequest('pages/home.html');
+}
+
 // Called when page has loaded
 function documentReady () {
 	contentDiv = $('#contentDiv');
-
-	// Test to get a page's content
-	// setupAndSendAjaxRequest('files/test.txt');
 
 	// When first loaded (after function definitions), check to see if it needs to redirect you because of a hash
 	dealWithHash();
