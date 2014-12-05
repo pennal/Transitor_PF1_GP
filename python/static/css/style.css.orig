@@ -1,0 +1,209 @@
+***************************************************/
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: url('fonts/OpenSans-light.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  src: url('fonts/OpenSans.ttf') format('truetype');
+}
+
+
+/****************************************************/
+/*Helpers*/
+
+.hidden{
+	display: none;
+}
+
+.noOverflow{
+	overflow: hidden;
+}
+
+.clearfix:after{
+	clear: both;
+	visibility: hidden;
+	content: " ";
+	display: block;
+	height: 0px;
+}
+
+
+
+/****************************************************/
+/*Main config*/
+
+html, body{
+	font-family: Open Sans;
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+}
+
+body{
+	background-color: rgb(230,230,230);
+	min-height: 715px;
+}
+
+#containerDiv{
+	margin: 0;
+	padding: 0;
+	padding-top: 5px;
+	overflow: hidden;
+	height: 95%;
+	position: relative;
+}
+
+#contentDiv{
+	margin: 2.5% auto;
+	overflow: scroll;
+	width: 90%;
+	height: 95%;
+}
+
+#progressDiv{
+	display: none;
+	height: 5px;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 100;
+}
+
+#progressDiv #outerProgress{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background-color: black;
+	display: block;
+}
+
+#progressDiv #innerProgress{
+	height: 100%;
+	width: 0%;
+	background-color: white;
+	display: block;
+}
+
+/****************************************************/
+/*Overlay classes*/
+
+#overlayView{
+	height: 100%;
+    left: 0;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 400;
+}
+
+
+/****************************************************/
+/*Home page*/
+/*Config*/
+
+.box {
+	box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);
+	float: left;
+	width: 300px;
+	height: 140px;
+	margin: 6px;
+}
+.whiteBox{
+	background-color: white;
+}
+.whiteBox:hover{
+	background-color: rgb(240,240,240);
+}
+.box2 {
+	box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);
+	float: left;
+	width: 144px;
+	height: 140px;
+	margin: 6px;
+}
+
+<<<<<<< HEAD
+#button, #loadedContent{
+	max-width: 936px;
+	margin: 0 auto;
+
+=======
+#button{
+	position: absolute;
+	width: 75%;
+	left: 25%;
+	margin-left: -7.5%;
+	min-width: 630px;
+>>>>>>> animationsTesting
+}
+@media (max-width: 1036px) {
+  #button {
+  	width: 626px;
+  }
+}
+
+
+
+/****************************************************/
+/*P2P input page*/
+
+#p2pInputContainer{
+	width: 50%;
+	min-width: 500px;
+	box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);
+	background-color: rgb(250,250,250);
+	margin: 0 auto;
+	margin-top: 20vh;
+	display: block;
+}
+
+#p2pInputContainer table{
+	height: 80%;
+	margin: 0 auto;
+	padding: 100px;
+}
+
+#p2pInputContainer table tr td{
+	padding: 20px;
+}
+
+#p2pInputContainer table tr:first-child{
+	text-align: right;
+	width: 400px;
+	padding: 20px 0px;
+}
+
+#p2pInputContainer table tr td input{
+	height: 20px;
+}
+
+
+
+/****************************************************/
+/*Results View*/
+
+#resultsView{
+	height: 80%;
+	width: 50%;
+	background-color: orange;
+	position: absolute;
+	left: 150%;
+	margin-left: -25%;
+}
+.inputField{
+	padding: 50px;
+	margin: 0 auto;
+}
+
+
+/***************************************************

@@ -10,11 +10,12 @@ import jinja2 #Used to substitute the tags in the html
 import datetime #Just as a demo
 import os
 
-app = Flask(__name__) 
+app = Flask(__name__,static_url_path='') 
 
 @app.route("/")
 def mainPage():
-    return "<a href=\"pointToPoint/doRequest\">Do a request</a>"
+    print("Hello World")
+    return app.send_static_file('index.html')
 
 
 # ACTUAL CALL!!
