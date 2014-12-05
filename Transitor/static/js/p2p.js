@@ -11,6 +11,7 @@ function submitP2PForm (form) {
 
 // Set this up
 function getResults (from, to) {
+	// CREATE SPECIAL FUNCTION FOR THIS
 	sendAjaxRequest('pointToPoint/doRequest?from='+from+'&to='+to, function(data){
 		replaceHTMLOfElement(resultsView, data);
 		// window.location.hash = 'pages/p2p/input.html?from='+from+'&to='+to;
