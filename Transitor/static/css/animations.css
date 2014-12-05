@@ -16,7 +16,10 @@
 }
 
 .box .front, .box .back, .box2 .front, .box2 .back{
-	backside-visibility: hidden;
+	b-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	-o-backface-visibility: hidden;
+	backface-visibility: hidden;
 	position: absolute;
 	top: 0;
 	left: 0;
