@@ -2,15 +2,18 @@ var resultsView = $('#resultsView')
 
 function submitP2PForm (form) {
 	// alert('From: '+$('#p2pFrom').val()+' To: '+$('#p2pTo').val());
-	getResults();
-	setPageTitle($('#p2pFrom').val(), $('#p2pTo').val());
+	var from = $('#p2pFrom').val();
+	var to = $('#p2pTo').val();
+	getResults(from, to);
+	setPageTitle(from, to);
 	return false;
 }
 
 // Set this up
 function getResults (from, to) {
-	sendAjaxRequest('pages/p2p/input.html?from='+from+'&to='+to, function(data){
+	sendAjaxRequest('pointToPoint/doRequest?from='+from+'&to='+to, function(data){
 		replaceHTMLOfElement(resultsView, data);
+		// window.location.hash = 'pages/p2p/input.html?from='+from+'&to='+to;
 		slideSearch(true);
 	})
 }
@@ -86,9 +89,14 @@ function setPageTitle (from, to) {
 }
 
 // Set this up
-if (objLength(getUrlParams()) > 0) {
+if (objLength(getUrlParams()) > 1) {
 	var params = getUrlParams();
-	console.log(params);
+
+	var from = params["from"];
+	var to = params["to"]
+	
 	getResults();
-	setPageTitle(params["from"], params["to"]);
+
+	getResults(from, to);
+	setPageTitle(from, to);
 };
