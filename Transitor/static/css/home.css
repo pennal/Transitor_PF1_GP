@@ -6,3 +6,8 @@
 	background-image: url(../images/p2p1.png);
 	background-size: cover;
 }
+.arrivalBoard{
+	background-color: rgb(120,185,255);
+	background-image: url(../images/arrivalBoard.png);
+	background-size: cover;	
+}
