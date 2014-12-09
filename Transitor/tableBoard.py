@@ -35,7 +35,7 @@ def getTableBoard(station):
 
 def returnHTMLBoard(data):
 
-    fullPageHTML = "<div id=\"arrivalBoard\">"
+    fullPageHTML = ""
 
     for i in range(0, len(data)):
 
