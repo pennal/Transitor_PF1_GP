@@ -231,10 +231,7 @@ body{
 
 /****************************************************/
 /* Results view */
-.colorBar{
-	height: 40px;
-	background-color: rgb(220,220,220);
-}
+
 #result{
 	width: 50%;
 	min-width: 660px;
