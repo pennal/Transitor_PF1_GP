@@ -35,7 +35,7 @@ function sendP2PTransitReq (params, callback) {
 	  if (xmlhttp.readyState==4 && (xmlhttp.status==200||xmlhttp.status==0)) { //The 0 is just because it seemed to not like it when run locally..
 	  	hideProgressBar();
 	  	updateProgressBar(0);
-	  	callback("<span id=\"backButton\"></span>\n"+xmlhttp.responseText);
+	  	callback("<a id=\"backButton\" href=\"javascript:slideSearch(false);\"></a>\n"+xmlhttp.responseText);
 	  }else if(xmlhttp.readyState==4){
 	  	hideProgressBar();
 	  	updateProgressBar(0);
@@ -61,6 +61,7 @@ function getResults (from, to) {
 	updateHashWithoutTriggeringChange('pages/p2p/input.html?from='+from+'&to='+to);
 	sendP2PTransitReq('from='+from+'&to='+to, function(data){
 		replaceHTMLOfElement(resultsView, data);
+		$("#resultsView .resultSlider").first().addClass('frontResult');
 		resultsView.css('display', 'block');
 		slideSearch(true);
 	})

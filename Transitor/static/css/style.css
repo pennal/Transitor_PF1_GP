@@ -228,6 +228,15 @@ body{
 	margin: 0 auto;
 }
 
+#resultsView #backButton{
+	background-image: url("../images/backbutton.png");
+    height: 42px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 42px;
+    z-index: 1000;
+}
 
 /****************************************************/
 /* First scratch of the results view */
@@ -291,6 +300,10 @@ body{
 	position: absolute;
     width: 100%;
     opacity: 0;
+}
+
+.resultSlider.frontResult{
+	opacity: 1;
 }
 
 /***************************************************
