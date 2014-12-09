@@ -179,6 +179,7 @@ body{
 	margin: 0;
 	left: 0;
 	top: 0;
+	overflow: scroll;
 }
 
 #p2pInputForm{
@@ -211,6 +212,16 @@ body{
 	font-size: 16px;
 }
 
+
+#additionalOptions table{
+	padding: 0px;
+	margin-top: -75px;
+}
+
+#p2pInputForm a {
+	color: white;
+	text-decoration: none;
+}
 
 /****************************************************/
 /*Results View*/
