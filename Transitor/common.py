@@ -35,8 +35,9 @@ def doRequest(urlForQuery):
     :param urlForQuery: URL for the query
     :return: JSON formatted data
     """
+    #We trigger a false positive, as to go into the while loop
     hasTimedOut = True
-        #While the text returned is a timeout, continue trying
+    #While the text returned is a timeout, continue trying
     while hasTimedOut:
         try:
             response = requests.get(urlForQuery)

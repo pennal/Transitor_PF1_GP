@@ -76,8 +76,8 @@ function sendP2PTransitReq (params, callback) {
 // Set this up
 function getResults (from, to, via, date, time, isArrivalTime, transportations, limit, direct, sleeper, couchette, bike) {
 	// Fix for hashes
-	// var queryString = 'from='+from+'&to='+to+'&via='+via+'&date='+date+'&time='+time+'&isArrivalTime='+isArrivalTime+'&transportations='+transportations+'&limit='+limit+'&direct='+direct+'&sleeper='+sleeper+'&couchette='+couchette+'&bike='+bike;
-	var queryString = 'from='+from+'&to='+to;
+	var queryString = 'from='+from+'&to='+to+'&via='+via+'&date='+date+'&time='+time+'&isArrivalTime='+isArrivalTime+'&transportations='+transportations+'&limit='+limit+'&direct='+direct+'&sleeper='+sleeper+'&couchette='+couchette+'&bike='+bike;
+	// var queryString = 'from='+from+'&to='+to;
 	updateHashWithoutTriggeringChange('pages/p2p/input.html?'+queryString);
 	sendP2PTransitReq(queryString, function(data){
 		replaceHTMLOfElement(resultsView, data);

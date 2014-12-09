@@ -29,7 +29,20 @@ def doPTPRequest():
     couchette=request.args.get('couchette')
     bike=request.args.get('bike')
 
-    return pointToPoint.getConnectionsPointToPoint(stationFrom,stationTo,via,time,date,isArrivalTime,transportations,limit,direct,sleeper,couchette,bike)
+    possibleParameters = [["stationFrom",stationFrom],["stationTo",stationTo],["via",via],["date",date],["time",time],["isArrivalTime",isArrivalTime],["transportations",transportations], ["limit",limit],["direct",direct],["sleeper",sleeper],["couchette",couchette],["bike",bike]]
+
+    if possibleParameters[0][1] == "" or possibleParameters[1][1] == "":
+        print("No departure or arrival given")
+        #TODO: SHould throw a 404 error or something like it
+
+    for i in range(2,len(possibleParameters)):
+        if possibleParameters[i][1] == "":
+            possibleParameters[i][1] = None
+
+    #Old Method
+    #return pointToPoint.getConnectionsPointToPoint(stationFrom,stationTo,via,time,date,isArrivalTime,transportations,limit,direct,sleeper,couchette,bike)
+
+    return pointToPoint.getConnectionsPointToPoint(stationFrom,stationTo,possibleParameters[2][1],possibleParameters[3][1],possibleParameters[4][1],possibleParameters[5][1],possibleParameters[6][1],possibleParameters[7][1],possibleParameters[8][1],possibleParameters[9][1],possibleParameters[10][1],possibleParameters[11][1])
 
 @app.route("/api/tb")
 def doTBRequest():
