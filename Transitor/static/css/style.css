@@ -228,6 +228,15 @@ body{
 	margin: 0 auto;
 }
 
+#backButton{
+	background-image: url("../images/backbutton.png");
+    background-size: cover;
+    height: 42px;
+    left: 1.5%;
+    position: absolute;
+    width: 42px;
+    z-index: 1000;
+}
 
 /****************************************************/
 /* Results view */
@@ -284,6 +293,16 @@ body{
 	padding-right: 30px;
 	padding-bottom: 30px;
 
+}
+
+.resultSlider{
+	position: absolute;
+    width: 100%;
+    opacity: 0;
+}
+
+.resultSlider.frontResult{
+	opacity: 1;
 }
 
 /***************************************************
