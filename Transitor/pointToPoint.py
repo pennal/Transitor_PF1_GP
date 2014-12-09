@@ -38,9 +38,6 @@ def durationOfTrip(originalDuration):
 
     return stringToReturn
 
-
-
-
 def returnHTMLTable(data):
     for i in range(0,len(data["connections"])):
         stationFrom = data["connections"][i]["from"]["station"]["name"]
@@ -148,8 +145,6 @@ def returnHTMLTable(data):
 
 
     return outputText
-
-
 
 def getConnectionsPointToPoint(stationFrom,stationTo,via = None,date=None, time=None,isArrivalTime = None,transportations=None,limit=None,direct=None,sleeper=None,couchette=None,bike=None):
     """
