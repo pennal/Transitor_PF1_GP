@@ -231,13 +231,9 @@ body{
 
 /****************************************************/
 /* Results view */
-.blueBar{
+.colorBar{
 	height: 40px;
-	background-color: rgb(180,210,255);
-}
-.greenBar{
-	height: 40px;
-	background-color: rgb(200,255,200);
+	background-color: rgb(220,220,220);
 }
 #result{
 	width: 50%;
@@ -294,7 +290,7 @@ body{
 }
 
 /***************************************************
-/* Arrival Board */
+/* Departure Board */
 
 #arrivalBoard{
 	margin: 0 10%;
