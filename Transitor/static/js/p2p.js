@@ -57,7 +57,7 @@ function sendP2PTransitReq (params, callback) {
 	  }else if(xmlhttp.readyState==4){
 	  	hideProgressBar();
 	  	updateProgressBar(0);
-	  	callback("<span style='display:block; text-align: center; color: white;'>There was an error. Please check your input and try again later.</span>");
+	  	callback("<a id=\"backButton\" href=\"javascript:slideSearch(false);\"></a>\n<span style='display:block; text-align: center; color: white;'>There was an error. Please check your input and try again later.</span>");
 	  }
 
 	}
@@ -76,7 +76,8 @@ function sendP2PTransitReq (params, callback) {
 // Set this up
 function getResults (from, to, via, date, time, isArrivalTime, transportations, limit, direct, sleeper, couchette, bike) {
 	// Fix for hashes
-	var queryString = 'from='+from+'&to='+to+'&via='+via+'&date='+date+'&time='+time+'&isArrivalTime='+isArrivalTime+'&transportations='+transportations+'&limit='+limit+'&direct='+direct+'&sleeper='+sleeper+'&couchette='+couchette+'&bike='+bike;
+	// var queryString = 'from='+from+'&to='+to+'&via='+via+'&date='+date+'&time='+time+'&isArrivalTime='+isArrivalTime+'&transportations='+transportations+'&limit='+limit+'&direct='+direct+'&sleeper='+sleeper+'&couchette='+couchette+'&bike='+bike;
+	var queryString = 'from='+from+'&to='+to;
 	updateHashWithoutTriggeringChange('pages/p2p/input.html?'+queryString);
 	sendP2PTransitReq(queryString, function(data){
 		replaceHTMLOfElement(resultsView, data);
@@ -155,6 +156,47 @@ function setPageTitle (from, to) {
 	
 	console.log('Title string: '+titleString);
 }
+
+function toggleAdditionalOptions () {
+	var theBox = $("#additionalOptions");
+	if (theBox.hasClass('closed')) {
+		theBox.removeClass('closed');
+		theBox.fadeIn(300);
+		$('#additionalOptionsLink').html("-Fewer Options");
+	}else{
+		theBox.addClass('closed');
+		theBox.fadeOut(300);
+		$('#additionalOptionsLink').html("+Additional Options");
+	};
+}
+
+
+function slideOutFrontAndReplace () {
+	var frontCard = $('.frontResult');
+	var secondCard = frontCard.next();
+	
+	frontCard.animate({
+       left: '-150%'
+    }, { duration: 500, queue: false, complete: function(){
+    	frontCard.removeClass('frontResult');
+    	secondCard.addClass('frontResult');
+    	frontCard.css('left', '');
+    	frontCard.css('opacity', '0');
+    	frontCard = frontCard.detach();
+    	resultsView.append(frontCard);
+    } });
+
+    secondCard.animate({
+       opacity: '1'
+    }, { duration: 500, queue: false });
+}
+
+
+
+$('#additionalOptionsLink').on('click', function(event) {
+	event.preventDefault();
+	toggleAdditionalOptions();
+});
 
 if (objLength(getUrlParams()) > 1) {
 	var params = getUrlParams();

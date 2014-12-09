@@ -213,6 +213,16 @@ body{
 }
 
 
+#additionalOptions table{
+	padding: 0px;
+	margin-top: -75px;
+}
+
+#p2pInputForm a {
+	color: white;
+	text-decoration: none;
+}
+
 /****************************************************/
 /*Results View*/
 
