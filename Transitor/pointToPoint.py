@@ -56,65 +56,66 @@ def returnHTMLTable(data):
 
 
         transfersTag = ""
-        try:
-            newData = data["connections"][i]["sections"]
-            for connection in range(0,len(newData)):
-                if connection == 0:
-                    # we only need the arrival
-                    intermediateArrivalName = newData[connection]["arrival"]['station']["name"]
-                    intermediateArrivalTime, intermediateArrivalDate = getDateAntTimeSplit(newData[connection]['arrival']["arrival"])
-                    intermediateArrivalPlatform = newData[connection]["arrival"]['platform']
+        if len(data["connections"][i]["sections"]) != 1:
+            try:
+                newData = data["connections"][i]["sections"]
+                for connection in range(0,len(newData)):
+                    if connection == 0:
+                        # we only need the arrival
+                        intermediateArrivalName = newData[connection]["arrival"]['station']["name"]
+                        intermediateArrivalTime, intermediateArrivalDate = getDateAntTimeSplit(newData[connection]['arrival']["arrival"])
+                        intermediateArrivalPlatform = newData[connection]["arrival"]['platform']
 
 
-                    templateVars = { "intermediateStationArrival" : intermediateArrivalName,
-                                     "arrivalTimeStep":intermediateArrivalTime,
-                                     "arrivalPlatform":intermediateArrivalPlatform
-                                     }
+                        templateVars = { "intermediateStationArrival" : intermediateArrivalName,
+                                         "arrivalTimeStep":intermediateArrivalTime,
+                                         "arrivalPlatform":intermediateArrivalPlatform
+                                         }
 
-                    # Finally, process the template to produce our final text.
-                    outputText = common.jinjaSubstitution(templateVars,"transfersTemplateArrival.jinja")
-
-
+                        # Finally, process the template to produce our final text.
+                        outputText = common.jinjaSubstitution(templateVars,"transfersTemplateArrival.jinja")
 
 
-                elif connection == len(newData)-1:
-                    #We only need the departure
-                    intermediateDepartureName = newData[connection]["departure"]['station']["name"]
-                    intermediateDepartureTime, intermediateDepartureDate = getDateAntTimeSplit(newData[connection]['departure']["departure"])
-                    intermediateDeparturePlatform = newData[connection]["departure"]['platform']
-
-                    # Specify any input variables to the template as a dictionary.
-                    templateVars = { "intermediateStationDeparture" : intermediateDepartureName,
-                                     "departureTimeStep":intermediateDepartureTime,
-                                     "departurePlatform":intermediateDeparturePlatform
-                                     }
-
-                    outputText = common.jinjaSubstitution(templateVars,"transfersTemplateDeparture.jinja")
-
-                else:
-                    intermediateArrivalName = newData[connection]["arrival"]['station']["name"]
-                    intermediateArrivalTime, intermediateArrivalDate = getDateAntTimeSplit(newData[connection]['arrival']["arrival"])
-                    intermediateArrivalPlatform = newData[connection]["arrival"]['platform']
-                    intermediateDepartureName = newData[connection]["departure"]['station']["name"]
-                    intermediateDepartureTime, intermediateDepartureDate = getDateAntTimeSplit(newData[connection]['departure']["departure"])
-                    intermediateDeparturePlatform = newData[connection]["departure"]['platform']
 
 
-                    # Specify any input variables to the template as a dictionary.
-                    templateVars = { "intermediateStationArrival" : intermediateArrivalName,
-                                     "arrivalTimeStep":intermediateArrivalTime,
-                                     "arrivalPlatform":intermediateArrivalPlatform,
-                                     "intermediateStationDeparture" : intermediateDepartureName,
-                                     "departureTimeStep":intermediateDepartureTime,
-                                     "departurePlatform":intermediateDeparturePlatform
-                                     }
+                    elif connection == len(newData)-1:
+                        #We only need the departure
+                        intermediateDepartureName = newData[connection]["departure"]['station']["name"]
+                        intermediateDepartureTime, intermediateDepartureDate = getDateAntTimeSplit(newData[connection]['departure']["departure"])
+                        intermediateDeparturePlatform = newData[connection]["departure"]['platform']
 
-                    outputText = common.jinjaSubstitution(templateVars,"transfersTemplateCombined.jinja")
+                        # Specify any input variables to the template as a dictionary.
+                        templateVars = { "intermediateStationDeparture" : intermediateDepartureName,
+                                         "departureTimeStep":intermediateDepartureTime,
+                                         "departurePlatform":intermediateDeparturePlatform
+                                         }
 
-                transfersTag += outputText
+                        outputText = common.jinjaSubstitution(templateVars,"transfersTemplateDeparture.jinja")
 
-        except:
-            print("No Connections")
+                    else:
+                        intermediateArrivalName = newData[connection]["arrival"]['station']["name"]
+                        intermediateArrivalTime, intermediateArrivalDate = getDateAntTimeSplit(newData[connection]['arrival']["arrival"])
+                        intermediateArrivalPlatform = newData[connection]["arrival"]['platform']
+                        intermediateDepartureName = newData[connection]["departure"]['station']["name"]
+                        intermediateDepartureTime, intermediateDepartureDate = getDateAntTimeSplit(newData[connection]['departure']["departure"])
+                        intermediateDeparturePlatform = newData[connection]["departure"]['platform']
+
+
+                        # Specify any input variables to the template as a dictionary.
+                        templateVars = { "intermediateStationArrival" : intermediateArrivalName,
+                                         "arrivalTimeStep":intermediateArrivalTime,
+                                         "arrivalPlatform":intermediateArrivalPlatform,
+                                         "intermediateStationDeparture" : intermediateDepartureName,
+                                         "departureTimeStep":intermediateDepartureTime,
+                                         "departurePlatform":intermediateDeparturePlatform
+                                         }
+
+                        outputText = common.jinjaSubstitution(templateVars,"transfersTemplateCombined.jinja")
+
+                    transfersTag += outputText
+
+            except:
+                print("No Connections")
 
         # Specify any input variables to the template as a dictionary.
         templateVars = { "stationFrom" : stationFrom,
