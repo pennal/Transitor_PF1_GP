@@ -2,9 +2,9 @@ $(document).ready(function(){
 	documentReady();
 });
 
-$(window).unload(function(){
-	resetPage();
-});
+// $(window).unload(function(){
+// 	resetPage();
+// });
 
 // Listen for hash changes
 window.addEventListener("hashchange", dealWithHash);

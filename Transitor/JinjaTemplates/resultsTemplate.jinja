@@ -1,31 +1,32 @@
-<div id="result">
-	<div class=""></div>
-	<table>
-		<tr>
-			<td colspan="4" class="FromTo">{{ stationFrom }} <a class="grey">to</a><br>{{ stationTo }}</td>
-		</tr>
-		<tr>
-			<td class="grey">Time:</td>
-			<td class="time">{{ departureTime }}</td>
-			<td class="grey">Platform:</td>
-			<td class="platform">{{ departurePlatform }}</td>
-		</tr>
-		<tr>
-			<td class="grey date">Date:</td>
-			<td class="date">{{ departureDate }}</td>
-            <td class="grey date">Duration:</td>
-            <td class="time date">{{ duration }}</t
-		</tr>
-		<tr class="important">
-			<td colspan="2">{{ stationFrom }}</td>
-			<td>{{ departureTime }}</td>
-			<td class="platform">{{ departurePlatform }}</td>
-		</tr>
-		{{ transfers }}
-		<tr class="important">
-			<td colspan="2">{{ stationTo }}</td>
-			<td>{{ arrivalTime }}</td>
-			<td class="platform">{{ arrivalPlatform }}</td>
-		</tr>
-	</table>
+<div class="resultSlider">
+	<div id="result">
+		<table>
+			<tr>
+				<td colspan="4" class="FromTo">{{ stationFrom }} <a class="grey">to</a><br>{{ stationTo }}</td>
+			</tr>
+			<tr>
+				<td class="grey">Time:</td>
+				<td class="time">{{ departureTime }}</td>
+				<td class="grey">Platform:</td>
+				<td class="platform">{{ departurePlatform }}</td>
+			</tr>
+			<tr>
+				<td class="grey date">Date:</td>
+				<td class="date">{{ departureDate }}</td>
+	            <td class="grey date">Duration:</td>
+	            <td class="time date">{{ duration }}</t
+			</tr>
+			<tr class="important">
+				<td colspan="2">{{ stationFrom }}</td>
+				<td>{{ departureTime }}</td>
+				<td class="platform">{{ departurePlatform }}</td>
+			</tr>
+			{{ transfers }}
+			<tr class="important">
+				<td colspan="2">{{ stationTo }}</td>
+				<td>{{ arrivalTime }}</td>
+				<td class="platform">{{ arrivalPlatform }}</td>
+			</tr>
+		</table>
+	</div>
 </div>

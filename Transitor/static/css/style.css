@@ -287,6 +287,12 @@ body{
 	border-bottom: 0.5px solid black;
 }
 
+.resultSlider{
+	position: absolute;
+    width: 100%;
+    opacity: 0;
+}
+
 /***************************************************
 /* Arrival Board */
 

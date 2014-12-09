@@ -35,7 +35,7 @@ function sendP2PTransitReq (params, callback) {
 	  if (xmlhttp.readyState==4 && (xmlhttp.status==200||xmlhttp.status==0)) { //The 0 is just because it seemed to not like it when run locally..
 	  	hideProgressBar();
 	  	updateProgressBar(0);
-	  	callback(xmlhttp.responseText);
+	  	callback("<span id=\"backButton\"></span>\n"+xmlhttp.responseText);
 	  }else if(xmlhttp.readyState==4){
 	  	hideProgressBar();
 	  	updateProgressBar(0);
