@@ -45,7 +45,7 @@ function sendP2PTransitReq (params, callback) {
 	}
 
 	// Build request
-	xmlhttp.open("GET",'pointToPoint/doRequest?'+params,true);
+	xmlhttp.open("GET",'api/p2p?'+params,true);
 
 	// Show the loading bar
 	showProgressBar();
