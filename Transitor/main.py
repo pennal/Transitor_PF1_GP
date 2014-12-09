@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import pointToPoint
+import tableBoard
 from flask import request
 from flask import Flask #Flask is the base server. use 'sudo pip3 install Flask' to install
 
@@ -7,15 +8,14 @@ app = Flask(__name__,static_url_path='')
 
 @app.route("/")
 def mainPage():
-    print("Hello World")
     return app.send_static_file('index.html')
 
 
 # ACTUAL CALL!!
 # Example URL: http://127.0.0.1:5000/pointToPoint/doRequest?from=Lugano&to=Zug
 
-@app.route("/pointToPoint/doRequest")
-def printHelloWorld():
+@app.route("/api/ptp")
+def doPTPRequest():
     stationFrom = request.args.get('from')
     stationTo = request.args.get('to')
     via = request.args.get('via')
@@ -31,6 +31,12 @@ def printHelloWorld():
 
     return pointToPoint.getConnectionsPointToPoint(stationFrom,stationTo,via,time,date,isArrivalTime,transportations,limit,direct,sleeper,couchette,bike)
 
+@app.route("/api/tb")
+def doTBRequest():
+    stationFrom = request.args.get('station')
+
+    return tableBoard.getTableBoard(stationFrom)
+
 
 
 
@@ -38,5 +44,4 @@ if __name__ == "__main__":
     app.debug = True
     app.run()
 
-#tableBoard.getTableBoard("Aarau")
 #print(json.dumps(pointToPoint.getConnectionsPointToPoint("Lugano","Zürich HB"),indent=4))

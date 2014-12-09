@@ -31,30 +31,23 @@ def getTableBoard(station):
     #         print("\t\tnameStop :", j["nameStop"])
     #         print("\t\tarrivalHour :", j["arrivalHour"], end="\n\n")
 
-    return result
+    return returnHTMLBoard(result)
 
 def returnHTMLBoard(data):
+
+    fullPageHTML = "<div id=\"arrivalBoard\">"
+
     for i in range(0, len(data)):
-        numberLine = data[i]["numberLine"]
 
-        templateLoader = jinja2.FileSystemLoader( searchpath="/" )
-        #Get the current path of this file. From here, put togehter the path of the template file
-        basePath = os.path.dirname(os.path.abspath(__file__))
-        # An environment provides the data necessary to read and
-        #   parse our templates.  We pass in the loader object here.
-        templateEnv = jinja2.Environment( loader=templateLoader )
+        templateVars = {"cityArrival" : "Nothing",
+                        "cityDeparture" : "Nothing",
+                        "arrivalName" : "Nothing",
+                        "departureName" : "Nothing",
+                        "time" : "Nothing"}
 
-        # This constant string specifies the template file we will use.
-        #TEMPLATE_FILE = basePath + "/JinjaTemplates/table.jinja"
-        TEMPLATE_FILE = basePath + "/JinjaTemplates/arrivalBoardTable.jinja"
-        # Read the template file using the environment object.
-        # This also constructs our Template object.
-        template = templateEnv.get_template( TEMPLATE_FILE )
+        outputText = common.jinjaSubstitution(templateVars,"departureBoardTemplate.jinja")
+        fullPageHTML += outputText
 
-        # Specify any input variables to the template as a dictionary.
-        templateVars = { "stationFrom" : stationFrom,
-                         "stationTo" : stationTo,
-                        "departureTime" : departureTime,
-                        "arrivalTime" : arrivalTime,
-                        "departurePlatform":departurePlatform,
-                        "arrivalPlatform":arrivalPlatform}
+    fullPageHTML += "</div>"
+
+    return fullPageHTML

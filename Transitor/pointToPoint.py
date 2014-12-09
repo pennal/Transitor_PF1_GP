@@ -1,75 +1,150 @@
 import common
-import jinja2 #Used to substitute the tags in the html
-import os
+import datetime
 import json
 
+def getDateAntTimeSplit(inputString):
+    splitInputData = inputString.split("T")
+    tempData = splitInputData[0].split("-")
+    date = ""
+    for el in range(0,len(tempData)):
+        if el != 0:
+            date += "/"
+        date += tempData[len(tempData)-el-1]
+
+    time = splitInputData[1][:-8]
+    return time,date
+
+def durationOfTrip(originalDuration):
+    numberOfDays = originalDuration[:2]
+    hours,minutes = originalDuration[3:-3].split(":")
+    stringToReturn = ""
+    if int(numberOfDays) > 0:
+        if int(numberOfDays) < 10:
+            stringToReturn += numberOfDays[1:] + "d "
+        else:
+            stringToReturn += numberOfDays + "d "
+
+    if int(hours) > 0:
+        if int(hours) < 10:
+            stringToReturn += hours[1:] + "h "
+        else:
+            stringToReturn += hours + "h "
+
+    if int(minutes) > 0:
+        if int(minutes) < 10:
+            stringToReturn += minutes[1:] + "m"
+        else:
+            stringToReturn += minutes + "m"
+
+    return stringToReturn
+
 def returnHTMLTable(data):
-    """
-    DEBUG!!!!!!!!!!!!!!!!!!!
-    """
     for i in range(0,len(data["connections"])):
         stationFrom = data["connections"][i]["from"]["station"]["name"]
         stationTo = data["connections"][i]["to"]["station"]["name"]
-        departureTime = data["connections"][i]["from"]["departure"]
-        arrivalTime = data["connections"][i]["to"]["arrival"]
+
+        departureTimeTemp = data["connections"][i]["from"]["departure"]
+        departureTime, departureDate = getDateAntTimeSplit(departureTimeTemp)
+
+
+        arrivalTimeTemp = data["connections"][i]["to"]["arrival"]
+        arrivalTime, arrivalDate = getDateAntTimeSplit(arrivalTimeTemp)
+
+        duration = durationOfTrip(data["connections"][i]["duration"])
         departurePlatform = data["connections"][i]["from"]["platform"]
         arrivalPlatform = data["connections"][i]["to"]["platform"]
 
-        templateLoader = jinja2.FileSystemLoader( searchpath="/" )
-        #Get the current path of this file. From here, put togehter the path of the template file
-        basePath = os.path.dirname(os.path.abspath(__file__))
-        # An environment provides the data necessary to read and
-        #   parse our templates.  We pass in the loader object here.
-        templateEnv = jinja2.Environment( loader=templateLoader )
 
-        # This constant string specifies the template file we will use.
-        #TEMPLATE_FILE = basePath + "/JinjaTemplates/table.jinja"
-        TEMPLATE_FILE = basePath + "/JinjaTemplates/resultsTemplate.jinja"
-        # Read the template file using the environment object.
-        # This also constructs our Template object.
-        template = templateEnv.get_template( TEMPLATE_FILE )
+        transfersTag = ""
+        try:
+            newData = data["connections"][i]["sections"]
+            for connection in range(0,len(newData)):
+                if connection == 0:
+                    # we only need the arrival
+                    intermediateArrivalName = newData[connection]["arrival"]['station']["name"]
+                    intermediateArrivalTime, intermediateArrivalDate = getDateAntTimeSplit(newData[connection]['arrival']["arrival"])
+                    intermediateArrivalPlatform = newData[connection]["arrival"]['platform']
+
+
+                    templateVars = { "intermediateStationArrival" : intermediateArrivalName,
+                                     "arrivalTimeStep":intermediateArrivalTime,
+                                     "arrivalPlatform":intermediateArrivalPlatform
+                                     }
+
+                    # Finally, process the template to produce our final text.
+                    outputText = common.jinjaSubstitution(templateVars,"transfersTemplateArrival.jinja")
+
+
+
+
+                elif connection == len(newData)-1:
+                    #We only need the departure
+                    intermediateDepartureName = newData[connection]["departure"]['station']["name"]
+                    intermediateDepartureTime, intermediateDepartureDate = getDateAntTimeSplit(newData[connection]['departure']["departure"])
+                    intermediateDeparturePlatform = newData[connection]["departure"]['platform']
+
+                    # Specify any input variables to the template as a dictionary.
+                    templateVars = { "intermediateStationDeparture" : intermediateDepartureName,
+                                     "departureTimeStep":intermediateDepartureTime,
+                                     "departurePlatform":intermediateDeparturePlatform
+                                     }
+
+                    outputText = common.jinjaSubstitution(templateVars,"transfersTemplateDeparture.jinja")
+
+                else:
+                    intermediateArrivalName = newData[connection]["arrival"]['station']["name"]
+                    intermediateArrivalTime, intermediateArrivalDate = getDateAntTimeSplit(newData[connection]['arrival']["arrival"])
+                    intermediateArrivalPlatform = newData[connection]["arrival"]['platform']
+                    intermediateDepartureName = newData[connection]["departure"]['station']["name"]
+                    intermediateDepartureTime, intermediateDepartureDate = getDateAntTimeSplit(newData[connection]['departure']["departure"])
+                    intermediateDeparturePlatform = newData[connection]["departure"]['platform']
+
+
+                    # Specify any input variables to the template as a dictionary.
+                    templateVars = { "intermediateStationArrival" : intermediateArrivalName,
+                                     "arrivalTimeStep":intermediateArrivalTime,
+                                     "arrivalPlatform":intermediateArrivalPlatform,
+                                     "intermediateStationDeparture" : intermediateDepartureName,
+                                     "departureTimeStep":intermediateDepartureTime,
+                                     "departurePlatform":intermediateDeparturePlatform
+                                     }
+
+                    outputText = common.jinjaSubstitution(templateVars,"transfersTemplateCombined.jinja")
+
+                transfersTag += outputText
+
+        except:
+            print("No Connections")
 
         # Specify any input variables to the template as a dictionary.
         templateVars = { "stationFrom" : stationFrom,
+                         "transfers" : transfersTag,
                          "stationTo" : stationTo,
                         "departureTime" : departureTime,
+                        "departureDate" : departureDate,
                         "arrivalTime" : arrivalTime,
                         "departurePlatform":departurePlatform,
-                        "arrivalPlatform":arrivalPlatform}
+                        "arrivalPlatform":arrivalPlatform,
+                        "duration": duration}
 
-        # Finally, process the template to produce our final text.
-        outputText = template.render( templateVars )
+
+        outputText = common.jinjaSubstitution(templateVars,"resultsTemplate.jinja")
+
         if i==0:
             fullPageHTML = outputText
         else:
             fullPageHTML += outputText
 
-    templateLoader = jinja2.FileSystemLoader( searchpath="/" )
-    #Get the current path of this file. From here, put togehter the path of the template file
-    basePath = os.path.dirname(os.path.abspath(__file__))
-    # An environment provides the data necessary to read and
-    #   parse our templates.  We pass in the loader object here.
-    templateEnv = jinja2.Environment( loader=templateLoader )
-
-    # This constant string specifies the template file we will use.
-    TEMPLATE_FILE = basePath + "/JinjaTemplates/mainPage.jinja"
-
-    # Read the template file using the environment object.
-    # This also constructs our Template object.
-    template = templateEnv.get_template( TEMPLATE_FILE )
 
     # Specify any input variables to the template as a dictionary.
-    templateVars = { "title" : stationFrom + " to " + stationTo,
-                     "description" : "Some description",
-                    "textOfWebPage" : fullPageHTML}
+    templateVars = {"textOfWebPage" : fullPageHTML}
 
-    # Finally, process the template to produce our final text.
-    outputText = template.render( templateVars )
+
+    outputText = common.jinjaSubstitution(templateVars,"mainPage.jinja")
+
 
 
     return outputText
-
-
 
 def getConnectionsPointToPoint(stationFrom,stationTo,via = None,date=None, time=None,isArrivalTime = None,transportations=None,limit=None,direct=None,sleeper=None,couchette=None,bike=None):
     """

@@ -36,7 +36,10 @@ function sendP2PTransitReq (params, callback) {
 	  	hideProgressBar();
 	  	updateProgressBar(0);
 	  	callback(xmlhttp.responseText);
-	  }else{
+	  }else if(xmlhttp.readyState==4){
+	  	hideProgressBar();
+	  	updateProgressBar(0);
+	  	callback("<span style='display:block; text-align: center; color: white;'>There was an error. Please check your input and try again later.</span>");
 	  }
 
 	}
@@ -45,7 +48,7 @@ function sendP2PTransitReq (params, callback) {
 	xmlhttp.open("GET",'pointToPoint/doRequest?'+params,true);
 
 	// Show the loading bar
-	showLoadingAjax();
+	showProgressBar();
 	
 	// Finally submit the request
 	xmlhttp.send();
@@ -57,8 +60,8 @@ function getResults (from, to) {
 	// Fix for hashes
 	updateHashWithoutTriggeringChange('pages/p2p/input.html?from='+from+'&to='+to);
 	sendP2PTransitReq('from='+from+'&to='+to, function(data){
-		console.log(data);
 		replaceHTMLOfElement(resultsView, data);
+		resultsView.css('display', 'block');
 		slideSearch(true);
 	})
 }
@@ -133,14 +136,14 @@ function setPageTitle (from, to) {
 	console.log('Title string: '+titleString);
 }
 
-// Set this up
 if (objLength(getUrlParams()) > 1) {
 	var params = getUrlParams();
 
 	var from = params["from"];
 	var to = params["to"]
-	
-	getResults();
+
+	$('#p2pFrom').val(from);
+	$('#p2pTo').val(to);
 
 	getResults(from, to);
 	setPageTitle(from, to);
