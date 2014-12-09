@@ -316,6 +316,16 @@ body{
 	opacity: 1;
 }
 
+#closeButton{
+	background-image: url("../images/closebutton.png");
+    background-size: cover;
+    height: 21px;
+    left: 1.5%;
+    position: absolute;
+    width: 21px;
+    z-index: 1000;
+}
+
 /***************************************************
 /* Departure Board */
 
