@@ -35,19 +35,16 @@ def getTableBoard(station):
 
 def returnHTMLBoard(data):
 
-    fullPageHTML = ""
-
+    contentPage = ""
     for i in range(0, len(data)):
 
-        templateVars = {"cityArrival" : "Nothing",
-                        "cityDeparture" : "Nothing",
-                        "arrivalName" : "Nothing",
-                        "departureName" : "Nothing",
-                        "time" : "Nothing"}
+        templateVars = {"arrivalName" : data[i]["intermediateStops"][len(data[i]["intermediateStops"])-1]["nameStop"],
+                        "departureName" : data[i]["intermediateStops"][0]["nameStop"],
+                        "time" : "Some"}
 
         outputText = common.jinjaSubstitution(templateVars,"departureBoardTemplate.jinja")
-        fullPageHTML += outputText
+        contentPage += outputText
 
-    fullPageHTML += "</div>"
+    fullPageHTML = common.jinjiaSubstitution({"variabile" : contentPage},"initDepartureBoardTemplate.jinja")
 
     return fullPageHTML
