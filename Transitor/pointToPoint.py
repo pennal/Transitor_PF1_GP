@@ -1,6 +1,5 @@
 import common
-import jinja2 #Used to substitute the tags in the html
-import os
+
 import json
 
 def getDateAntTimeSplit(inputString):
@@ -47,28 +46,14 @@ def returnHTMLTable(data):
                     intermediateArrivalTime, intermediateArrivalDate = getDateAntTimeSplit(newData[connection]['arrival']["arrival"])
                     intermediateArrivalPlatform = newData[connection]["arrival"]['platform']
 
-                    templateLoader = jinja2.FileSystemLoader( searchpath="/" )
-                    #Get the current path of this file. From here, put togehter the path of the template file
-                    basePath = os.path.dirname(os.path.abspath(__file__))
-                    # An environment provides the data necessary to read and
-                    #   parse our templates.  We pass in the loader object here.
-                    templateEnv = jinja2.Environment( loader=templateLoader )
 
-                    # This constant string specifies the template file we will use.
-                    #TEMPLATE_FILE = basePath + "/JinjaTemplates/table.jinja"
-                    TEMPLATE_FILE = basePath + "/JinjaTemplates/transfersTemplateArrival.jinja"
-                    # Read the template file using the environment object.
-                    # This also constructs our Template object.
-                    template = templateEnv.get_template( TEMPLATE_FILE )
-
-                    # Specify any input variables to the template as a dictionary.
                     templateVars = { "intermediateStationArrival" : intermediateArrivalName,
                                      "arrivalTimeStep":intermediateArrivalTime,
                                      "arrivalPlatform":intermediateArrivalPlatform
                                      }
 
                     # Finally, process the template to produce our final text.
-                    outputText = template.render( templateVars )
+                    outputText = common.jinjaSubstitution(templateVars,"transfersTemplateArrival.jinja")
 
 
 
@@ -79,28 +64,13 @@ def returnHTMLTable(data):
                     intermediateDepartureTime, intermediateDepartureDate = getDateAntTimeSplit(newData[connection]['departure']["departure"])
                     intermediateDeparturePlatform = newData[connection]["departure"]['platform']
 
-                    templateLoader = jinja2.FileSystemLoader( searchpath="/" )
-                    #Get the current path of this file. From here, put togehter the path of the template file
-                    basePath = os.path.dirname(os.path.abspath(__file__))
-                    # An environment provides the data necessary to read and
-                    #   parse our templates.  We pass in the loader object here.
-                    templateEnv = jinja2.Environment( loader=templateLoader )
-
-                    # This constant string specifies the template file we will use.
-                    #TEMPLATE_FILE = basePath + "/JinjaTemplates/table.jinja"
-                    TEMPLATE_FILE = basePath + "/JinjaTemplates/transfersTemplateDeparture.jinja"
-                    # Read the template file using the environment object.
-                    # This also constructs our Template object.
-                    template = templateEnv.get_template( TEMPLATE_FILE )
-
                     # Specify any input variables to the template as a dictionary.
                     templateVars = { "intermediateStationDeparture" : intermediateDepartureName,
                                      "departureTimeStep":intermediateDepartureTime,
                                      "departurePlatform":intermediateDeparturePlatform
                                      }
 
-                    # Finally, process the template to produce our final text.
-                    outputText = template.render( templateVars )
+                    outputText = common.jinjaSubstitution(templateVars,"transfersTemplateDeparture.jinja")
 
                 else:
                     intermediateArrivalName = newData[connection]["arrival"]['station']["name"]
@@ -110,19 +80,6 @@ def returnHTMLTable(data):
                     intermediateDepartureTime, intermediateDepartureDate = getDateAntTimeSplit(newData[connection]['departure']["departure"])
                     intermediateDeparturePlatform = newData[connection]["departure"]['platform']
 
-                    templateLoader = jinja2.FileSystemLoader( searchpath="/" )
-                    #Get the current path of this file. From here, put togehter the path of the template file
-                    basePath = os.path.dirname(os.path.abspath(__file__))
-                    # An environment provides the data necessary to read and
-                    #   parse our templates.  We pass in the loader object here.
-                    templateEnv = jinja2.Environment( loader=templateLoader )
-
-                    # This constant string specifies the template file we will use.
-                    #TEMPLATE_FILE = basePath + "/JinjaTemplates/table.jinja"
-                    TEMPLATE_FILE = basePath + "/JinjaTemplates/transfersTemplateCombined.jinja"
-                    # Read the template file using the environment object.
-                    # This also constructs our Template object.
-                    template = templateEnv.get_template( TEMPLATE_FILE )
 
                     # Specify any input variables to the template as a dictionary.
                     templateVars = { "intermediateStationArrival" : intermediateArrivalName,
@@ -133,34 +90,12 @@ def returnHTMLTable(data):
                                      "departurePlatform":intermediateDeparturePlatform
                                      }
 
-                    # Finally, process the template to produce our final text.
-                    outputText = template.render( templateVars )
+                    outputText = common.jinjaSubstitution(templateVars,"transfersTemplateCombined.jinja")
 
                 transfersTag += outputText
 
         except:
             print("No Connections")
-
-
-
-
-
-
-
-
-        templateLoader = jinja2.FileSystemLoader( searchpath="/" )
-        #Get the current path of this file. From here, put togehter the path of the template file
-        basePath = os.path.dirname(os.path.abspath(__file__))
-        # An environment provides the data necessary to read and
-        #   parse our templates.  We pass in the loader object here.
-        templateEnv = jinja2.Environment( loader=templateLoader )
-
-        # This constant string specifies the template file we will use.
-        #TEMPLATE_FILE = basePath + "/JinjaTemplates/table.jinja"
-        TEMPLATE_FILE = basePath + "/JinjaTemplates/resultsTemplate.jinja"
-        # Read the template file using the environment object.
-        # This also constructs our Template object.
-        template = templateEnv.get_template( TEMPLATE_FILE )
 
         # Specify any input variables to the template as a dictionary.
         templateVars = { "stationFrom" : stationFrom,
@@ -172,9 +107,8 @@ def returnHTMLTable(data):
                         "departurePlatform":departurePlatform,
                         "arrivalPlatform":arrivalPlatform}
 
-        # Finally, process the template to produce our final text.
-        outputText = template.render( templateVars )
 
+        outputText = common.jinjaSubstitution(templateVars,"resultsTemplate.jinja")
 
         if i==0:
             fullPageHTML = outputText
@@ -182,30 +116,14 @@ def returnHTMLTable(data):
             fullPageHTML += outputText
 
 
-    templateLoader = jinja2.FileSystemLoader( searchpath="/" )
-    #Get the current path of this file. From here, put togehter the path of the template file
-    basePath = os.path.dirname(os.path.abspath(__file__))
-    # An environment provides the data necessary to read and
-    #   parse our templates.  We pass in the loader object here.
-    templateEnv = jinja2.Environment( loader=templateLoader )
-
-    # This constant string specifies the template file we will use.
-    TEMPLATE_FILE = basePath + "/JinjaTemplates/mainPage.jinja"
-
-    # Read the template file using the environment object.
-    # This also constructs our Template object.
-    template = templateEnv.get_template( TEMPLATE_FILE )
-
     # Specify any input variables to the template as a dictionary.
     templateVars = { "title" : stationFrom + " to " + stationTo,
                      "description" : "Some description",
                     "textOfWebPage" : fullPageHTML}
 
-    # Finally, process the template to produce our final text.
-    outputText = template.render( templateVars )
 
+    outputText = common.jinjaSubstitution(templateVars,"mainPage.jinja")
 
-    #print("Output text: ", outputText)
 
 
     return outputText
