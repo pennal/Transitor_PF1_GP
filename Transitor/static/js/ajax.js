@@ -1,16 +1,19 @@
 $(document).ready(function(){
-	documentReady()
+	documentReady();
 });
 
 $(window).unload(function(){
 	resetPage();
-})
+});
 
 // Listen for hash changes
 window.addEventListener("hashchange", dealWithHash);
 
 // Variable containing the div which always gets updated
-var contentDiv
+var contentDiv;
+
+// Ignore hash changes
+var _ignoreHashChangeOnce = false;
 
 // Function to send GET Ajax request
 function sendAjaxRequest (url, callback) {
@@ -108,13 +111,21 @@ function hideProgressBar () {
 
 // Parses hash and redirects if needed
 function dealWithHash () {
-	var hash = window.location.hash.substr(1);
-	console.log('Hash changed to: '+hash);
-	if (hash != '') {
-		setupAndSendAjaxRequest(hash);
-	}else{
-		setupAndSendAjaxRequest('pages/home.html');
+	if (!_ignoreHashChangeOnce) {
+		var hash = window.location.hash.substr(1);
+		console.log('Hash changed to: '+hash);
+		if (hash != '') {
+			setupAndSendAjaxRequest(hash);
+		}else{
+			setupAndSendAjaxRequest('pages/home.html');
+		}
 	}
+	_ignoreHashChangeOnce = false;
+}
+
+function updateHashWithoutTriggeringChange (hash) {
+	_ignoreHashChangeOnce = true;
+	window.location.hash = hash
 }
 
 function resetPage () {

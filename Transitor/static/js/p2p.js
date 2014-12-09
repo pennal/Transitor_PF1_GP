@@ -9,12 +9,56 @@ function submitP2PForm (form) {
 	return false;
 }
 
+
+function sendP2PTransitReq (params, callback) {
+	var xmlhttp;
+	if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+
+	  // Update the progress bar
+	xmlhttp.onprogress = function(e){
+	    if (e.lengthComputable){
+	    	var progress = (e.loaded / e.total) * 100;
+	        updateProgressBar(progress);
+	    }
+	};
+
+	// Has the request finished?
+	xmlhttp.onreadystatechange=function(){
+	  
+	  if (xmlhttp.readyState==4 && (xmlhttp.status==200||xmlhttp.status==0)) { //The 0 is just because it seemed to not like it when run locally..
+	  	hideProgressBar();
+	  	updateProgressBar(0);
+	  	callback(xmlhttp.responseText);
+	  }else{
+	  }
+
+	}
+
+	// Build request
+	xmlhttp.open("GET",'pointToPoint/doRequest?'+params,true);
+
+	// Show the loading bar
+	showLoadingAjax();
+	
+	// Finally submit the request
+	xmlhttp.send();
+}
+
+
 // Set this up
 function getResults (from, to) {
-	// CREATE SPECIAL FUNCTION FOR THIS
-	sendAjaxRequest('pointToPoint/doRequest?from='+from+'&to='+to, function(data){
+	// Fix for hashes
+	updateHashWithoutTriggeringChange('pages/p2p/input.html?from='+from+'&to='+to);
+	sendP2PTransitReq('from='+from+'&to='+to, function(data){
+		console.log(data);
 		replaceHTMLOfElement(resultsView, data);
-		// window.location.hash = 'pages/p2p/input.html?from='+from+'&to='+to;
 		slideSearch(true);
 	})
 }
@@ -59,14 +103,14 @@ function slideSearch (offScreen) {
 function getUrlParams() {
 	var questionMarkIndex = window.location.href.indexOf('?');
 	var result = {};
-		if (questionMarkIndex !== -1) {
-			var query = window.location.href.substring(questionMarkIndex+1);
-			query.split("&").forEach(function(part) {
-				var item = part.split("=");
-				result[item[0]] = decodeURIComponent(item[1]);
-			});
-		};
-		return result;
+	if (questionMarkIndex !== -1) {
+		var query = window.location.href.substring(questionMarkIndex+1);
+		query.split("&").forEach(function(part) {
+			var item = part.split("=");
+			result[item[0]] = decodeURIComponent(item[1]);
+		});
+	};
+	return result;
 }
 
 function objLength (obj){    
