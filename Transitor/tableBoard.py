@@ -32,3 +32,22 @@ def getTableBoard(station):
             print("\t\tarrivalHour :", j["arrivalHour"], end="\n\n")
 
     return result
+
+def returnHTMLBoard(data):
+
+    fullPageHTML = "<div id=\"arrivalBoard\">"
+
+    for i in range(0, len(data)):
+
+        templateVars = {"cityArrival" : "Nothing",
+                        "cityDeparture" : "Nothing",
+                        "arrivalName" : "Nothing",
+                        "departureName" : "Nothing",
+                        "time" : "Nothing"}
+
+        outputText = common.jinjaSubstitution(templateVars,"departureBoardTemplate.jinja")
+        fullPageHTML += outputText
+
+    fullPageHTML += "</div>"
+
+    return fullPageHTML

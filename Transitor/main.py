@@ -37,6 +37,6 @@ def printHelloWorld():
 if __name__ == "__main__":
     app.debug = True
     app.run()
-
-#tableBoard.getTableBoard("Aarau")
+data = tableBoard.getTableBoard("Aarau")
+tableBoard.returnHTMLBoard()
 #print(json.dumps(pointToPoint.getConnectionsPointToPoint("Lugano","Zürich HB"),indent=4))
