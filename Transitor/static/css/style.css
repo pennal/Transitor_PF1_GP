@@ -228,12 +228,13 @@ body{
 	margin: 0 auto;
 }
 
-#resultsView #backButton{
+#backButton{
 	background-image: url("../images/backbutton.png");
+    background-size: cover;
     height: 42px;
-    left: 0;
+    left: 1.5%;
     position: absolute;
-    top: 0;
+    top: 2.5%;
     width: 42px;
     z-index: 1000;
 }
