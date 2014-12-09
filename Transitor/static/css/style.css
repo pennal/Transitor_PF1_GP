@@ -230,7 +230,7 @@ body{
 
 
 /****************************************************/
-/* First scratch of the results view */
+/* Results view */
 .blueBar{
 	height: 40px;
 	background-color: rgb(180,210,255);
@@ -241,7 +241,7 @@ body{
 }
 #result{
 	width: 50%;
-	min-width: 630px;
+	min-width: 660px;
 	margin: 10px auto;
 	padding-bottom: 30px;
 	background-color: white;
@@ -257,10 +257,10 @@ body{
 	width: 15%;
 }
 #result table td:nth-child(2){
-	width: 35%;
-}
-#result table td:nth-child(3){
 	width: 30%;
+}
+#result table td:nth-child(4){
+	width: 35%;
 }
 .platform{
 	text-align: right;
@@ -285,6 +285,12 @@ body{
 .transfer{
 	padding-bottom: 20px;
 	border-bottom: 0.5px solid black;
+}
+.duration{
+	text-align: right;
+	padding-right: 30px;
+	padding-bottom: 30px;
+
 }
 
 /***************************************************
