@@ -31,7 +31,7 @@ def getTableBoard(station):
             print("\t\tnameStop :", j["nameStop"])
             print("\t\tarrivalHour :", j["arrivalHour"], end="\n\n")
 
-    return result
+    return returnHTMLBoard(result)
 
 def returnHTMLBoard(data):
 
