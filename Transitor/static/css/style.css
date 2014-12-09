@@ -147,6 +147,26 @@ body{
   }
 }
 
+.front.overlay{
+	background: rgba(25,25,25,0.7);
+	color: white;
+	text-align: center;
+	display: none;
+    vertical-align: middle;
+    font-size: 20pt;
+}
+
+.front.overlay:before {
+    content: " ";
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.flipper:hover .front.overlay{
+	display: inline-block;
+}
+
 /****************************************************/
 /*P2P input page*/
 
