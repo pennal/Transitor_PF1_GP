@@ -14,7 +14,7 @@ def mainPage():
 # ACTUAL CALL!!
 # Example URL: http://127.0.0.1:5000/pointToPoint/doRequest?from=Lugano&to=Zug
 
-@app.route("/api/ptp")
+@app.route("/api/p2p")
 def doPTPRequest():
     stationFrom = request.args.get('from')
     stationTo = request.args.get('to')
