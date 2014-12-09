@@ -1,5 +1,5 @@
 import common
-
+import datetime
 import json
 
 def getDateAntTimeSplit(inputString):
@@ -14,10 +14,34 @@ def getDateAntTimeSplit(inputString):
     time = splitInputData[1][:-8]
     return time,date
 
+def durationOfTrip(originalDuration):
+    numberOfDays = originalDuration[:2]
+    hours,minutes = originalDuration[3:-3].split(":")
+    stringToReturn = ""
+    if int(numberOfDays) > 0:
+        if int(numberOfDays) < 10:
+            stringToReturn += numberOfDays[1:] + "d "
+        else:
+            stringToReturn += numberOfDays + "d "
+
+    if int(hours) > 0:
+        if int(hours) < 10:
+            stringToReturn += hours[1:] + "h "
+        else:
+            stringToReturn += hours + "h "
+
+    if int(minutes) > 0:
+        if int(minutes) < 10:
+            stringToReturn += minutes[1:] + "m"
+        else:
+            stringToReturn += minutes + "m"
+
+    return stringToReturn
+
+
+
+
 def returnHTMLTable(data):
-    """
-    DEBUG!!!!!!!!!!!!!!!!!!!
-    """
     for i in range(0,len(data["connections"])):
         stationFrom = data["connections"][i]["from"]["station"]["name"]
         stationTo = data["connections"][i]["to"]["station"]["name"]
@@ -29,7 +53,7 @@ def returnHTMLTable(data):
         arrivalTimeTemp = data["connections"][i]["to"]["arrival"]
         arrivalTime, arrivalDate = getDateAntTimeSplit(arrivalTimeTemp)
 
-
+        duration = durationOfTrip(data["connections"][i]["duration"])
         departurePlatform = data["connections"][i]["from"]["platform"]
         arrivalPlatform = data["connections"][i]["to"]["platform"]
 
@@ -37,9 +61,7 @@ def returnHTMLTable(data):
         transfersTag = ""
         try:
             newData = data["connections"][i]["sections"]
-            print("Amount of connections: ",len(newData))
             for connection in range(0,len(newData)):
-                print("Processing connection ",connection)
                 if connection == 0:
                     # we only need the arrival
                     intermediateArrivalName = newData[connection]["arrival"]['station']["name"]
@@ -105,7 +127,8 @@ def returnHTMLTable(data):
                         "departureDate" : departureDate,
                         "arrivalTime" : arrivalTime,
                         "departurePlatform":departurePlatform,
-                        "arrivalPlatform":arrivalPlatform}
+                        "arrivalPlatform":arrivalPlatform,
+                        "duration": duration}
 
 
         outputText = common.jinjaSubstitution(templateVars,"resultsTemplate.jinja")
@@ -117,9 +140,7 @@ def returnHTMLTable(data):
 
 
     # Specify any input variables to the template as a dictionary.
-    templateVars = { "title" : stationFrom + " to " + stationTo,
-                     "description" : "Some description",
-                    "textOfWebPage" : fullPageHTML}
+    templateVars = {"textOfWebPage" : fullPageHTML}
 
 
     outputText = common.jinjaSubstitution(templateVars,"mainPage.jinja")
