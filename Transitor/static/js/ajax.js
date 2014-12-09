@@ -123,7 +123,7 @@ function dealWithHash () {
 	_ignoreHashChangeOnce = false;
 }
 
-function updateHashWithoutTriggeringChange (hash) {
+function updateHashWithoutTriggeringChange(hash) {
 	_ignoreHashChangeOnce = true;
 	window.location.hash = hash
 }

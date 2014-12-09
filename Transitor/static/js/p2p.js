@@ -45,7 +45,7 @@ function sendP2PTransitReq (params, callback) {
 	xmlhttp.open("GET",'pointToPoint/doRequest?'+params,true);
 
 	// Show the loading bar
-	showLoadingAjax();
+	showProgressBar();
 	
 	// Finally submit the request
 	xmlhttp.send();
@@ -58,7 +58,9 @@ function getResults (from, to) {
 	updateHashWithoutTriggeringChange('pages/p2p/input.html?from='+from+'&to='+to);
 	sendP2PTransitReq('from='+from+'&to='+to, function(data){
 		console.log(data);
+		console.log(resultsView);
 		replaceHTMLOfElement(resultsView, data);
+		resultsView.css('display', 'block');
 		slideSearch(true);
 	})
 }
