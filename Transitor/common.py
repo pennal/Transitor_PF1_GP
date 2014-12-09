@@ -35,13 +35,25 @@ def doRequest(urlForQuery):
     :param urlForQuery: URL for the query
     :return: JSON formatted data
     """
-    try:
-        #Actual http request
-        response = requests.get(urlForQuery)
-    except ConnectionError:
-        print("Not connected to the internet")
-    except:
-        print("An unknown error has occured")
+    hasTimedOut = True
+        #While the text returned is a timeout, continue trying
+    while hasTimedOut:
+        try:
+            response = requests.get(urlForQuery)
+            data = json.loads(response.text)
+            #Check if what was returned is actually a timeout issue
+            if "errors" in data:
+                if "Connection timed out" in data["errors"][0]["message"]:
+                    hasTimedOut = True
+                    print("Connection timed out. Retrying...")
+            else:
+                hasTimedOut = False
+        except ConnectionError:
+            print("ConnectionError: Check your internet connection, and retry")
+        except:
+            print("UnknownError: An unknown error has occured")
+
+
 
     # Convert incoming data to JSON, and return it
     return json.loads(response.text)
