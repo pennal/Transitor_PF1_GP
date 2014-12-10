@@ -1,3 +1,5 @@
+// TODO loading icon
+
 $(document).ready(function(){
 	documentReady();
 });

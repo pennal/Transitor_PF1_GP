@@ -5,15 +5,13 @@
 			<table>
 				<tr>
 					<!-- <td><label for="p2pFrom">From: </label></td> -->
-					<td><input type="text" id="p2pFrom" class="p2pInput" placeholder="From" value=""></td>
+					<td><input type="text" name="p2pFrom" class="p2pInput" placeholder="From" value="" autofocus></td>
 				</tr>
 				<tr>
 					<!-- <td><label for="p2pTo">To: </label></td> -->
-					<td><input type="text" id="p2pTo" class="p2pInput" placeholder="To" value=""></td>
+					<td><input type="text" name="p2pTo" class="p2pInput" placeholder="To" value=""></td>
 				</tr>
 				<tr>
-					<!-- <td><a href="http://upload.wikimedia.org/wikipedia/commons/8/8b/Buck_Mountain_Grand_Teton_NP1.jpg" class="internal">Big Image</a></td> -->
-					<!-- <td><a href="files/test.txt" class="internal">file</a></td> -->
 					<td><input type="submit" value="Plan" class="inputButton"></td>
 				</tr>
 				<tr>
@@ -23,35 +21,46 @@
 			<div id="additionalOptions" class="hidden closed">
 				<table>
 					<tr>
-						<td><input type="text" id="p2pVia" class="p2pInput" placeholder="Via" value=""></td>
+						<td><input type="text" name="p2pVia" class="p2pInput" placeholder="Via" value=""></td>
 					</tr>
 					<tr>
-						<td><input type="text" id="p2pDate" class="p2pInput" placeholder="Date" value=""></td>
+						<td><input type="text" name="p2pDate" class="p2pInput" placeholder="Date - click to choose" value=""></td>
 					</tr>
 					<tr>
-						<td><input type="text" id="p2pTime" class="p2pInput" placeholder="Time" value=""></td>
+						<td><input type="text" name="p2pTime" class="p2pInput" placeholder="Time e.g. 14:12" value=""></td>
 					</tr>
 					<tr>
-						<td><input type="text" id="p2pIsArrivalTime" class="p2pInput" placeholder="IsArrivalTime" value=""></td>
+						<td><input type="radio" name="p2pIsArrivalTime" class="" value="0" checked="checked">Deparing<br/>
+						<input type="radio" name="p2pIsArrivalTime" class="" value="1">Arriving</td>
 					</tr>
 					<tr>
-						<td><input type="text" id="p2pTransportations" class="p2pInput" placeholder="Transportations" value=""></td>
+						<td>
+							<input type="checkbox" name="p2pTransportationType[]" value="ice_tgv_rj" checked="checked">ICE/TGV/RJ<br/>
+							<input type="checkbox" name="p2pTransportationType[]" value="ec_ic" checked="checked">EC/IC<br/>
+							<input type="checkbox" name="p2pTransportationType[]" value="ir" checked="checked">IR<br/>
+							<input type="checkbox" name="p2pTransportationType[]" value="re_d" checked="checked">RE/D<br/>
+							<input type="checkbox" name="p2pTransportationType[]" value="ship" checked="checked">Ship<br/>
+							<input type="checkbox" name="p2pTransportationType[]" value="s_sn_r" checked="checked">S/SN/R<br/>
+							<input type="checkbox" name="p2pTransportationType[]" value="bus" checked="checked">Bus<br/>
+							<input type="checkbox" name="p2pTransportationType[]" value="cableway" checked="checked">Cableway<br/>
+							<input type="checkbox" name="p2pTransportationType[]" value="arz_ext" checked="checked">ARZ/EXT<br/>
+							<input type="checkbox" name="p2pTransportationType[]" value="tramway_underground" checked="checked">Tramway/Underground
+						</td>
 					</tr>
 					<tr>
-						<td><input type="text" id="p2pLimit" class="p2pInput" placeholder="Limit" value=""></td>
+						<td>
+							<input type="radio" name="p2pConnectionType" value="0" checked="checked">All connections<br/>
+							<input type="radio" name="p2pConnectionType" value="1">Direct connection<br/>
+							<input type="radio" name="p2pConnectionType" value="2">Direct connection with sleeper<br/>
+							<input type="radio" name="p2pConnectionType" value="3">Direct connection with couchette
+						</td>
 					</tr>
 					<tr>
-						<td><input type="text" id="p2pDirect" class="p2pInput" placeholder="Direct" value=""></td>
+						<td><input type="checkbox" name="p2pBike" value="1">Bike needed</td>
 					</tr>
 					<tr>
-						<td><input type="text" id="p2pSleeper" class="p2pInput" placeholder="Sleeper" value=""></td>
-					</tr>
-					<tr>
-						<td><input type="text" id="p2pCouchette" class="p2pInput" placeholder="Couchette" value=""></td>
-					</tr>
-					<tr>
-						<td><input type="text" id="p2pBike" class="p2pInput" placeholder="Bike" value=""></td>
-					</tr>
+					<td><input type="submit" value="Plan" class="inputButton"></td>
+				</tr>
 				</table>
 			</div>
 		</form>
