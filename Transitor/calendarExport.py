@@ -2,26 +2,56 @@ from icalendar import Calendar, Event
 from datetime import datetime
 import pytz
 import  os
+from bs4 import BeautifulSoup  # Pretty self explanatory...
+
 
 
 def downloadEventForCalendar(htmlPage):
+    htmlPage = urllib.parse.unquote(urllib.parse.unquote(htmlPage))
+
+    # DEBUG
+    #htmlPage = open("/Users/Lucas/Desktop/resultHTMLBF.html").read()
+
+    mainDiv = BeautifulSoup(htmlPage)
+
+    entries = mainDiv.find_all('tr')[1:]
+    print(len(entries), entries)
+    # Get the names of departure and arrival station
+    stationFrom,stationTo = entries[0].text.replace("to","").split(" ")
+    stationFrom = stationFrom[1:]
+    stationTo = stationTo[:-1]
+
+    # Get the departure time
+    depTime = entries[1].find_all('td')[1].text
+    depPlatform = entries[1].find_all('td')[3].text
+    print(depTime,depPlatform)
+
+    depDate = entries[2].find_all('td')[1].text
+    durationOfTrip = entries[2].find_all('td')[3].text[:-4]
+
+    print(durationOfTrip, depDate)
+
+
     cal = Calendar()
     cal.add('prodid', 'Transitor')
     cal.add('version', '2.0')
     event = Event()
 
-    #summaryString = stationFrom + " to " + stationTo
+    summaryString = " Trip from " + stationFrom + " to " + stationTo
 
-
-
-    event.add('summary', 'Python meeting about calendaring')
-    event.add('dtstart', datetime(2005,4,4,8,0,0,tzinfo=pytz.utc))
-    event.add('dtend', datetime(2005,4,4,10,0,0,tzinfo=pytz.utc))
-    event.add('dtstamp', datetime(2005,4,4,0,10,0,tzinfo=pytz.utc))
+    splitDate = depDate.split("/")
+    splitDate[0],splitDate[1],splitDate[2] = int(splitDate[0]),int(splitDate[1]),int(splitDate[2])
+    event.add('summary', summaryString)
+    event.add('dtstart', datetime(splitDate[2],splitDate[1],splitDate[0],8,0,0,tzinfo=pytz.utc))
+    event.add('dtend', datetime(splitDate[2],splitDate[1],splitDate[0],10,0,0,tzinfo=pytz.utc))
+    event.add('dtstamp', datetime(splitDate[2],splitDate[1],splitDate[0],0,10,0,tzinfo=pytz.utc))
     event['uid'] = '20050115T101010/27346262376@mxm.dk'
     event.add('priority', 5)
     cal.add_component(event)
 
 
     return cal.to_ical()
+
+
+downloadEventForCalendar("")    
 
