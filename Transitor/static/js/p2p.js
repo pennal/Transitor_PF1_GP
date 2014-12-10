@@ -2,21 +2,22 @@ var resultsView = $('#resultsView')
 
 // TODO: Fix the formatting
 function dateFormat (forURL, value) {
-	// console.log('supplied date: '+value);
-	// if (forURL) {
-	// 	var date = '';
-	// 	if (value && value != '') {
-	// 		date = $.datepicker.formatDate('yy-mm-dd', value);
-	// 	};
-	// 	return date;
-	// }else{
-	// 	var date = '';
-	// 	if (value && value != '') {
-	// 		date = $.datepicker.formatDate('dd.mm.yy', value);
-	// 	};
-	// 	return date;
-	// }
-	return value;
+	console.log(value);
+	if (forURL) {
+		var date = '';
+		if (value && value != '') {
+			date = $.datepicker.formatDate('yy-mm-dd', value);
+		};
+		return date;
+	}else{
+		value = new Date(value);
+		var date = '';
+		if (value && value != '') {
+			date = $.datepicker.formatDate('dd.mm.yy', value);
+		};
+		return date;
+	}
+	// return value;
 }
 
 function submitP2PForm (form) {
@@ -25,18 +26,17 @@ function submitP2PForm (form) {
 	var to = returnValueIfExistsString($('#p2pTo'));
 	var via = returnValueIfExistsString($('#p2pVia'));
 	
-	var date = dateFormat(true, $('#p2pDate').val());
+	var date = dateFormat(true, $('#p2pDate').datepicker("getDate"));
 	
 	var time = returnValueIfExistsString($('#p2pTime'));
 	var isArrivalTime = returnValueIfExistsString($('#p2pIsArrivalTime'));
 	var transportations = returnValueIfExistsString($('#p2pTransportations'));
-	var limit = returnValueIfExistsString($('#p2pLimit'));
 	var direct = returnValueIfExistsString($('#p2pDirect'));
 	var sleeper = returnValueIfExistsString($('#p2pSleeper'));
 	var couchette = returnValueIfExistsString($('#p2pCouchette'));
 	var bike = returnValueIfExistsString($('#p2pBike'));
 
-	getResults(from, to, via, date, time, isArrivalTime, transportations, limit, direct, sleeper, couchette, bike);
+	getResults(from, to, via, date, time, isArrivalTime, transportations, direct, sleeper, couchette, bike);
 	setPageTitle(from, to);
 	return false;
 }
@@ -95,9 +95,9 @@ function sendP2PTransitReq (params, callback) {
 
 
 // Set this up
-function getResults (from, to, via, date, time, isArrivalTime, transportations, limit, direct, sleeper, couchette, bike) {
+function getResults (from, to, via, date, time, isArrivalTime, transportations, direct, sleeper, couchette, bike) {
 	// Fix for hashes
-	var queryString = 'from='+from+'&to='+to+'&via='+via+'&date='+date+'&time='+time+'&isArrivalTime='+isArrivalTime+'&transportations='+transportations+'&limit='+limit+'&direct='+direct+'&sleeper='+sleeper+'&couchette='+couchette+'&bike='+bike;
+	var queryString = 'from='+from+'&to='+to+'&via='+via+'&date='+date+'&time='+time+'&isArrivalTime='+isArrivalTime+'&transportations='+transportations+'&direct='+direct+'&sleeper='+sleeper+'&couchette='+couchette+'&bike='+bike;
 	// var queryString = 'from='+from+'&to='+to;
 	updateHashWithoutTriggeringChange('pages/p2p/input.html?'+queryString);
 	sendP2PTransitReq(queryString, function(data){
@@ -217,8 +217,8 @@ function slideOutFrontAndReplace () {
 // Set up date Picker
 // TODO: Fix the formatting
 $('#p2pDate').datepicker({
-	dateFormat: "yy-mm-dd"
-	// dateFormat: "dd.mm.yy"
+	// dateFormat: "yy-mm-dd"
+	dateFormat: "dd.mm.yy"
 });
 
 // Attach function to click on additional options
@@ -238,7 +238,6 @@ if (objLength(getUrlParams()) > 1) {
 	var time = params["time"];
 	var isArrivalTime = params["isArrivalTime"];
 	var transportations = params["transportations"];
-	var limit = params["limit"];
 	var direct = params["direct"];
 	var sleeper = params["sleeper"];
 	var couchette = params["couchette"];
@@ -251,12 +250,11 @@ if (objLength(getUrlParams()) > 1) {
 	$('#p2pTime').val(time);
 	$('#p2pIsArrivalTime').val(isArrivalTime);
 	$('#p2pTransportations').val(transportations);
-	$('#p2pLimit').val(limit);
 	$('#p2pDirect').val(direct);
 	$('#p2pSleeper').val(sleeper);
 	$('#p2pCouchette').val(couchette);
 	$('#p2pBike').val(bike);
 
-	getResults(from, to, via, date, time, isArrivalTime, transportations, limit, direct, sleeper, couchette, bike);
+	getResults(from, to, via, date, time, isArrivalTime, transportations, direct, sleeper, couchette, bike);
 	setPageTitle(from, to);
 };
