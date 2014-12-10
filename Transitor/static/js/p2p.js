@@ -160,12 +160,14 @@ function setPageTitle (from, to) {
 function toggleAdditionalOptions () {
 	var theBox = $("#additionalOptions");
 	if (theBox.hasClass('closed')) {
-		theBox.removeClass('closed');
-		theBox.fadeIn(300);
+		theBox.fadeIn(300, function(){
+			theBox.removeClass('closed');
+		});
 		$('#additionalOptionsLink').html("-Fewer Options");
 	}else{
-		theBox.addClass('closed');
-		theBox.fadeOut(300);
+		theBox.fadeOut(300, function(){
+			theBox.addClass('closed');
+		});
 		$('#additionalOptionsLink').html("+Additional Options");
 	};
 }
@@ -193,7 +195,7 @@ function slideOutFrontAndReplace () {
 
 
 
-$('#additionalOptionsLink').on('click', function(event) {
+$('#additionalOptionsLink').click(function(event) {
 	event.preventDefault();
 	toggleAdditionalOptions();
 });
