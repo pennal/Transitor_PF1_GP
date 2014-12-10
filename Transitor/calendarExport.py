@@ -3,6 +3,7 @@ from datetime import datetime
 import pytz
 import  os
 from bs4 import BeautifulSoup  # Pretty self explanatory...
+import urllib
 
 
 
@@ -41,9 +42,15 @@ def downloadEventForCalendar(htmlPage):
 
     splitDate = depDate.split("/")
     splitDate[0],splitDate[1],splitDate[2] = int(splitDate[0]),int(splitDate[1]),int(splitDate[2])
+
+    # TODO: Time difference for different regions !!!!
+    splitTime = depTime.split(":")
+    splitTime[0],splitTime[1] = int(splitTime[0]), int(splitTime[1])
+
+
     event.add('summary', summaryString)
-    event.add('dtstart', datetime(splitDate[2],splitDate[1],splitDate[0],8,0,0,tzinfo=pytz.utc))
-    event.add('dtend', datetime(splitDate[2],splitDate[1],splitDate[0],10,0,0,tzinfo=pytz.utc))
+    event.add('dtstart', datetime(splitDate[2],splitDate[1],splitDate[0],splitTime[0],splitTime[1],0,tzinfo=pytz.utc))
+    event.add('dtend', datetime(splitDate[2],splitDate[1],splitDate[0],splitTime[0],splitTime[1],0,tzinfo=pytz.utc))
     event.add('dtstamp', datetime(splitDate[2],splitDate[1],splitDate[0],0,10,0,tzinfo=pytz.utc))
     event['uid'] = '20050115T101010/27346262376@mxm.dk'
     event.add('priority', 5)
@@ -51,7 +58,4 @@ def downloadEventForCalendar(htmlPage):
 
 
     return cal.to_ical()
-
-
-downloadEventForCalendar("")    
 
