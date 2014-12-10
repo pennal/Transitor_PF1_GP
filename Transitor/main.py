@@ -29,6 +29,8 @@ def doPTPRequest():
     couchette=request.args.get('couchette')
     bike=request.args.get('bike')
 
+
+
     possibleParameters = [["stationFrom",stationFrom],["stationTo",stationTo],["via",via],["date",date],["time",time],["isArrivalTime",isArrivalTime],["transportations",transportations], ["limit",limit],["direct",direct],["sleeper",sleeper],["couchette",couchette],["bike",bike]]
 
     if possibleParameters[0][1] == "" or possibleParameters[1][1] == "":
@@ -36,9 +38,10 @@ def doPTPRequest():
         #TODO: SHould throw a 404 error or something like it
 
     for i in range(2,len(possibleParameters)):
-        if possibleParameters[i][1] == "":
+        if possibleParameters[i][1] == "" or possibleParameters[i][1] == '0':
             possibleParameters[i][1] = None
 
+    possibleParameters[6][1] = transportations.split(",")
     #Old Method
     #return pointToPoint.getConnectionsPointToPoint(stationFrom,stationTo,via,time,date,isArrivalTime,transportations,limit,direct,sleeper,couchette,bike)
 
