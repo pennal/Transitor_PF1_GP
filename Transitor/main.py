@@ -58,20 +58,15 @@ def doTBRequest():
 def exportFromCalendar():
     htmlPage = request.args.get('htmlPage')
 
-    # calendarString = calendarExport.downloadEventForCalendar(htmlPage)
-    # response = make_response(calendarString)
-    # response.headers["Content-Disposition"] = "attachment; filename=calEvent.ics"
-    #
-    # input(response)
-    #
-    # return response
-    #
-    #
-    #
-    # print(type(response))
+    calendarString = calendarExport.downloadEventForCalendar(htmlPage)
+    response = make_response(calendarString)
+    response.headers["Content-Disposition"] = "attachment; filename=calEvent.ics"
+    response.headers['Cache-Control'] = 'no-cache'
+    response.headers['Content-Type'] = 'application/ics'
+
+    return response
 
 
-    return calendarExport.downloadEventForCalendar(htmlPage)
     #return calendarExport.downloadEventForCalendar(htmlPage)
 
 if __name__ == "__main__":

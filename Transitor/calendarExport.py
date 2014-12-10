@@ -7,7 +7,7 @@ import  os
 def downloadEventForCalendar(htmlPage):
     cal = Calendar()
     cal.add('prodid', 'Transitor')
-    cal.add('version', 'Beta')
+    cal.add('version', '2.0')
     event = Event()
 
     #summaryString = stationFrom + " to " + stationTo
@@ -21,9 +21,7 @@ def downloadEventForCalendar(htmlPage):
     event['uid'] = '20050115T101010/27346262376@mxm.dk'
     event.add('priority', 5)
     cal.add_component(event)
-    #return cal.to_ical()
-
-    return "Placeholder for the download"
 
 
+    return cal.to_ical()
 
