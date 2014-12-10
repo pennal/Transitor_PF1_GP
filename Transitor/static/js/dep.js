@@ -3,7 +3,7 @@ var backButtonCode = "<a id=\"backButton\" href=\"javascript:slideSearch(false);
 
 // Gets all the form's values and submits them. Also converts the values into the appropriate format
 function submitDepBoardForm (form) {
-	
+	$( "input" ).blur();
 	var station = returnValueIfExistsString($("input[name='depBoardFrom']"));
 	var time = '';
 
@@ -14,7 +14,7 @@ function submitDepBoardForm (form) {
 
 // Helper function to ensure there is a value
 function returnValueIfExistsString (element) {
-	if (element.length && element.val()!="") {
+	if (element.length && checkParamValues(element.val())) {
 		return element.val();
 	}else{
 		return '';
