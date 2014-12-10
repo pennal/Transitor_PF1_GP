@@ -74,7 +74,7 @@ function getResults (station, time) {
 	// Fix for hashes
 	var queryString = 'station='+station+'&time='+time;
 	updateHashWithoutTriggeringChange('pages/departureBoard/departureBoardInput.html?'+queryString);
-	sendP2PTransitReq(queryString, function(data){
+	sendDepTransitReq(queryString, function(data){
 		replaceHTMLOfElement(resultsView, data);
 		resultsView.css('display', 'block');
 		slideSearch(true);
