@@ -39,7 +39,12 @@ def getTimeDifference(time1, date1, time2, date2):
         print("result :", deltaMinutes + deltaHours * 60)
         return deltaMinutes + deltaHours * 60
     else:
-        print("Different Date!")
+        day1 = date1.split("/")[0]
+        month1 = date1.split("/")[1]
+        year1 = date1.split("/")[2]
+        day2 = date2.split("/")[0]
+        month2 = date2.split("/")[1]
+        year2 = date2.split("/")[2]
 
 def getCurrentDateAndTime():
     return time.strftime("%H:%M"), time.strftime("%d/%m/%Y")
