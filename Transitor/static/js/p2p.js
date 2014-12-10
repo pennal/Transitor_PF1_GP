@@ -1,8 +1,8 @@
 var resultsView = $('#resultsView')
+var backButtonCode = "<a id=\"backButton\" href=\"javascript:slideSearch(false);\"></a>\n";
 
-// TODO: Fix the formatting
+// Formats the date for the user and also for the API
 function dateFormat (forURL, value) {
-	console.log(value);
 	if (forURL) {
 		var date = '';
 		if (value && value != '') {
@@ -17,30 +17,57 @@ function dateFormat (forURL, value) {
 		};
 		return date;
 	}
-	// return value;
 }
 
+// Gets all the form's values and submits them. Also converts the values into the appropriate format
 function submitP2PForm (form) {
-	// alert('From: '+$('#p2pFrom').val()+' To: '+$('#p2pTo').val());
-	var from = returnValueIfExistsString($('#p2pFrom'));
-	var to = returnValueIfExistsString($('#p2pTo'));
-	var via = returnValueIfExistsString($('#p2pVia'));
+	var from = returnValueIfExistsString($("input[name='p2pFrom']"));
+	var to = returnValueIfExistsString($("input[name='p2pTo']"));
+	var via = returnValueIfExistsString($("input[name='p2pVia']"));
 	
-	var date = dateFormat(true, $('#p2pDate').datepicker("getDate"));
+	var date = dateFormat(true, $("input[name='p2pDate']").datepicker("getDate"));
 	
-	var time = returnValueIfExistsString($('#p2pTime'));
-	var isArrivalTime = returnValueIfExistsString($('#p2pIsArrivalTime'));
-	var transportations = returnValueIfExistsString($('#p2pTransportations'));
-	var direct = returnValueIfExistsString($('#p2pDirect'));
-	var sleeper = returnValueIfExistsString($('#p2pSleeper'));
-	var couchette = returnValueIfExistsString($('#p2pCouchette'));
-	var bike = returnValueIfExistsString($('#p2pBike'));
+	var time = returnValueIfExistsString($("input[name='p2pTime']"));
+
+	var isArrivalTime = returnValueIfExistsString($("input[name='p2pIsArrivalTime']:checked"));
+	
+	var checked = [];
+	$("input[name='p2pTransportationType[]']:checked").each(function(){
+	    checked.push($(this).val());
+	});
+
+	var transportations =  checked.toString();
+
+ 	var radioSelectionValue = $("input[name='p2pConnectionType']:checked").val();
+	var direct = '0';
+	var sleeper = '0';
+	var couchette = '0';
+
+	switch(radioSelectionValue){
+		case '0':
+			break;
+		case '1':
+			direct = '1';
+			break;
+		case '2':
+			sleeper = '1';
+			break;
+		case '3':
+			couchette = '1';
+			break;
+		default:
+			break;
+	}
+
+
+	var bike = $("input[name='p2pBike']").prop("checked") > 0 ? '1' : '0';
 
 	getResults(from, to, via, date, time, isArrivalTime, transportations, direct, sleeper, couchette, bike);
 	setPageTitle(from, to);
 	return false;
 }
 
+// Helper function to ensure there is a value
 function returnValueIfExistsString (element) {
 	if (element.length && element.val()!="") {
 		return element.val();
@@ -49,6 +76,7 @@ function returnValueIfExistsString (element) {
 	}
 }
 
+// Create and send the Ajax request - customised which is why we don't use the ajax.js one
 function sendP2PTransitReq (params, callback) {
 	var xmlhttp;
 	if (window.XMLHttpRequest)
@@ -74,11 +102,13 @@ function sendP2PTransitReq (params, callback) {
 	  if (xmlhttp.readyState==4 && (xmlhttp.status==200||xmlhttp.status==0)) { //The 0 is just because it seemed to not like it when run locally..
 	  	hideProgressBar();
 	  	updateProgressBar(0);
-	  	callback("<a id=\"backButton\" href=\"javascript:slideSearch(false);\"></a>\n"+xmlhttp.responseText);
+	  	// Success - display results
+	  	callback(backButtonCode+xmlhttp.responseText);
 	  }else if(xmlhttp.readyState==4){
 	  	hideProgressBar();
 	  	updateProgressBar(0);
-	  	callback("<a id=\"backButton\" href=\"javascript:slideSearch(false);\"></a>\n<span style='display:block; text-align: center; color: white;'>There was an error. Please check your input and try again later.</span>");
+	  	// There was an error - display an error message
+	  	callback(backButtonCode+"<span style='display:block; text-align: center; color: white;'>There was an error. Please check your input and try again later.</span>");
 	  }
 
 	}
@@ -94,7 +124,7 @@ function sendP2PTransitReq (params, callback) {
 }
 
 
-// Set this up
+// creates the query string, sets the page URL and calls the ajax request
 function getResults (from, to, via, date, time, isArrivalTime, transportations, direct, sleeper, couchette, bike) {
 	// Fix for hashes
 	var queryString = 'from='+from+'&to='+to+'&via='+via+'&date='+date+'&time='+time+'&isArrivalTime='+isArrivalTime+'&transportations='+transportations+'&direct='+direct+'&sleeper='+sleeper+'&couchette='+couchette+'&bike='+bike;
@@ -108,7 +138,7 @@ function getResults (from, to, via, date, time, isArrivalTime, transportations, 
 	})
 }
 
-// Animate box on and off the screen
+// Animate search form on and off the screen
 function slideSearch (offScreen) {
 	var searchDiv = $('#p2pInputContainer')
 	var speed = 350
@@ -145,6 +175,7 @@ function slideSearch (offScreen) {
 	}
 }
 
+// Parse url for params
 function getUrlParams() {
 	var questionMarkIndex = window.location.href.indexOf('?');
 	var result = {};
@@ -158,6 +189,7 @@ function getUrlParams() {
 	return result;
 }
 
+// Function to count items in object
 function objLength (obj){    
     var key,len=0;
     for(key in obj){
@@ -166,6 +198,8 @@ function objLength (obj){
     return len;
 };
 
+
+// Sets the page title
 function setPageTitle (from, to) {
 	var titleString = "Point-to-Point: "+from+" to "+to;
 
@@ -178,6 +212,7 @@ function setPageTitle (from, to) {
 	console.log('Title string: '+titleString);
 }
 
+// Shows and hides additional options
 function toggleAdditionalOptions () {
 	var theBox = $("#additionalOptions");
 	if (theBox.hasClass('closed')) {
@@ -194,6 +229,7 @@ function toggleAdditionalOptions () {
 }
 
 
+// Function to animate the cards sliding out front to back
 function slideOutFrontAndReplace () {
 	var frontCard = $('.frontResult');
 	var secondCard = frontCard.next();
@@ -214,20 +250,26 @@ function slideOutFrontAndReplace () {
     }, { duration: 500, queue: false });
 }
 
+
+// Helper function to see if a parameter is empty. Returns true if not empty
+function checkParamValues (param) {
+	return !(param==''||param==undefined||param==null);
+}
+
+// These are executed on page load *****************************************
+
 // Set up date Picker
-// TODO: Fix the formatting
-$('#p2pDate').datepicker({
-	// dateFormat: "yy-mm-dd"
+$("input[name='p2pDate']").datepicker({
 	dateFormat: "dd.mm.yy"
 });
 
-// Attach function to click on additional options
+// Attach function to click event on additional options
 $('#additionalOptionsLink').click(function(event) {
 	event.preventDefault();
 	toggleAdditionalOptions();
 });
 
-// If there are parameters, parse them into the page
+// If there are parameters, parse them into the form and request
 if (objLength(getUrlParams()) > 1) {
 	var params = getUrlParams();
 
@@ -243,18 +285,67 @@ if (objLength(getUrlParams()) > 1) {
 	var couchette = params["couchette"];
 	var bike = params["bike"];
 
-	$('#p2pFrom').val(from);
-	$('#p2pTo').val(to);
-	$('#p2pVia').val(via);
-	$('#p2pDate').val(dateFormat(false,date));
-	$('#p2pTime').val(time);
-	$('#p2pIsArrivalTime').val(isArrivalTime);
-	$('#p2pTransportations').val(transportations);
-	$('#p2pDirect').val(direct);
-	$('#p2pSleeper').val(sleeper);
-	$('#p2pCouchette').val(couchette);
-	$('#p2pBike').val(bike);
+// Fill form on page with old values
+	if (checkParamValues(from)) {
+		$("input[name='p2pFrom']").val(from);
+	};
+	if (checkParamValues(to)) {
+		$("input[name='p2pTo']").val(to);
+	};
+		
+	if (checkParamValues(via)) {
+		$("input[name='p2pVia']").val(via);
+	};
+	
+	if (checkParamValues(date)) {
+		$("input[name='p2pDate']").val(dateFormat(false,date));
+	};
 
+	if (checkParamValues(time)) {
+		$("input[name='p2pTime']").val(time);
+	};
+	
+	if (checkParamValues(isArrivalTime)&&isArrivalTime=='1') {
+		$("input[name='p2pIsArrivalTime'][value='0']").prop("checked", false);
+		$("input[name='p2pIsArrivalTime'][value='1']").prop("checked", true);
+	}else{
+		$("input[name='p2pIsArrivalTime'][value='0']").prop("checked", true);
+		$("input[name='p2pIsArrivalTime'][value='1']").prop("checked", false);
+	}
+
+
+	if (checkParamValues(transportations)) {
+		var transpArray = transportations.split(",");
+		$("input[name='p2pTransportationType[]']").each(function (){
+			if (transpArray.indexOf($(this).val()) > -1) {
+				$(this).prop("checked", true);
+			}else{
+				$(this).prop("checked", false);
+			}
+		});
+	};
+
+
+	if (direct == '1') {
+		$("input[name='p2pConnectionType'][value='1']").prop("checked", true);
+	}else if(sleeper == '1'){
+		$("input[name='p2pConnectionType'][value='2']").prop("checked", true);
+	}else if(couchette == '1'){
+		$("input[name='p2pConnectionType'][value='3']").prop("checked", true);
+	}else{
+		$("input[name='p2pConnectionType'][value='0']").prop("checked", true);
+	}
+
+	if (checkParamValues(bike)) {
+		if (bike =='1') {
+			$("input[name='p2pBike']").prop("checked", true);
+		}else{
+			$("input[name='p2pBike']").prop("checked", false);
+		}
+	};
+
+	
+// Finally submit form
 	getResults(from, to, via, date, time, isArrivalTime, transportations, direct, sleeper, couchette, bike);
 	setPageTitle(from, to);
 };

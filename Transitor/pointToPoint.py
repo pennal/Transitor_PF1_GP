@@ -174,25 +174,55 @@ def getConnectionsPointToPoint(stationFrom,stationTo,via = None,date=None, time=
 
     # Holds the final input Values
     finalValues = []
-    print(finalValues)
+
+
+    #Prepare the transportations options
+    if len(transportations) != 10:
+        transportationOptions = ""
+        for typeOfTransportation in range(0,len(transportations)):
+
+            transportationOptions += "transportations[]=" + transportations[typeOfTransportation]
+            if typeOfTransportation != len(transportations) - 1:
+                transportationOptions += "&"
+
+    else:
+        transportationOptions = None
+
+    for i in range(0,len(inputElementsKeys)):
+        if inputElementsKeys[i] == "transportations":
+            inputElementsValues[i] = transportationOptions
+
+
+
+
+
+    print("trans opt:",transportations)
     # Add all items that are not the restricted ones, as well as are not 'None'
     for i in range(0,len(inputElementsKeys)):
         if inputElementsKeys[i] != "stationFrom" and inputElementsKeys[i] != "stationTo" and inputElementsKeys[i] != "urlForRequest" and inputElementsValues[i] != None:
             finalValues.append([inputElementsKeys[i],inputElementsValues[i]])
 
     # DEBUG: Display final values
-    print(finalValues)
+    print("Final Values: ", finalValues)
 
     # We start by adding the departure station and the destination
     urlForRequest += "?from=" + common.getCorrectLocationURLFormatted(stationFrom) + "&to=" + common.getCorrectLocationURLFormatted(stationTo)
 
+
+
+
+
+
+
     for i in range(0,len(finalValues)):
         if finalValues[i][0] == "via":
             urlForRequest += "&" + str(finalValues[i][0]) + "=" + common.getCorrectLocationURLFormatted(str(finalValues[i][1]))
+        elif finalValues[i][0] == "transportations":
+            urlForRequest += "&" + str(finalValues[i][1])
         else:
             urlForRequest += "&" + str(finalValues[i][0]) + "=" + str(finalValues[i][1])
 
-    print(urlForRequest)
+    print("Final URL for request: " + urlForRequest)
 
     # HTTP Request with the data needed
     rawJSON = common.doRequest(urlForRequest)
