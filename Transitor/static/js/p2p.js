@@ -1,11 +1,32 @@
 var resultsView = $('#resultsView')
 
+// TODO: Fix the formatting
+function dateFormat (forURL, value) {
+	// console.log('supplied date: '+value);
+	// if (forURL) {
+	// 	var date = '';
+	// 	if (value && value != '') {
+	// 		date = $.datepicker.formatDate('yy-mm-dd', value);
+	// 	};
+	// 	return date;
+	// }else{
+	// 	var date = '';
+	// 	if (value && value != '') {
+	// 		date = $.datepicker.formatDate('dd.mm.yy', value);
+	// 	};
+	// 	return date;
+	// }
+	return value;
+}
+
 function submitP2PForm (form) {
 	// alert('From: '+$('#p2pFrom').val()+' To: '+$('#p2pTo').val());
 	var from = returnValueIfExistsString($('#p2pFrom'));
 	var to = returnValueIfExistsString($('#p2pTo'));
 	var via = returnValueIfExistsString($('#p2pVia'));
-	var date = returnValueIfExistsString($('#p2pDate'));
+	
+	var date = dateFormat(true, $('#p2pDate').val());
+	
 	var time = returnValueIfExistsString($('#p2pTime'));
 	var isArrivalTime = returnValueIfExistsString($('#p2pIsArrivalTime'));
 	var transportations = returnValueIfExistsString($('#p2pTransportations'));
@@ -193,13 +214,20 @@ function slideOutFrontAndReplace () {
     }, { duration: 500, queue: false });
 }
 
+// Set up date Picker
+// TODO: Fix the formatting
+$('#p2pDate').datepicker({
+	dateFormat: "yy-mm-dd"
+	// dateFormat: "dd.mm.yy"
+});
 
-
+// Attach function to click on additional options
 $('#additionalOptionsLink').click(function(event) {
 	event.preventDefault();
 	toggleAdditionalOptions();
 });
 
+// If there are parameters, parse them into the page
 if (objLength(getUrlParams()) > 1) {
 	var params = getUrlParams();
 
@@ -219,7 +247,7 @@ if (objLength(getUrlParams()) > 1) {
 	$('#p2pFrom').val(from);
 	$('#p2pTo').val(to);
 	$('#p2pVia').val(via);
-	$('#p2pDate').val(date);
+	$('#p2pDate').val(dateFormat(false,date));
 	$('#p2pTime').val(time);
 	$('#p2pIsArrivalTime').val(isArrivalTime);
 	$('#p2pTransportations').val(transportations);
