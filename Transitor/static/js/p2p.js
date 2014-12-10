@@ -259,7 +259,7 @@ function checkParamValues (param) {
 // These are executed on page load *****************************************
 
 // Set up date Picker
-$('#p2pDate').datepicker({
+$("input[name='p2pDate']").datepicker({
 	dateFormat: "dd.mm.yy"
 });
 
