@@ -38,7 +38,7 @@ def downloadEventForCalendar(htmlPage):
     cal.add('version', '2.0')
     event = Event()
 
-    summaryString = " Trip from " + stationFrom + " to " + stationTo
+    summaryString = "Trip from " + stationFrom + " to " + stationTo
 
     splitDate = depDate.split("/")
     splitDate[0],splitDate[1],splitDate[2] = int(splitDate[0]),int(splitDate[1]),int(splitDate[2])
