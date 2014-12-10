@@ -310,6 +310,13 @@ body{
     opacity: 0;
 }
 
+.resultSlider{
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	-o-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+
 .resultSlider.frontResult{
 	opacity: 1;
 }
@@ -317,8 +324,8 @@ body{
 #rightarrow {
     background: url("../images/rightarrow.png");
     background-size: cover;
-    height: 180px;
-    width: 110px;
+    height: 150px;
+    width: 79px;
     position: fixed;
     top: 50%;
     margin-top: -5%;
@@ -330,8 +337,8 @@ body{
 #leftarrow {
     background: url("../images/leftarrow.png");
     background-size: cover;
-    height: 180px;
-    width: 110px;
+    height: 150px;
+    width: 79px;
     position: fixed;
     top: 50%;
     margin-top: -5%;
