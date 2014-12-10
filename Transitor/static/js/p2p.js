@@ -349,3 +349,36 @@ if (objLength(getUrlParams()) > 1) {
 	getResults(from, to, via, date, time, isArrivalTime, transportations, direct, sleeper, couchette, bike);
 	setPageTitle(from, to);
 };
+
+$("input[name='p2pFrom']").autocomplete({
+    		source: function (request, response) {
+    			$.get('http://transport.opendata.ch/v1/locations', {query:request.term}, function(data) {
+    				response($.map(data.stations, function(station) {
+    					return {
+    						label: station.name,
+    						station: station
+    					}
+    				}));
+    			}, 'json');
+    		},
+    		minLength: 2,
+    		select: function (event, ui) {
+    			
+    		}
+    	});
+    	$("input[name='p2pTo']").autocomplete({
+    		source: function (request, response) {
+    			$.get('http://transport.opendata.ch/v1/locations', {query:request.term}, function(data) {
+    				response($.map(data.stations, function(station) {
+    					return {
+    						label: station.name,
+    						station: station
+    					}
+    				}));
+    			}, 'json');
+    		},
+    		minLength: 2,
+    		select: function (event, ui) {
+    			
+    		}
+    	});
