@@ -65,16 +65,14 @@ def getCorrectLocation(userInput):
     :param userInput: Name of the station entered by the user
     :return: (string) Name of the correct station
     """
-    # locationToCheck = userInput.replace(" ","%20")
-    #
-    # # Convert incoming data to JSON
-    # data = doRequest(apiURL + 'locations?query=' + locationToCheck)
-    # stringToReturn = str(data["stations"][0]["name"])
-    #
-    #
-    # return stringToReturn
+    locationToCheck = userInput.replace(" ","%20")
 
-    return userInput
+    # Convert incoming data to JSON
+    data = doRequest(apiURL + 'locations?query=' + locationToCheck)
+    stringToReturn = str(data["stations"][0]["name"])
+
+
+    return stringToReturn
 
 def getCorrectLocationURLFormatted(userInput):
     return getCorrectLocation(userInput).replace("ü","ue").replace("ä","ae").replace("ö","oe").replace(" ","%20")
