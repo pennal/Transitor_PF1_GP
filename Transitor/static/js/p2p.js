@@ -300,12 +300,16 @@ if (objLength(getUrlParams()) > 1) {
 	}
 
 
-	
-	var checked = [];
-	$("input[name='p2pTransportationType[]']:checked").each(function ()
-	{
-	    checked.push($(this).val());
-	});
+	if (checkParamValues(transportations)) {
+		var transpArray = transportations.split(",");
+		$("input[name='p2pTransportationType[]']").each(function (){
+			if (transpArray.indexOf($(this).val()) > -1) {
+				$(this).prop("checked", true);
+			}else{
+				$(this).prop("checked", false);
+			}
+		});
+	};
 
 
 	if (direct == '1') {
