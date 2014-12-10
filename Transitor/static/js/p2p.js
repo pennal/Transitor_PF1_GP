@@ -1,6 +1,7 @@
 var resultsView = $('#resultsView')
+var backButtonCode = "<a id=\"backButton\" href=\"javascript:slideSearch(false);\"></a>\n";
 
-// TODO: Fix the formatting
+// Formats the date for the user and also for the API
 function dateFormat (forURL, value) {
 	if (forURL) {
 		var date = '';
@@ -16,11 +17,10 @@ function dateFormat (forURL, value) {
 		};
 		return date;
 	}
-	// return value;
 }
 
+// Gets all the form's values and submits them. Also converts the values into the appropriate format
 function submitP2PForm (form) {
-	// alert('From: '+$('#p2pFrom').val()+' To: '+$('#p2pTo').val());
 	var from = returnValueIfExistsString($("input[name='p2pFrom']"));
 	var to = returnValueIfExistsString($("input[name='p2pTo']"));
 	var via = returnValueIfExistsString($("input[name='p2pVia']"));
@@ -67,6 +67,7 @@ function submitP2PForm (form) {
 	return false;
 }
 
+// Helper function to ensure there is a value
 function returnValueIfExistsString (element) {
 	if (element.length && element.val()!="") {
 		return element.val();
@@ -75,6 +76,7 @@ function returnValueIfExistsString (element) {
 	}
 }
 
+// Create and send the Ajax request - customised which is why we don't use the ajax.js one
 function sendP2PTransitReq (params, callback) {
 	var xmlhttp;
 	if (window.XMLHttpRequest)
@@ -100,11 +102,13 @@ function sendP2PTransitReq (params, callback) {
 	  if (xmlhttp.readyState==4 && (xmlhttp.status==200||xmlhttp.status==0)) { //The 0 is just because it seemed to not like it when run locally..
 	  	hideProgressBar();
 	  	updateProgressBar(0);
-	  	callback("<a id=\"backButton\" href=\"javascript:slideSearch(false);\"></a>\n"+xmlhttp.responseText);
+	  	// Success - display results
+	  	callback(backButtonCode+xmlhttp.responseText);
 	  }else if(xmlhttp.readyState==4){
 	  	hideProgressBar();
 	  	updateProgressBar(0);
-	  	callback("<a id=\"backButton\" href=\"javascript:slideSearch(false);\"></a>\n<span style='display:block; text-align: center; color: white;'>There was an error. Please check your input and try again later.</span>");
+	  	// There was an error - display an error message
+	  	callback(backButtonCode+"<span style='display:block; text-align: center; color: white;'>There was an error. Please check your input and try again later.</span>");
 	  }
 
 	}
@@ -120,7 +124,7 @@ function sendP2PTransitReq (params, callback) {
 }
 
 
-// Set this up
+// creates the query string, sets the page URL and calls the ajax request
 function getResults (from, to, via, date, time, isArrivalTime, transportations, direct, sleeper, couchette, bike) {
 	// Fix for hashes
 	var queryString = 'from='+from+'&to='+to+'&via='+via+'&date='+date+'&time='+time+'&isArrivalTime='+isArrivalTime+'&transportations='+transportations+'&direct='+direct+'&sleeper='+sleeper+'&couchette='+couchette+'&bike='+bike;
@@ -134,7 +138,7 @@ function getResults (from, to, via, date, time, isArrivalTime, transportations, 
 	})
 }
 
-// Animate box on and off the screen
+// Animate search form on and off the screen
 function slideSearch (offScreen) {
 	var searchDiv = $('#p2pInputContainer')
 	var speed = 350
@@ -171,6 +175,7 @@ function slideSearch (offScreen) {
 	}
 }
 
+// Parse url for params
 function getUrlParams() {
 	var questionMarkIndex = window.location.href.indexOf('?');
 	var result = {};
@@ -184,6 +189,7 @@ function getUrlParams() {
 	return result;
 }
 
+// Function to count items in object
 function objLength (obj){    
     var key,len=0;
     for(key in obj){
@@ -192,6 +198,8 @@ function objLength (obj){
     return len;
 };
 
+
+// Sets the page title
 function setPageTitle (from, to) {
 	var titleString = "Point-to-Point: "+from+" to "+to;
 
@@ -204,6 +212,7 @@ function setPageTitle (from, to) {
 	console.log('Title string: '+titleString);
 }
 
+// Shows and hides additional options
 function toggleAdditionalOptions () {
 	var theBox = $("#additionalOptions");
 	if (theBox.hasClass('closed')) {
@@ -220,6 +229,7 @@ function toggleAdditionalOptions () {
 }
 
 
+// Function to animate the cards sliding out front to back
 function slideOutFrontAndReplace () {
 	var frontCard = $('.frontResult');
 	var secondCard = frontCard.next();
@@ -240,22 +250,26 @@ function slideOutFrontAndReplace () {
     }, { duration: 500, queue: false });
 }
 
+
+// Helper function to see if a parameter is empty. Returns true if not empty
 function checkParamValues (param) {
 	return !(param==''||param==undefined||param==null);
 }
+
+// These are executed on page load *****************************************
 
 // Set up date Picker
 $('#p2pDate').datepicker({
 	dateFormat: "dd.mm.yy"
 });
 
-// Attach function to click on additional options
+// Attach function to click event on additional options
 $('#additionalOptionsLink').click(function(event) {
 	event.preventDefault();
 	toggleAdditionalOptions();
 });
 
-// If there are parameters, parse them into the page
+// If there are parameters, parse them into the form and request
 if (objLength(getUrlParams()) > 1) {
 	var params = getUrlParams();
 
@@ -331,7 +345,7 @@ if (objLength(getUrlParams()) > 1) {
 	};
 
 	
-
+// Finally submit form
 	getResults(from, to, via, date, time, isArrivalTime, transportations, direct, sleeper, couchette, bike);
 	setPageTitle(from, to);
 };
