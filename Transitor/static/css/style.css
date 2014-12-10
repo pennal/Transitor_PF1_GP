@@ -340,7 +340,7 @@ body{
     opacity: 0;
 }
 
-#calButton{
+.calButton{
 	background-image: url("../images/calbutton.png");
     background-size: cover;
     height: 25px;

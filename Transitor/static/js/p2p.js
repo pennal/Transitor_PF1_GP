@@ -139,6 +139,7 @@ function getResults (from, to, via, date, time, isArrivalTime, transportations, 
 		replaceHTMLOfElement(resultsView, data);
 		$("#resultsView .resultSlider").first().addClass('frontResult');
 		resultsView.css('display', 'block');
+		setUpClickOnCalButton();
 		slideSearch(true);
 	})
 }
@@ -356,6 +357,20 @@ function slideInBackAndReplace () {
 // Helper function to see if a parameter is empty. Returns true if not empty
 function checkParamValues (param) {
 	return !(param==''||param==undefined||param==null);
+}
+
+// Attach function to calButton (calendar event)
+function setUpClickOnCalButton () {
+	$('.calButton').click(function(event){
+		event.preventDefault();
+
+		var queryString = '/api/calendarExport?htmlPage=';
+
+		var htmlContent = $(this).parents("#result").html();
+
+		window.open(queryString+encodeURIComponent(htmlContent), '_blank');
+
+	});
 }
 
 // These are executed on page load *****************************************
