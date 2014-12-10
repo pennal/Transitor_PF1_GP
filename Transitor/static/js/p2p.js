@@ -153,31 +153,33 @@ function slideSearch (offScreen) {
 		resultsView.removeClass('hidden')
 	    searchDiv.animate({
 	        left: '-150%'
-	    }, speed, "swing", function() {
+	    }, {duration:speed, queue: false, complete:function(){
 	        searchDiv.addClass('hidden');
-	    });
+	    }});
 
 	    resultsView.animate({
 	        left: '25%'
-	    }, speed, "swing", function(){
+	    }, {duration:speed, queue: false, complete:function(){
 	    	$('#contentDiv').removeClass('noOverflow');
-	    });
+	    	freezeArrows(false);
+	    }});
 
 	}else{
 		$('#contentDiv').addClass('noOverflow')
 		searchDiv.removeClass('hidden')
 	    resultsView.animate({
 	        left: '150%'
-	    }, speed, "swing", function() {
+	    }, {duration:speed, queue: false, complete:function(){
 	        resultsView.addClass('hidden');
-	        freezeArrows(true);
-	    });
+	    }});
+
+	    freezeArrows(true);
 
 	    searchDiv.animate({
 	        left: '0%'
-	    }, speed, "swing", function(){
+	    }, {duration:speed, queue: false, complete:function(){
 	    	$('#contentDiv').removeClass('noOverflow');
-	    });
+	    }});
 	}
 }
 
@@ -186,12 +188,14 @@ function freezeArrows (freeze) {
 	var rightarrow = $('#rightarrow');
 	var backButton = $('#backButton');
 
+	var speed = 175;
+
 	if (freeze) {
 		
 		leftarrow.animate({
 			opacity: '0'
 		}, { 
-			duration: 300, queue: false, complete: function(){
+			duration: speed, queue: false, complete: function(){
 				leftarrow.css({
 					top: leftarrow.offset().top,
 					position: "absolute"
@@ -202,7 +206,7 @@ function freezeArrows (freeze) {
 		rightarrow.animate({
 			opacity: '0'
 		}, { 
-			duration: 300, queue: false, complete: function(){
+			duration: speed, queue: false, complete: function(){
 				rightarrow.css({
 					top: rightarrow.offset().top,
 					position: "absolute"
@@ -213,7 +217,7 @@ function freezeArrows (freeze) {
 		backButton.animate({
 			opacity: '0'
 		}, { 
-			duration: 300, queue: false, complete: function(){
+			duration: speed, queue: false, complete: function(){
 				backButton.css({
 					position: "absolute"
 				});
@@ -221,38 +225,25 @@ function freezeArrows (freeze) {
 		});
 
 
-}
-	// }else{
-	// 	leftarrow.css({
-	// 		top: '',
-	// 		position: ''
-	// 	});
-	// 	rightarrow.css({
-	// 		ttop: '',
-	// 		position: ''
-	// 	});
-	// 	backButton.css({
-	// 		position: ''
-	// 	});
+	}else{
+		leftarrow.animate({
+			opacity: '1'
+		}, { 
+			duration: speed*2, queue: false 
+		});
 
-	// 	leftarrow.animate({
-	// 		opacity: '1'
-	// 	}, { 
-	// 		duration: 300, queue: false 
-	// 	});
+		rightarrow.animate({
+			opacity: '1'
+		}, { 
+			duration: speed*2, queue: false 
+		});
 
-	// 	rightarrow.animate({
-	// 		opacity: '1'
-	// 	}, { 
-	// 		duration: 300, queue: false 
-	// 	});
-
-	// 	backButton.animate({
-	// 		opacity: '1'
-	// 	}, { 
-	// 		duration: 300, queue: false 
-	// 	});
-	// };
+		backButton.animate({
+			opacity: '1'
+		}, { 
+			duration: speed*2, queue: false 
+		});
+	};
 
 }
 

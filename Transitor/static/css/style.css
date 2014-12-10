@@ -243,6 +243,7 @@ body{
     position: fixed;
     width: 42px;
     z-index: 1000;
+    opacity: 0;
 }
 
 /****************************************************/
@@ -323,6 +324,7 @@ body{
     margin-top: -5%;
     right: 35px;
     z-index: 1000;
+    opacity: 0;
 }
 
 #leftarrow {
@@ -335,6 +337,7 @@ body{
     margin-top: -5%;
     left: 35px;
     z-index: 1000;
+    opacity: 0;
 }
 
 #calButton{
