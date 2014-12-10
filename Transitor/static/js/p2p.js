@@ -350,35 +350,34 @@ if (objLength(getUrlParams()) > 1) {
 	setPageTitle(from, to);
 };
 
+// Autocomplete setup
 $("input[name='p2pFrom']").autocomplete({
-    		source: function (request, response) {
-    			$.get('http://transport.opendata.ch/v1/locations', {query:request.term}, function(data) {
-    				response($.map(data.stations, function(station) {
-    					return {
-    						label: station.name,
-    						station: station
-    					}
-    				}));
-    			}, 'json');
-    		},
-    		minLength: 2,
-    		select: function (event, ui) {
-    			
-    		}
-    	});
-    	$("input[name='p2pTo']").autocomplete({
-    		source: function (request, response) {
-    			$.get('http://transport.opendata.ch/v1/locations', {query:request.term}, function(data) {
-    				response($.map(data.stations, function(station) {
-    					return {
-    						label: station.name,
-    						station: station
-    					}
-    				}));
-    			}, 'json');
-    		},
-    		minLength: 2,
-    		select: function (event, ui) {
-    			
-    		}
-    	});
+	source: function (request, response) {
+		$.get('http://transport.opendata.ch/v1/locations', {query:request.term}, function(data) {
+			response($.map(data.stations, function(station) {
+				return {
+					label: station.name,
+					station: station
+				};
+			}));
+		}, 'json');
+	},
+	minLength: 2,
+	select: function (event, ui) {
+	}
+});
+$("input[name='p2pTo']").autocomplete({
+	source: function (request, response) {
+		$.get('http://transport.opendata.ch/v1/locations', {query:request.term}, function(data) {
+			response($.map(data.stations, function(station) {
+				return {
+					label: station.name,
+					station: station
+				};
+			}));
+		}, 'json');
+	},
+	minLength: 2,
+	select: function (event, ui) {
+	}
+});
