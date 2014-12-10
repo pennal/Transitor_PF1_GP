@@ -1,9 +1,9 @@
 var resultsView = $('#resultsView')
 var backButtonCode = "<a id=\"backButton\" href=\"javascript:slideSearch(false);\"></a>\n";
-var navRightArrowCode = "<a href=\"javascript:slideOutFrontAndReplace();\" class=\"rightarrow\"></a>";
-// var navRightArrowCode = "<a href=\"javascript:slideOutFrontAndReplace();\" class=\"rightarrow\"></a>";
+var navRightArrowCode = "<a href=\"javascript:slideOutFrontAndReplace();\" id=\"rightarrow\"></a>";
+var navLeftArrowCode = "<a href=\"javascript:slideInBackAndReplace();\" id=\"leftarrow\"></a>";
 
-var additionalCode = backButtonCode+navRightArrowCode;
+var additionalCode = backButtonCode+navRightArrowCode+navLeftArrowCode;
 
 // Formats the date for the user and also for the API
 function dateFormat (forURL, value) {
@@ -170,6 +170,7 @@ function slideSearch (offScreen) {
 	        left: '150%'
 	    }, speed, "swing", function() {
 	        resultsView.addClass('hidden');
+	        freezeArrows(true);
 	    });
 
 	    searchDiv.animate({
@@ -178,6 +179,81 @@ function slideSearch (offScreen) {
 	    	$('#contentDiv').removeClass('noOverflow');
 	    });
 	}
+}
+
+function freezeArrows (freeze) {
+	var leftarrow = $('#leftarrow');
+	var rightarrow = $('#rightarrow');
+	var backButton = $('#backButton');
+
+	if (freeze) {
+		
+		leftarrow.animate({
+			opacity: '0'
+		}, { 
+			duration: 300, queue: false, complete: function(){
+				leftarrow.css({
+					top: leftarrow.offset().top,
+					position: "absolute"
+				});
+			} 
+		});
+
+		rightarrow.animate({
+			opacity: '0'
+		}, { 
+			duration: 300, queue: false, complete: function(){
+				rightarrow.css({
+					top: rightarrow.offset().top,
+					position: "absolute"
+				});
+			} 
+		});
+
+		backButton.animate({
+			opacity: '0'
+		}, { 
+			duration: 300, queue: false, complete: function(){
+				backButton.css({
+					position: "absolute"
+				});
+			} 
+		});
+
+
+}
+	// }else{
+	// 	leftarrow.css({
+	// 		top: '',
+	// 		position: ''
+	// 	});
+	// 	rightarrow.css({
+	// 		ttop: '',
+	// 		position: ''
+	// 	});
+	// 	backButton.css({
+	// 		position: ''
+	// 	});
+
+	// 	leftarrow.animate({
+	// 		opacity: '1'
+	// 	}, { 
+	// 		duration: 300, queue: false 
+	// 	});
+
+	// 	rightarrow.animate({
+	// 		opacity: '1'
+	// 	}, { 
+	// 		duration: 300, queue: false 
+	// 	});
+
+	// 	backButton.animate({
+	// 		opacity: '1'
+	// 	}, { 
+	// 		duration: 300, queue: false 
+	// 	});
+	// };
+
 }
 
 // Parse url for params
