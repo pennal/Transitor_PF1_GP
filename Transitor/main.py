@@ -49,9 +49,9 @@ def doPTPRequest():
 
 @app.route("/api/tb")
 def doTBRequest():
-    stationFrom = request.args.get('station')
+    station = request.args.get('station')
 
-    return tableBoard.getTableBoard(stationFrom)
+    return tableBoard.getTableBoard(station)
 
 
 

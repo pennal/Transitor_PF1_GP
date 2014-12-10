@@ -2,53 +2,37 @@ import common
 import datetime
 import time
 
-def getDateAntTimeSplit(inputString):
+def deltaTime(timeOfDeparture):
+    """
+    :param timeOfDeparture: Time at which the bus is supposed to depart in datetime format
+    :return:(int)time left until departure
+    """
+    a = datetime.datetime.now()
+    a = a.replace(microsecond=0)
+
+    c = timeOfDeparture - a
+
+    #DEBUGGING
+    # print("\n" + str(timeOfDeparture))
+    # print(a)
+    # print("Result :", c.total_seconds())
+    # print("Result minutes :", int(c.total_seconds())//60, end="\n\n")
+
+    return (int(c.total_seconds())//60)
+
+def getDateAndTime(inputString):
     splitInputData = inputString.split("T")
-    tempData = splitInputData[0].split("-")
-    date = ""
-    for el in range(0,len(tempData)):
-        if el != 0:
-            date += "/"
-        date += tempData[len(tempData)-el-1]
+    date = splitInputData[0].split("-")
 
-    time = splitInputData[1][:-8]
+    # date = ""
+    # for el in range(0,len(tempData)):
+    #     if el != 0:
+    #         date += "/"
+    #     date += tempData[len(tempData)-el-1]
 
-    return time,date
+    time = splitInputData[1][:-8].split(":")
 
-def getTimeDifference(time1, date1, time2, date2):
-    print("Time1 :", time1)
-    print("Date1 :", date1)
-    print("Time2 :", time2)
-    print("Date2 :", date2)
-
-    #If the dates share the same date
-    if date1 == date2:
-        hours1 = time1.split(":")[0]
-        hours2 = time2.split(":")[0]
-        minutes1 = time1.split(":")[1]
-        minutes2 = time2.split(":")[1]
-
-        # print("\nhours1 :", hours1, end="  ")
-        # print("\nminutes1 :", minutes1)
-        # print("\nhours2 :", hours2, end="  ")
-        # print("\nminutes2 :", minutes2, end="\n\n")
-
-        deltaMinutes = int(minutes2) - int(minutes1)
-        deltaHours = int(hours2) - int(hours1)
-
-        print("result :", deltaMinutes + deltaHours * 60)
-        return deltaMinutes + deltaHours * 60
-    else:
-        print("Different Date!")
-        day1 = date1.split("/")[0]
-        month1 = date1.split("/")[1]
-        year1 = date1.split("/")[2]
-        day2 = date2.split("/")[0]
-        month2 = date2.split("/")[1]
-        year2 = date2.split("/")[2]
-
-def getCurrentDateAndTime():
-    return time.strftime("%H:%M"), time.strftime("%d/%m/%Y")
+    return datetime.datetime(int(date[0]), int(date[1]), int(date[2]), int(time[0]), int(time[1]))
 
 def getTableBoard(station):
     """
@@ -84,14 +68,11 @@ def getTableBoard(station):
 
 def returnHTMLBoard(data):
 
-    currentTime, currentDate = getCurrentDateAndTime()
-    getDateAntTimeSplit("2014-12-09T15:35:00+0100")
-
     contentPage = ""
     for i in range(0, len(data)):
 
-        arrivalTime, arrivalDate = getDateAntTimeSplit(data[i]["intermediateStops"][0]["arrivalHour"])
-        time = getTimeDifference(currentTime, currentDate, arrivalTime, arrivalDate)
+        arrivalTime = getDateAndTime(data[i]["intermediateStops"][0]["arrivalHour"])
+        time = deltaTime(arrivalTime)
 
         templateVars = {"arrivalName" : data[i]["intermediateStops"][len(data[i]["intermediateStops"])-1]["nameStop"],
                         "departureName" : data[i]["intermediateStops"][0]["nameStop"],
