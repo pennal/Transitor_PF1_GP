@@ -1,5 +1,9 @@
 var resultsView = $('#resultsView')
 var backButtonCode = "<a id=\"backButton\" href=\"javascript:slideSearch(false);\"></a>\n";
+var navRightArrowCode = "<a href=\"javascript:slideOutFrontAndReplace();\" id=\"rightarrow\"></a>";
+var navLeftArrowCode = "<a href=\"javascript:slideInBackAndReplace();\" id=\"leftarrow\"></a>";
+
+var additionalCode = backButtonCode+navRightArrowCode+navLeftArrowCode;
 
 // Formats the date for the user and also for the API
 function dateFormat (forURL, value) {
@@ -21,6 +25,7 @@ function dateFormat (forURL, value) {
 
 // Gets all the form's values and submits them. Also converts the values into the appropriate format
 function submitP2PForm (form) {
+	$( "input" ).blur();
 	var from = returnValueIfExistsString($("input[name='p2pFrom']"));
 	var to = returnValueIfExistsString($("input[name='p2pTo']"));
 	var via = returnValueIfExistsString($("input[name='p2pVia']"));
@@ -69,7 +74,7 @@ function submitP2PForm (form) {
 
 // Helper function to ensure there is a value
 function returnValueIfExistsString (element) {
-	if (element.length && element.val()!="") {
+	if (element.length && checkParamValues(element.val())) {
 		return element.val();
 	}else{
 		return '';
@@ -103,12 +108,12 @@ function sendP2PTransitReq (params, callback) {
 	  	hideProgressBar();
 	  	updateProgressBar(0);
 	  	// Success - display results
-	  	callback(backButtonCode+xmlhttp.responseText);
+	  	callback(additionalCode+xmlhttp.responseText);
 	  }else if(xmlhttp.readyState==4){
 	  	hideProgressBar();
 	  	updateProgressBar(0);
 	  	// There was an error - display an error message
-	  	callback(backButtonCode+"<span style='display:block; text-align: center; color: white;'>There was an error. Please check your input and try again later.</span>");
+	  	callback(additionalCode+"<span style='display:block; text-align: center; color: white;'>There was an error. Please check your input and try again later.</span>");
 	  }
 
 	}
@@ -148,31 +153,98 @@ function slideSearch (offScreen) {
 		resultsView.removeClass('hidden')
 	    searchDiv.animate({
 	        left: '-150%'
-	    }, speed, "swing", function() {
+	    }, {duration:speed, queue: false, complete:function(){
 	        searchDiv.addClass('hidden');
-	    });
+	    }});
 
 	    resultsView.animate({
 	        left: '25%'
-	    }, speed, "swing", function(){
+	    }, {duration:speed, queue: false, complete:function(){
 	    	$('#contentDiv').removeClass('noOverflow');
-	    });
+	    	freezeArrows(false);
+	    }});
 
 	}else{
 		$('#contentDiv').addClass('noOverflow')
 		searchDiv.removeClass('hidden')
 	    resultsView.animate({
 	        left: '150%'
-	    }, speed, "swing", function() {
+	    }, {duration:speed, queue: false, complete:function(){
 	        resultsView.addClass('hidden');
-	    });
+	    }});
+
+	    freezeArrows(true);
 
 	    searchDiv.animate({
 	        left: '0%'
-	    }, speed, "swing", function(){
+	    }, {duration:speed, queue: false, complete:function(){
 	    	$('#contentDiv').removeClass('noOverflow');
-	    });
+	    }});
 	}
+}
+
+function freezeArrows (freeze) {
+	var leftarrow = $('#leftarrow');
+	var rightarrow = $('#rightarrow');
+	var backButton = $('#backButton');
+
+	var speed = 175;
+
+	if (freeze) {
+		
+		leftarrow.animate({
+			opacity: '0'
+		}, { 
+			duration: speed, queue: false, complete: function(){
+				leftarrow.css({
+					top: leftarrow.offset().top,
+					position: "absolute"
+				});
+			} 
+		});
+
+		rightarrow.animate({
+			opacity: '0'
+		}, { 
+			duration: speed, queue: false, complete: function(){
+				rightarrow.css({
+					top: rightarrow.offset().top,
+					position: "absolute"
+				});
+			} 
+		});
+
+		backButton.animate({
+			opacity: '0'
+		}, { 
+			duration: speed, queue: false, complete: function(){
+				backButton.css({
+					position: "absolute"
+				});
+			} 
+		});
+
+
+	}else{
+		leftarrow.animate({
+			opacity: '1'
+		}, { 
+			duration: speed*2, queue: false 
+		});
+
+		rightarrow.animate({
+			opacity: '1'
+		}, { 
+			duration: speed*2, queue: false 
+		});
+
+		backButton.animate({
+			opacity: '1'
+		}, { 
+			duration: speed*2, queue: false 
+		});
+	};
+
 }
 
 // Parse url for params
@@ -247,6 +319,36 @@ function slideOutFrontAndReplace () {
 
     secondCard.animate({
        opacity: '1'
+    }, { duration: 500, queue: false });
+}
+
+function slideInBackAndReplace () {
+	var frontCard = $('.frontResult');
+	var backCard = frontCard.parent().children(":last");
+	
+	frontCard.animate({
+       opacity: '0'
+    }, { duration: 500, queue: false, complete: function(){
+    	frontCard.removeClass('frontResult');
+    	backCard.addClass('frontResult');
+    	backCard.css({
+    		opacity: '',
+    		left: ''
+    	});
+    	frontCard.css({
+    		opacity: '',
+    		left: ''
+    	});
+    	backCard = backCard.detach();
+    	resultsView.children("a").last().after(backCard);
+    } });
+
+	backCard.css({
+		left:'-150%',
+		opacity: '1'
+	});
+    backCard.animate({
+       left: '0%'
     }, { duration: 500, queue: false });
 }
 
