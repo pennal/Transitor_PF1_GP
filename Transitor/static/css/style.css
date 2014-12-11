@@ -224,12 +224,28 @@ body{
 	color: black; 
 }
 .inputButton{
-	font-size: 16px;
+	background-color: rgba(0,0,0,0);
+	border: 0;
+	border-radius: 40px;
+	background-image: url(../images/arrowSubmit.png);
+	background-size: cover;
+	height: 40px;
+	width: 40px;
+	/*font-size: 16px;*/
 }
 
-#additionalOptions table{
-	padding: 0px;
+.expansionButton{
+	background-color: rgba(0,0,0,0);
+	border: 0;
+	border-radius: 40px;
+	background-image: url(../images/expansionButton.png);
+	background-size: cover;
+	height: 40px;
+	width: 40px;
 }
+/*#additionalOptions table{
+	padding: 0px;
+}*/
 
 #p2pInputForm a {
 	color: white;
