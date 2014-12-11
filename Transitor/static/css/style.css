@@ -266,6 +266,7 @@ body{
 }
 #result table td:first-child{
 	width: 15%;
+	padding-bottom: 30px;
 }
 #result table td:nth-child(2){
 	width: 30%;
