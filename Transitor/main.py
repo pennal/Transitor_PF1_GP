@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 import pointToPoint
 import tableBoard
-from flask import request
+from flask import request,make_response
 from flask import Flask #Flask is the base server. use 'sudo pip3 install Flask' to install
+import calendarExport
 
 app = Flask(__name__,static_url_path='') 
 
@@ -53,8 +54,20 @@ def doTBRequest():
 
     return tableBoard.getTableBoard(station)
 
+@app.route("/api/calendarExport")
+def exportFromCalendar():
+    htmlPage = request.args.get('htmlPage')
+
+    calendarString = calendarExport.downloadEventForCalendar(htmlPage)
+    response = make_response(calendarString)
+    response.headers["Content-Disposition"] = "attachment; filename=calEvent.ics"
+    response.headers['Cache-Control'] = 'no-cache'
+    response.headers['Content-Type'] = 'application/ics'
+
+    return response
 
 
+    #return calendarExport.downloadEventForCalendar(htmlPage)
 
 if __name__ == "__main__":
     app.debug = True
