@@ -191,7 +191,7 @@ function freezeArrows (freeze) {
 
 	var speed = 175;
 
-	if (freeze) {
+	if (freeze) { //Animating results off screen
 		
 		leftarrow.animate({
 			opacity: '0'
@@ -225,8 +225,9 @@ function freezeArrows (freeze) {
 			} 
 		});
 
+		$("body").off("keydown", handleKeyPress);
 
-	}else{
+	}else{ //Animating results on screen
 		leftarrow.animate({
 			opacity: '1'
 		}, { 
@@ -246,6 +247,20 @@ function freezeArrows (freeze) {
 		});
 	};
 
+	// Montors left and right arrow key events
+	$("body").keydown(handleKeyPress);
+
+}
+
+function handleKeyPress (e) {
+  if(e.which == 37) { // left     
+      slideInBackAndReplace();
+      console.log("left key pressed");
+  }
+  else if(e.which == 39) { // right     
+      slideOutFrontAndReplace();
+      console.log("right key pressed");
+  }
 }
 
 // Parse url for params
@@ -365,9 +380,14 @@ function slideInBackAndReplace () {
 
 // Function to smoothscroll to top of element
 function smoothScroll () {
-	resultsView.animate({
-            scrollTop: $('.resultSlider.frontResult').offset().top
+	var offsetTop = $('.resultSlider.frontResult').offset().top-10;
+
+	if (offsetTop < 0) {
+		resultsView.animate({
+            scrollTop: offsetTop
         }, { duration: 500, queue: false });
+	};
+	
 }
 
 // Helper function to see if a parameter is empty. Returns true if not empty
