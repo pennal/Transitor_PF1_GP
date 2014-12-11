@@ -25,12 +25,13 @@ def downloadEventForCalendar(htmlPage):
     # Get the departure time
     depTime = entries[1].find_all('td')[1].text
     depPlatform = entries[1].find_all('td')[3].text
-    print(depTime,depPlatform)
+    arrivalTime = entries[4].find_all('td')[1].text
+
 
     depDate = entries[2].find_all('td')[1].text
     durationOfTrip = entries[2].find_all('td')[3].text[:-4]
 
-    print(durationOfTrip, depDate)
+    
 
 
     cal = Calendar()
@@ -48,11 +49,14 @@ def downloadEventForCalendar(htmlPage):
     splitTime[0],splitTime[1] = int(splitTime[0]), int(splitTime[1])
 
 
+    splitArrivalTime = arrivalTime.split(":")
+    splitArrivalTime[0],splitArrivalTime[1] = int(splitArrivalTime[0]), int(splitArrivalTime[1])
+
+
     event.add('summary', summaryString)
-    event.add('dtstart', datetime(splitDate[2],splitDate[1],splitDate[0],splitTime[0],splitTime[1],0,tzinfo=pytz.utc))
-    event.add('dtend', datetime(splitDate[2],splitDate[1],splitDate[0],splitTime[0],splitTime[1],0,tzinfo=pytz.utc))
-    event.add('dtstamp', datetime(splitDate[2],splitDate[1],splitDate[0],0,10,0,tzinfo=pytz.utc))
-    event['uid'] = '20050115T101010/27346262376@mxm.dk'
+    event.add('dtstart', datetime(splitDate[2],splitDate[1],splitDate[0],splitTime[0],splitTime[1],0))
+    event.add('dtend', datetime(splitDate[2],splitDate[1],splitDate[0],splitArrivalTime[0],splitArrivalTime[1],0))
+    event['uid'] = datetime.now().strftime('%s')
     event.add('priority', 5)
     cal.add_component(event)
 
