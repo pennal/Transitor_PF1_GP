@@ -304,6 +304,7 @@ function toggleAdditionalOptions () {
 
 // Function to animate the cards sliding out front to back
 function slideOutFrontAndReplace () {
+	smoothScroll();
 	var frontCard = $('.frontResult');
 	var secondCard = frontCard.next();
 	
@@ -312,18 +313,23 @@ function slideOutFrontAndReplace () {
     }, { duration: 500, queue: false, complete: function(){
     	frontCard.removeClass('frontResult');
     	secondCard.addClass('frontResult');
-    	frontCard.css('left', '');
-    	frontCard.css('opacity', '0');
+    	frontCard.css({
+    		left: '',
+    		opacity: '0',
+    		display: 'none'
+    	});
     	frontCard = frontCard.detach();
     	resultsView.append(frontCard);
     } });
 
+	secondCard.css('display', 'block');
     secondCard.animate({
        opacity: '1'
     }, { duration: 500, queue: false });
 }
 
 function slideInBackAndReplace () {
+	smoothScroll();
 	var frontCard = $('.frontResult');
 	var backCard = frontCard.parent().children(":last");
 	
@@ -334,11 +340,13 @@ function slideInBackAndReplace () {
     	backCard.addClass('frontResult');
     	backCard.css({
     		opacity: '',
-    		left: ''
+    		left: '',
+    		display: ''
     	});
     	frontCard.css({
     		opacity: '',
-    		left: ''
+    		left: '',
+    		display: ''
     	});
     	backCard = backCard.detach();
     	resultsView.children("a").last().after(backCard);
@@ -346,13 +354,21 @@ function slideInBackAndReplace () {
 
 	backCard.css({
 		left:'-150%',
-		opacity: '1'
+		opacity: '1',
+		display: 'block'
 	});
     backCard.animate({
        left: '0%'
     }, { duration: 500, queue: false });
 }
 
+
+// Function to smoothscroll to top of element
+function smoothScroll () {
+	resultsView.animate({
+            scrollTop: $('.resultSlider.frontResult').offset().top
+        }, { duration: 500, queue: false });
+}
 
 // Helper function to see if a parameter is empty. Returns true if not empty
 function checkParamValues (param) {

@@ -305,20 +305,19 @@ body{
 }
 
 .resultSlider{
-	position: absolute;
-    width: 100%;
-    opacity: 0;
-}
-
-.resultSlider{
 	-webkit-backface-visibility: hidden;
 	-moz-backface-visibility: hidden;
 	-o-backface-visibility: hidden;
 	backface-visibility: hidden;
+	position: absolute;
+    width: 100%;
+    opacity: 0;
+    display: none;
 }
 
 .resultSlider.frontResult{
 	opacity: 1;
+	display: block;
 }
 
 #rightarrow {
