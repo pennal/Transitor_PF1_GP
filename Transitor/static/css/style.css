@@ -33,8 +33,6 @@
 	height: 0px;
 }
 
-
-
 /****************************************************/
 /*Main config*/
 
@@ -62,7 +60,7 @@ body{
 
 #contentDiv{
 	margin: 2.5% auto;
-	/*overflow: scroll;*/
+	overflow: scroll;
 	width: 90%;
 	height: 90%;
 }
@@ -115,36 +113,63 @@ body{
 /*Home page*/
 /*Config*/
 
+.welcome{
+	padding: 0;
+	margin: 0;
+	font-size: 70px;
+	text-align: left;
+}
+
+.projectTitle{
+	padding: 0 0 100px 0;
+	margin: -40px 0 0 0;
+	font-size: 90px;
+	text-align: center;
+}
+
+#button, #loadedContent{
+	width: 960px;
+	margin: 0 auto 0 auto;
+}
+
+.buttonSet1{
+	width: 640px;
+	float: left;
+}
+
+.buttonSet2{
+	width: 320px;
+	float: right;
+}
+
 .box {
-	box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);
+	box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.3);
 	float: left;
 	width: 300px;
 	height: 140px;
-	margin: 6px;
+	margin: 10px;
 }
 .whiteBox{
-	background-color: white;
+	background-color: #87A2D8;
 }
 .whiteBox:hover{
 	background-color: rgb(240,240,240);
 }
+
 .box2 {
-	box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);
+	box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.3);
 	float: left;
-	width: 144px;
+	width: 140px;
 	height: 140px;
-	margin: 6px;
+	margin: 10px;
 }
 
-#button, #loadedContent{
-	max-width: 936px;
-	margin: 30vh auto 0 auto;
-
-}
-@media (max-width: 1036px) {
-  #button {
-  	width: 626px;
-  }
+.staticBox{
+	box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.3);
+	float: left;
+	width: 300px;
+	height: 140px;
+	margin: 10px;
 }
 
 .front.overlay{
@@ -170,6 +195,11 @@ body{
 /****************************************************/
 /*P2P input page*/
 
+.inputPageTitle{
+	padding: 50px;
+	text-align: left;
+	font-size: 40px;
+}
 
 #p2pInputContainer{
 	position: absolute;
@@ -186,32 +216,47 @@ body{
 	width: 50%;
 	min-width: 500px;
 	margin: 0 auto;
-	margin-top: 30vh;
+	margin-top: 20vh;
 	display: block;
 	color: white;
 }
 
 #p2pInputContainer table{
 	height: 80%;
-	margin: 0 auto;
+	margin: 0 22%;
 	padding: 0px;
 }
 
-#p2pInputContainer table tr td{
-	padding: 20px;
-}
 .p2pInput{
 	width: 400px;
 	line-height: 2em;
 	font-size: 18px;
 	color: black; 
 }
+
 .inputButton{
-	font-size: 16px;
+	background-color: rgba(0,0,0,0.2);
+	border: 1px solid black;
+	background-image: url(../images/arrowSubmit.png);
+	background-size: cover;
+	height: 44px;
+	width: 44px;
+	float: right;
+	margin-right: 20px;
 }
 
-#additionalOptions table{
-	padding: 0px;
+.expButImg{
+	margin-left: 25%;
+	margin-top: 5px;
+	height: 12px;
+}
+
+.expansionButton{
+	background-color: rgba(0,0,0,0.4);
+	border-radius: 2px;
+	background-size: cover;
+	height: 20px;
+	width: 40px;
 }
 
 #p2pInputForm a {
@@ -375,19 +420,15 @@ body{
 	width: 50%;
 	min-width: 500px;
 	margin: 0 auto;
-	margin-top: 40vh;
+	margin-top: 30vh;
 	display: block;
 
 }
 
 #depBoardInputContainer table{
 	height: 80%;
-	margin: 0 auto;
+	margin: 0 22%;
 	padding: 0px;
-}
-
-#depBoardInputContainer table tr td{
-	padding: 20px;
 }
 
 .depBoardInput{
@@ -414,7 +455,7 @@ body{
 #arrivalBoard{
 	margin: 0 10%;
 	min-width: 950px;
-	padding-bottom: 30px;
+	padding-bottom: 40px;
 }
 
 .mainArrival{

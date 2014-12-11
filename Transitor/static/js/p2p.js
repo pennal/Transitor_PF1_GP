@@ -307,12 +307,14 @@ function toggleAdditionalOptions () {
 		theBox.fadeIn(300, function(){
 			theBox.removeClass('closed');
 		});
-		$('#additionalOptionsLink').html("-Fewer Options");
+		// $('#additionalOptionsLink').html("-Fewer Options");
+		// $('#additionalOptionsLink').html("");
 	}else{
 		theBox.fadeOut(300, function(){
 			theBox.addClass('closed');
 		});
-		$('#additionalOptionsLink').html("+Additional Options");
+		// $('#additionalOptionsLink').html("+Additional Options");
+		// $('#additionalOptionsLink').html("");
 	};
 }
 

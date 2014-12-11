@@ -1,5 +1,6 @@
 <div class="title hidden">Point-to-Point Search</div>
 <div id="p2pInputContainer">
+	<div class="inputPageTitle">Point to Point <br>Connection Search</div>
 	<div id="p2pInputForm">
 		<form onsubmit="return submitP2PForm(this);">
 			<table>
@@ -10,12 +11,10 @@
 				<tr>
 					<!-- <td><label for="p2pTo">To: </label></td> -->
 					<td><input type="text" name="p2pTo" class="p2pInput" placeholder="To" value=""></td>
+					<td><input type="submit" value="" class="inputButton"></td>
 				</tr>
 				<tr>
-					<td><input type="submit" value="Plan" class="inputButton"></td>
-				</tr>
-				<tr>
-					<td><a id="additionalOptionsLink" href="#">+Additional Options</a></td>
+					<td><a id="additionalOptionsLink" href="#"><div class="expansionButton"><img class="expButImg" src="images/expansionButton.png"></div></td>
 				</tr>
 			</table>
 			<div id="additionalOptions" class="hidden closed">
@@ -59,7 +58,8 @@
 						<td><input type="checkbox" name="p2pBike" value="1">Bike needed</td>
 					</tr>
 					<tr>
-					<td><input type="submit" value="Plan" class="inputButton"></td>
+					<td></td>
+					<td><input type="submit" value="" class="inputButton"></td>
 				</tr>
 				</table>
 			</div>
@@ -70,4 +70,4 @@
 
 </div>
 <script type="text/javascript" src="js/p2p.js"></script>
-<script type="text/javascript">setBGColour('#CC432A');</script>
+<script type="text/javascript">setBGColour('#ca4431');</script>
