@@ -4,82 +4,52 @@ import time
 
 def deltaTime(timeOfDeparture):
     """
-    :param timeOfDeparture: Time at which the bus is supposed to depart in datetime format
+    :param timeOfDeparture: Time at which the bus is supposed to depart
     :return:(int)time left until departure
     """
     a = datetime.datetime.now()
-    a = a.replace(microsecond=0)
-
     c = timeOfDeparture - a
 
-    #DEBUGGING
-    # print("\n" + str(timeOfDeparture))
-    # print(a)
-    # print("Result :", c.total_seconds())
-    # print("Result minutes :", int(c.total_seconds())//60, end="\n\n")
-
-    return (int(c.total_seconds())//60)
+    res = divmod(c.days * 86400 + c.seconds, 60)
+    if res[0] > 59: #More than an hour
+            return str(res[0]//60) + 'h'
+    else: #If time left is less than an hour
+        return str(res[0]+1) +'\''
 
 def getDateAndTime(inputString):
-    splitInputData = inputString.split("T")
-    date = splitInputData[0].split("-")
-
-    # date = ""
-    # for el in range(0,len(tempData)):
-    #     if el != 0:
-    #         date += "/"
-    #     date += tempData[len(tempData)-el-1]
-
-    time = splitInputData[1][:-8].split(":")
-
-    return datetime.datetime(int(date[0]), int(date[1]), int(date[2]), int(time[0]), int(time[1]))
+    departureTimeTemp = inputString.split("T")
+    departureDate = departureTimeTemp[0]
+    departureTime = departureTimeTemp[1].split("+")[0]#Remove the greenwich delta
+    newTimeLeftAsString = deltaTime(datetime.datetime.strptime(departureTime + " " + departureDate,"%H:%M:%S %Y-%m-%d"))
+    return newTimeLeftAsString
 
 def getTableBoard(station):
     """
-
     :param station: [MANDATORY] Station to check table-board.             {string}
     :return: list
     """
-
     urlForRequest = common.apiURL + "stationboard"
     urlForRequest += "?station=" + common.getCorrectLocationURLFormatted(station) + "&limit=10"
-
     dic = common.doRequest(urlForRequest)
-
-    result = []
+    result = [dic["stationboard"][0]["stop"]["station"]["name"]]
 
     for i in range(0, len(dic["stationboard"])):
-        result.append({"numberLine" : dic["stationboard"][i]["number"],
-                    "intermediateStops" : []})
-        for j in dic["stationboard"][i]["passList"]:
-            result[i]["intermediateStops"].append({"nameStop" : j["location"]["name"],
-                                                "arrivalHour" : j["arrival"]})
-
-    #DEBUG
-    #Visualize ris
-    for i in result:
-        print("numberLine :", i["numberLine"])
-        print("IntermediateStops : ")
-        for j in i["intermediateStops"]:
-            print("\t\tnameStop :", j["nameStop"])
-            print("\t\tarrivalHour :", j["arrivalHour"], end="\n\n")
+        result.append([dic["stationboard"][i]["to"],dic["stationboard"][i]["number"],getDateAndTime(dic["stationboard"][i]["stop"]["departure"])])
 
     return returnHTMLBoard(result)
 
 def returnHTMLBoard(data):
-
     contentPage = ""
-    for i in range(0, len(data)):
+    for i in range(1, len(data)):
+        time = data[i][2]
+        if time != "0'":
+            templateVars = {"lineNumber" : data[i][1],
+                            "arrivalName" : data[i][0],
+                            "departureName" : data[0],
+                            "time" : time}
 
-        arrivalTime = getDateAndTime(data[i]["intermediateStops"][0]["arrivalHour"])
-        time = deltaTime(arrivalTime)
-
-        templateVars = {"arrivalName" : data[i]["intermediateStops"][len(data[i]["intermediateStops"])-1]["nameStop"],
-                        "departureName" : data[i]["intermediateStops"][0]["nameStop"],
-                        "time" : time}
-
-        outputText = common.jinjaSubstitution(templateVars,"departureBoardTemplate.jinja")
-        contentPage += outputText
+            outputText = common.jinjaSubstitution(templateVars,"departureBoardTemplate.jinja")
+            contentPage += outputText
 
     fullPageHTML = common.jinjaSubstitution({"variabile" : contentPage},"initDepartureBoardTemplate.jinja")
 

@@ -414,7 +414,7 @@ body{
 #arrivalBoard{
 	margin: 0 10%;
 	min-width: 950px;
-	background-color: rgb(120,185,255);
+	padding-bottom: 30px;
 }
 
 .mainArrival{
