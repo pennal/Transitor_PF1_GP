@@ -117,16 +117,22 @@ def returnHTMLTable(data):
             except:
                 print("No Connections")
 
+
+
+
         # Specify any input variables to the template as a dictionary.
-        templateVars = { "stationFrom" : stationFrom,
-                         "transfers" : transfersTag,
-                         "stationTo" : stationTo,
-                        "departureTime" : departureTime,
-                        "departureDate" : departureDate,
-                        "arrivalTime" : arrivalTime,
-                        "departurePlatform":departurePlatform,
-                        "arrivalPlatform":arrivalPlatform,
-                        "duration": duration}
+        templateVars = {
+            "stationFrom" : stationFrom,
+             "transfers" : transfersTag,
+             "stationTo" : stationTo,
+             "departureTime" : departureTime,
+             "departureDate" : departureDate,
+             "arrivalTime" : arrivalTime,
+             "arrivalDate" : arrivalDate,
+             "departurePlatform":departurePlatform,
+             "arrivalPlatform":arrivalPlatform,
+             "duration": duration
+        }
 
 
         outputText = common.jinjaSubstitution(templateVars,"resultsTemplate.jinja")
