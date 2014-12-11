@@ -113,16 +113,24 @@ body{
 /*Home page*/
 /*Config*/
 
-#button, #loadedContent{
-	/*box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);*/
-	width: 960px;
-	margin: 30vh auto 0 auto;
+.welcome{
+	padding: 0;
+	margin: 0;
+	font-size: 70px;
+	text-align: left;
 }
-/*@media (max-width: 1036px) {
-  #button {
-  	width: 626px;
-  }
-}*/
+
+.projectTitle{
+	padding: 0 0 100px 0;
+	margin: -40px 0 0 0;
+	font-size: 90px;
+	text-align: center;
+}
+
+#button, #loadedContent{
+	width: 960px;
+	margin: 0 auto 0 auto;
+}
 
 .buttonSet1{
 	width: 640px;
@@ -187,6 +195,11 @@ body{
 /****************************************************/
 /*P2P input page*/
 
+.inputPageTitle{
+	padding: 50px;
+	text-align: left;
+	font-size: 40px;
+}
 
 #p2pInputContainer{
 	position: absolute;
@@ -203,7 +216,7 @@ body{
 	width: 50%;
 	min-width: 500px;
 	margin: 0 auto;
-	margin-top: 40vh;
+	margin-top: 20vh;
 	display: block;
 	color: white;
 }
@@ -214,9 +227,6 @@ body{
 	padding: 0px;
 }
 
-#p2pInputContainer table tr td{
-	/*padding: 20px;*/
-}
 .p2pInput{
 	width: 400px;
 	line-height: 2em;
@@ -225,10 +235,8 @@ body{
 }
 
 .inputButton{
-	/*position: absolute;*/
-background-color: rgba(0,0,0,0.2);
+	background-color: rgba(0,0,0,0.2);
 	border: 1px solid black;
-	/*border-radius: 40px;*/
 	background-image: url(../images/arrowSubmit.png);
 	background-size: cover;
 	height: 44px;
@@ -238,27 +246,18 @@ background-color: rgba(0,0,0,0.2);
 }
 
 .expButImg{
-	/*float: right;*/
-	/*margin-right: 5px;*/
-	margin-left: 45%;
+	margin-left: 25%;
 	margin-top: 5px;
 	height: 12px;
 }
 
 .expansionButton{
-	margin: 0 auto;
 	background-color: rgba(0,0,0,0.4);
-	/*border: 1px solid black;*/
 	border-radius: 2px;
-	/*background-image: url(../images/expansionButton.png);*/
 	background-size: cover;
 	height: 20px;
-	/*width: 404px;*/
-	width: 200px;
+	width: 40px;
 }
-/*#additionalOptions table{
-	padding: 0px;
-}*/
 
 #p2pInputForm a {
 	color: white;
@@ -415,7 +414,7 @@ background-color: rgba(0,0,0,0.2);
 	width: 50%;
 	min-width: 500px;
 	margin: 0 auto;
-	margin-top: 40vh;
+	margin-top: 30vh;
 	display: block;
 
 }
@@ -424,10 +423,6 @@ background-color: rgba(0,0,0,0.2);
 	height: 80%;
 	margin: 0 22%;
 	padding: 0px;
-}
-
-#depBoardInputContainer table tr td{
-	/*padding: 20px;*/
 }
 
 .depBoardInput{
@@ -455,7 +450,6 @@ background-color: rgba(0,0,0,0.2);
 	margin: 0 10%;
 	min-width: 950px;
 	padding-bottom: 50px;
-	/*background-color: rgb(120,185,255);*/
 }
 
 .mainArrival{
