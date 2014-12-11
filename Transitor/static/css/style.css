@@ -203,14 +203,14 @@ body{
 	width: 50%;
 	min-width: 500px;
 	margin: 0 auto;
-	margin-top: 30vh;
+	margin-top: 40vh;
 	display: block;
 	color: white;
 }
 
 #p2pInputContainer table{
 	height: 80%;
-	margin: 0 auto;
+	margin: 0 22%;
 	padding: 0px;
 }
 
@@ -223,27 +223,38 @@ body{
 	font-size: 18px;
 	color: black; 
 }
+
 .inputButton{
 	/*position: absolute;*/
-	background-color: white;
-	border: 0;
+background-color: rgba(0,0,0,0.2);
+	border: 1px solid black;
 	/*border-radius: 40px;*/
 	background-image: url(../images/arrowSubmit.png);
 	background-size: cover;
-	height: 40px;
-	width: 40px;
-	/*float: right;*/
+	height: 44px;
+	width: 44px;
+	float: right;
 	margin-right: 20px;
 }
 
+.expButImg{
+	/*float: right;*/
+	/*margin-right: 5px;*/
+	margin-left: 45%;
+	margin-top: 5px;
+	height: 12px;
+}
+
 .expansionButton{
-	background-color: white;
-	border: 0;
-	/*border-radius: 40px;*/
-	background-image: url(../images/expansionButton.png);
+	margin: 0 auto;
+	background-color: rgba(0,0,0,0.4);
+	/*border: 1px solid black;*/
+	border-radius: 2px;
+	/*background-image: url(../images/expansionButton.png);*/
 	background-size: cover;
-	height: 40px;
-	width: 40px;
+	height: 20px;
+	/*width: 404px;*/
+	width: 200px;
 }
 /*#additionalOptions table{
 	padding: 0px;
@@ -411,12 +422,12 @@ body{
 
 #depBoardInputContainer table{
 	height: 80%;
-	margin: 0 auto;
+	margin: 0 22%;
 	padding: 0px;
 }
 
 #depBoardInputContainer table tr td{
-	padding: 20px;
+	/*padding: 20px;*/
 }
 
 .depBoardInput{

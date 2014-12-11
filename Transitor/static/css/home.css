@@ -2,17 +2,17 @@
 
 /*BOX SPECIFICS*/
 .p2pBox{
-	background: #18265d;
+	background: #ab1800;
 	background-image: url(../images/p2p1.png);
 	background-size: cover;
 }
 .arrivalBoard{
-	background-color: #4a6491;
+	background-color: #133e88;
 	background-image: url(../images/arrivalBoard.png);
 	background-size: cover;	
 }
 .weather{
-	background-color: #85a5cc;
+	background-color: #419b0a;
 	/*background-image: url(../images/arrivalBoard.png);*/
 	background-size: cover;	
 }
