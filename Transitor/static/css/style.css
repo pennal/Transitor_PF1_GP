@@ -33,8 +33,6 @@
 	height: 0px;
 }
 
-
-
 /****************************************************/
 /*Main config*/
 
@@ -62,7 +60,7 @@ body{
 
 #contentDiv{
 	margin: 2.5% auto;
-	/*overflow: scroll;*/
+	overflow: scroll;
 	width: 90%;
 	height: 90%;
 }
@@ -115,36 +113,55 @@ body{
 /*Home page*/
 /*Config*/
 
+#button, #loadedContent{
+	/*box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);*/
+	width: 960px;
+	margin: 30vh auto 0 auto;
+}
+/*@media (max-width: 1036px) {
+  #button {
+  	width: 626px;
+  }
+}*/
+
+.buttonSet1{
+	width: 640px;
+	float: left;
+}
+
+.buttonSet2{
+	width: 320px;
+	float: right;
+}
+
 .box {
 	box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);
 	float: left;
 	width: 300px;
 	height: 140px;
-	margin: 6px;
+	margin: 10px;
 }
 .whiteBox{
-	background-color: white;
+	background-color: #87A2D8;
 }
 .whiteBox:hover{
 	background-color: rgb(240,240,240);
 }
+
 .box2 {
 	box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);
 	float: left;
-	width: 144px;
+	width: 140px;
 	height: 140px;
-	margin: 6px;
+	margin: 10px;
 }
 
-#button, #loadedContent{
-	max-width: 936px;
-	margin: 30vh auto 0 auto;
-
-}
-@media (max-width: 1036px) {
-  #button {
-  	width: 626px;
-  }
+.staticBox{
+	box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);
+	float: left;
+	width: 300px;
+	height: 140px;
+	margin: 10px;
 }
 
 .front.overlay{
@@ -407,7 +424,8 @@ body{
 #arrivalBoard{
 	margin: 0 10%;
 	min-width: 950px;
-	background-color: rgb(120,185,255);
+	padding-bottom: 50px;
+	/*background-color: rgb(120,185,255);*/
 }
 
 .mainArrival{
