@@ -188,10 +188,6 @@ function checkParamValues (param) {
 if (objLength(getUrlParams()) > 0) {
 	var params = getUrlParams();
 
-	console.log("Params:");
-	console.log(params);
-	console.log(params["location"]);
-
 	var theLocation = params["location"];
 
 // Fill form on page with old values
@@ -199,25 +195,24 @@ if (objLength(getUrlParams()) > 0) {
 		$("input[name='weatherLocation']").val(theLocation);
 	};
 
-	console.log('Location in checkParamValues: '+theLocation);
 // Finally submit form
 	getResults(theLocation);
 	setPageTitle(theLocation);
 };
 
 // Autocomplete setup
-// $("input[name='weatherLocation']").autocomplete({
-// 	source: function (request, response) {
-// 		$.get('http://transport.opendata.ch/v1/locations', {query:request.term}, function(data) {
-// 			response($.map(data.stations, function(station) {
-// 				return {
-// 					label: station.name,
-// 					station: station
-// 				};
-// 			}));
-// 		}, 'json');
-// 	},
-// 	minLength: 2,
-// 	select: function (event, ui) {
-// 	}
-// });
+$("input[name='weatherLocation']").autocomplete({
+	source: function (request, response) {
+		$.get('http://transport.opendata.ch/v1/locations', {query:request.term, type:'address'}, function(data) {
+			response($.map(data.stations, function(station) {
+				return {
+					label: station.name,
+					station: station
+				};
+			}));
+		}, 'json');
+	},
+	minLength: 2,
+	select: function (event, ui) {
+	}
+});
