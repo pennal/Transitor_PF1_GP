@@ -13,7 +13,6 @@
   src: url('fonts/OpenSans.ttf') format('truetype');
 }
 
-
 /****************************************************/
 /*Helpers*/
 
@@ -162,28 +161,6 @@ body{
 }
 
 .box {
-	box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.3);
-	float: left;
-	width: 300px;
-	height: 140px;
-	margin: 10px;
-}
-.whiteBox{
-	background-color: #87A2D8;
-}
-.whiteBox:hover{
-	background-color: rgb(240,240,240);
-}
-
-.box2 {
-	box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.3);
-	float: left;
-	width: 140px;
-	height: 140px;
-	margin: 10px;
-}
-
-.staticBox{
 	box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.3);
 	float: left;
 	width: 300px;
@@ -544,3 +521,319 @@ body{
 	height: 150px;
 	margin: 20px 10px;
 }
+
+/***************************************************
+/* Weather input */
+
+/***************************************************
+/* Weather */
+
+#weatherContent{
+	position: absolute;
+	top: 50%;
+	margin-top: -255px;
+	left: 50%;
+	margin-left: -405px;
+	width: 810px;
+	height: 510px;
+}
+
+#weatherContent ul{
+	padding: 0;
+	margin: 0 auto;
+	list-style-type: none;
+}
+
+#weatherContent li{
+	padding: 0;
+	margin: 0 auto;
+	list-style-type: none;
+}
+
+.weatherBox{
+	background-color: #e6e6e6;
+	box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.3);
+	float: left;
+	min-width: 250px;
+	min-height: 250px;
+	margin: 10px;
+}
+
+.basicInfo{
+	float: left;
+	margin: 0px;
+	width: 250px;
+	height: 250px;
+}
+
+.forecast{
+	float: left;
+	/*width: 250px;*/
+	height: 100px;
+	text-align: center;
+	margin: 0 auto;
+	height: 8em;
+}
+
+.degree{
+	/*margin: 10px;*/
+	/*width: 250px;*/
+	/*height: 125px;*/
+	padding-left: 20px;
+	font-size: 60px;
+	text-align: center;
+}
+
+.expandedInfo{
+	width: 540px;
+	height: 510px;
+	float: right;
+	/*margin: 10px;*/
+	/*background-color: red;*/
+}
+
+.dayName{
+	font-size: 30px;
+	text-align: center;
+	padding: 0;
+	margin: 0;
+}
+
+/***************************************************/
+/* Forecast Icon imports */
+
+@font-face {
+  font-family: "iconvault";
+  src: url("forecastIcon/iconvault_forecastfont.eot");
+  src: url("forecastIcon/iconvault_forecastfont.eot?#iefix") format("embedded-opentype"),
+       url("forecastIcon/iconvault_forecastfont.woff") format("woff"),
+       url("forecastIcon/iconvault_forecastfont.ttf") format("truetype"),
+       url("forecastIcon/iconvault_forecastfont.svg#iconvault") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}	
+
+[class^="icon-"],
+[class*=" icon-"] {
+  margin: 0 auto;
+  text-align: center;
+  font-family: 'iconvault';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  -webkit-font-smoothing: antialiased;
+  font-size: 7em;
+
+}
+
+/*@media only screen and (min-width: 479px) and (max-width: 678px){
+[class^="icon-"],
+[class*=" icon-"] {
+  font-family: 'iconvault';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  -webkit-font-smoothing: antialiased;}
+}*/
+
+/* -----BaseCloud----- */
+
+	.basecloud:before  {
+	font-family: 'iconvault';
+	font-size:6em;
+	content: '\f105';
+	/*position:absolute;*/
+	color:rgb(204, 204, 204);
+	}
+	
+	
+	
+/* -----windyraincloud----- */
+
+	.windyraincloud:before  {
+	font-family: 'iconvault';
+	font-size:6em;
+	content: '\f111';
+	/*position:absolute;*/
+	color:rgb(204, 204, 204);
+	}
+	
+/* -----Windysnowcloud----- */
+
+	.windysnowcloud:before  {
+	font-family: 'iconvault';
+	font-size:6em;
+	content: '\f109';
+	/*position:absolute;*/
+	color:rgb(204, 204, 204);
+	}
+
+/* -----Basethundercloud----- */
+
+	.basethundercloud:before  {
+	font-family: 'iconvault';
+	font-size:6em;
+	content: '\f105';
+	/*position:absolute;*/
+	color:#000;
+
+	}
+
+
+/* -----Thunder----- */
+
+	.icon-thunder::before  {
+	content: "\f114";
+	/*position:absolute;*/
+	color:rgb(255, 165, 0);
+	}
+
+/* -----Sunny----- */
+
+	.icon-sunny::after {
+	content: "\f101";
+	color:rgb(255, 165, 0);
+	/*position: absolute;*/
+	}
+
+
+/* -----Drizzle----- */
+
+	.icon-drizzle::before  {
+	content: "\f10a";
+	color: #82b2e4;
+	/*position: absolute;*/
+}
+
+/* -----Hail----- */
+
+	.icon-hail::before {
+	content: "\f10f";
+	/*position:absolute;*/
+	color:rgb(204, 204, 204);}
+
+/* -----Showers----- */
+
+	.icon-showers::before  {
+	content: "\f104";
+	/*position:absolute;*/
+	color:#82b2e4;
+}
+
+/* -----Rainy----- */
+
+	.icon-rainy::before {
+	content: "\f107";
+	/*position:absolute;*/
+	color:#4681c3;
+	}
+
+/* -----Snowy----- */
+
+	.icon-snowy::before  {
+	content: "\f10b";
+	/*position:absolute;*/
+	color:#acd3f3;
+	}
+
+/* -----Frosty----- */
+
+	.icon-frosty::before {
+	content: "\f102";
+	/*position:absolute;*/
+	color:#85d8f7;
+	}
+
+/* -----Windy----- */
+
+	.icon-windy::before  {
+	content: "\f115";
+	/*position:absolute;*/
+	color:rgb(204, 204, 204);
+	}
+
+/* -----WindyRain----- */
+
+	.icon-windyrain::before {
+	content: "\f10e";
+	/*position:absolute;*/
+	color:#acd3f3;
+	}
+
+/* -----WindySnow----- */
+
+	.icon-windysnow::before {
+	content: "\f103";
+	/*position:absolute;*/
+	color:#acd3f3;
+	}
+
+/* -----Sleet----- */
+
+	.icon-sleet::before  {
+	content: "\f10c";
+	/*position:absolute;*/
+	color:#acd3f3;
+	}
+
+/* -----Moon----- */
+
+	.icon-moon::after {
+	content: "\f10d";
+	color:rgb(255, 165, 0);
+	/*position: absolute;*/
+	}
+
+/* -----Night----- */
+
+	.icon-night::after {
+	content: "\f100";
+	/*position:absolute;*/
+	color:rgb(255, 165, 0);
+	}
+
+
+/* -----Sun----- */
+
+	.icon-sun::after {
+	content: "\f113";
+	color:rgb(255, 165, 0);
+	/*position: absolute;*/
+	}
+
+/* -----Cloud----- */
+
+	.icon-cloud::after {
+	content: "\f106";
+	color:rgb(204, 204, 204);
+	/*position: absolute;*/
+	}
+
+
+/* -----Sunrise----- */
+
+	.icon-sunrise:before  {
+	content: '\f112';
+	color:rgb(255, 165, 0);
+	/*position: absolute;*/
+	}
+
+/* -----Sunset----- */
+
+	.icon-sunset:before  {
+	content: '\f110';
+	color:#f96f23;
+	/*position: absolute;*/
+	}
+
+/* -----Mist----- */
+
+	.icon-mist:before  {
+	content: '\f108';
+	color:rgb(204, 204, 204);
+	/*position: absolute;*/
+	}
+
+
+/***************************************************
+/***************************************************
