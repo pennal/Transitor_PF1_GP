@@ -207,6 +207,25 @@
 	}
 }
 
+/*Fade in*/
+@-webkit-keyframes slideOffScreen{
+	50%{
+		left: 65%;
+	}
+	100%{
+		left: 110%;
+	}
+}
+
+@keyframes slideOffScreen{
+	50%{
+		left: 65%;
+	}
+	100%{
+		left: 110%;
+	}
+}
+
 
 /*Perform animations*/
 .box.flip, .box2.flip {
@@ -227,7 +246,6 @@
 }
 
 .expButImg{
-	perspective: 800px;
 	-webkit-transition: all .3s ease-in;
     -moz-transition: all .3s ease-in;
     -o-transition: all .3s ease-in;
@@ -244,4 +262,10 @@
 	-ms-transform: rotate(-180deg);
 	-o-transform: rotate(-180deg);
 	transform: rotate(-180deg);
+}
+
+#innerProgress.animateProgress{
+	-webkit-animation: slideOffScreen 1.5s linear 0s infinite forwards;
+	-o-animation: slideOffScreen 1.5s linear 0s infinite forwards;
+	animation: slideOffScreen 1.5s linear 0s infinite forwards;
 }
