@@ -304,12 +304,14 @@ function setPageTitle (from, to) {
 function toggleAdditionalOptions () {
 	var theBox = $("#additionalOptions");
 	if (theBox.hasClass('closed')) {
+		$(".expButImg").addClass("upsideDown");
 		theBox.fadeIn(300, function(){
 			theBox.removeClass('closed');
 		});
 		// $('#additionalOptionsLink').html("-Fewer Options");
 		// $('#additionalOptionsLink').html("");
 	}else{
+		$(".expButImg").removeClass("upsideDown");
 		theBox.fadeOut(300, function(){
 			theBox.addClass('closed');
 		});
