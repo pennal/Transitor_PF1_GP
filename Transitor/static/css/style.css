@@ -314,6 +314,14 @@ body{
     opacity: 0;
 }
 
+#cardNumTag{
+	color: white;
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+    font-size: 16pt;
+}
+
 
 /****************************************************/
 /* Results view returned */

@@ -1,9 +1,16 @@
+// Helpful variables;
 var resultsView = $('#resultsView')
+var cardNumCodeTextField = "Card %current% of %total%";
+var currentCardNum = 1;
+var totalCardNum = 1;
+
+// Additional code to add to results
+var cardNumCode = "<div id=\"cardNumTag\"></div>";
 var backButtonCode = "<a id=\"backButton\" href=\"javascript:slideSearch(false);\"></a>\n";
 var navRightArrowCode = "<a href=\"javascript:slideOutFrontAndReplace();\" id=\"rightarrow\"></a>";
 var navLeftArrowCode = "<a href=\"javascript:slideInBackAndReplace();\" id=\"leftarrow\"></a>";
 
-var additionalCode = backButtonCode+navRightArrowCode+navLeftArrowCode;
+var additionalCode = cardNumCode+backButtonCode+navRightArrowCode+navLeftArrowCode;
 
 // Formats the date for the user and also for the API
 function dateFormat (forURL, value) {
@@ -133,6 +140,11 @@ function getResults (from, to, via, date, time, isArrivalTime, transportations, 
 		setUpClickOnCalButton();
 		// Tooltip setup for calButton
 		$(".calButton").tooltip();
+
+		// Work out how many cards there are
+		totalCardNum = $(".resultSlider").length;
+		updateCardNumText();
+
 		slideSearch(true);
 	})
 }
@@ -301,18 +313,19 @@ function toggleAdditionalOptions () {
 		theBox.fadeIn(300, function(){
 			theBox.removeClass('closed');
 		});
-		// $('#additionalOptionsLink').html("-Fewer Options");
-		// $('#additionalOptionsLink').html("");
 	}else{
 		$(".expButImg").removeClass("upsideDown");
 		theBox.fadeOut(300, function(){
 			theBox.addClass('closed');
 		});
-		// $('#additionalOptionsLink').html("+Additional Options");
-		// $('#additionalOptionsLink').html("");
 	};
 }
 
+// Set text card num
+function updateCardNumText () {
+	var finalString = cardNumCodeTextField.replace('%current%', currentCardNum).replace('%total%', totalCardNum);
+	$("#cardNumTag").html(finalString);
+}
 
 // Function to animate the cards sliding out front to back
 function slideOutFrontAndReplace () {
@@ -320,6 +333,7 @@ function slideOutFrontAndReplace () {
 	var frontCard = $('.frontResult');
 	var secondCard = frontCard.next();
 	
+
 	frontCard.animate({
        left: '-150%'
     }, { duration: 500, queue: false, complete: function(){
@@ -332,6 +346,10 @@ function slideOutFrontAndReplace () {
     	});
     	frontCard = frontCard.detach();
     	resultsView.append(frontCard);
+    	// Update counter
+		currentCardNum = currentCardNum+1;
+		currentCardNum == totalCardNum+1 ? currentCardNum = 1: currentCardNum = currentCardNum;
+		updateCardNumText();
     } });
 
 	secondCard.css('display', 'block');
@@ -344,7 +362,8 @@ function slideInBackAndReplace () {
 	smoothScroll();
 	var frontCard = $('.frontResult');
 	var backCard = frontCard.parent().children(":last");
-	
+
+
 	frontCard.animate({
        opacity: '0'
     }, { duration: 500, queue: false, complete: function(){
@@ -362,6 +381,10 @@ function slideInBackAndReplace () {
     	});
     	backCard = backCard.detach();
     	resultsView.children("a").last().after(backCard);
+    	// Update counter
+		currentCardNum = currentCardNum-1;
+		currentCardNum == 0 ? currentCardNum = totalCardNum: currentCardNum = currentCardNum;
+		updateCardNumText();
     } });
 
 	backCard.css({
