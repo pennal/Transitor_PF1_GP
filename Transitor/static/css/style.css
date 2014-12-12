@@ -541,13 +541,14 @@ body{
 #weatherContent ul{
 	padding: 0;
 	margin: 0 auto;
-	list-style-type: none;
+	/*list-style-type: none;*/
+	list-style: none;
 }
 
 #weatherContent li{
 	padding: 0;
 	margin: 0 auto;
-	list-style-type: none;
+	list-style: none;
 }
 
 .weatherBox{
@@ -639,10 +640,11 @@ body{
 /* -----BaseCloud----- */
 
 	.basecloud:before  {
+	text-align: center;
 	font-family: 'iconvault';
 	font-size:6em;
 	content: '\f105';
-	/*position:absolute;*/
+	position:absolute;
 	color:rgb(204, 204, 204);
 	}
 	
@@ -684,7 +686,7 @@ body{
 
 	.icon-thunder::before  {
 	content: "\f114";
-	/*position:absolute;*/
+	position:absolute;
 	color:rgb(255, 165, 0);
 	}
 
