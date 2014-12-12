@@ -129,7 +129,10 @@ function getResults (from, to, via, date, time, isArrivalTime, transportations, 
 		replaceHTMLOfElement(resultsView, data);
 		$("#resultsView .resultSlider").first().addClass('frontResult');
 		resultsView.css('display', 'block');
+		// Listens for clicks on cal button
 		setUpClickOnCalButton();
+		// Tooltip setup for calButton
+		$(".calButton").tooltip();
 		slideSearch(true);
 	})
 }
