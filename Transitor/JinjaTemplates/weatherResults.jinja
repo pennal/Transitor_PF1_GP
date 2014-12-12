@@ -1,0 +1,51 @@
+<div class="weatherBox">
+    <div class="basicInfo">
+        <p class="dayName">{{ dayName }} {{ dayNumber }}</p>
+        <div class="icon-sun"></div>
+        <div class="degree">
+            {{ mainTemp }}
+        </div>
+    </div>
+    <div class="expandedInfo hidden">
+        <table>
+
+            <tr>
+                <td>Humidity</td>
+                <td>{{ humidity }}</td>
+            </tr>
+            <tr>
+                <td>Pressure</td>
+                <td>{{ pressure }}</td>
+            </tr>
+            <tr>
+                <td>Wind Speed</td>
+                <td>{{ windSpeed }}</td>
+            </tr>
+            <tr>
+                <td>Day</td>
+                <td>{{ dayTemp }}</td>
+            </tr>
+            <tr>
+                <td>Evenig</td>
+                <td>{{ eveningTemp }}</td>
+            </tr>
+            <tr>
+                <td>Max</td>
+                <td>{{ maxTemp }}</td>
+            </tr>
+            <tr>
+                <td>Min</td>
+                <td>{{ minTemp }}</td>
+            </tr>
+            <tr>
+                <td>Morning</td>
+                <td>{{ morningTemp }}</td>
+            </tr>
+            <tr>
+                <td>Night</td>
+                <td>{{ nightTemp }}</td>
+            </tr>
+
+        </table>
+    </div>
+</div>
