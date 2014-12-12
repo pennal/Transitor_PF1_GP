@@ -67,7 +67,7 @@ body{
 
 #progressDiv{
 	display: none;
-	height: 5px;
+	height: 10px;
 	width: 100%;
 	position: absolute;
 	top: 0;
@@ -85,7 +85,9 @@ body{
 
 #progressDiv #innerProgress{
 	height: 100%;
-	width: 0%;
+	width: 120px;
+	position: relative;
+	left: -120px; /*neg width*/
 	background-color: white;
 	display: block;
 }

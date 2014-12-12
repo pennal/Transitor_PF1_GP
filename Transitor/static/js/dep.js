@@ -33,25 +33,15 @@ function sendDepTransitReq (params, callback) {
 	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 	  }
 
-	  // Update the progress bar
-	xmlhttp.onprogress = function(e){
-	    if (e.lengthComputable){
-	    	var progress = (e.loaded / e.total) * 100;
-	        updateProgressBar(progress);
-	    }
-	};
-
 	// Has the request finished?
 	xmlhttp.onreadystatechange=function(){
 	  
 	  if (xmlhttp.readyState==4 && xmlhttp.status==200) {
 	  	hideProgressBar();
-	  	updateProgressBar(0);
 	  	// Success - display results
 	  	callback(backButtonCode+xmlhttp.responseText);
 	  }else if(xmlhttp.readyState==4){
 	  	hideProgressBar();
-	  	updateProgressBar(0);
 	  	// There was an error - display an error message
 	  	callback(backButtonCode+"<span style='display:block; text-align: center; color: white;'>There was an error. Please check your input and try again later.</span>");
 	  }

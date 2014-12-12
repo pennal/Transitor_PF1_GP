@@ -30,20 +30,11 @@ function sendAjaxRequest (url, callback) {
 	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 	  }
 
-	  // Update the progress bar
-	xmlhttp.onprogress = function(e){
-	    if (e.lengthComputable){
-	    	var progress = (e.loaded / e.total) * 100;
-	        updateProgressBar(progress);
-	    }
-	};
-
 	// Has the request finished?
 	xmlhttp.onreadystatechange=function(){
 	  
 	  if (xmlhttp.readyState==4 && xmlhttp.status==200) { //The 0 is just because it seemed to not like it when run locally..
 	  	hideProgressBar();
-	  	updateProgressBar(0);
 	  	callback(xmlhttp.responseText);
 	  }else{
 	  	// console.log('readyState: '+xmlhttp.readyState+', code: '+xmlhttp.status);
@@ -96,19 +87,16 @@ function showLoadingAjax () {
 	showProgressBar();
 }
 
-// Update progress bar
-function updateProgressBar (percent) {
-	$("#progressDiv #innerProgress").css('width', ''+percent+'%');
-}
-
 // Unhide progress bar
 function showProgressBar () {
 	$("#progressDiv").css('display', 'block');
+	$("#progressDiv #innerProgress").addClass('animateProgress');
 }
 
 // Hide progress bar
 function hideProgressBar () {
 	$("#progressDiv").css('display', 'none');
+	$("#progressDiv #innerProgress").removeClass('animateProgress');
 }
 
 // Parses hash and redirects if needed
