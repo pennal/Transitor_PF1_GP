@@ -3,6 +3,7 @@ var resultsView = $('#resultsView')
 var cardNumCodeTextField = "Card %current% of %total%";
 var currentCardNum = 1;
 var totalCardNum = 1;
+var isTransitioningCard = false;
 
 // Additional code to add to results
 var cardNumCode = "<div id=\"cardNumTag\"></div>";
@@ -329,72 +330,80 @@ function updateCardNumText () {
 
 // Function to animate the cards sliding out front to back
 function slideOutFrontAndReplace () {
-	smoothScroll();
-	var frontCard = $('.frontResult');
-	var secondCard = frontCard.next();
-	
+	if (!isTransitioningCard) {
+		isTransitioningCard = true;
+		smoothScroll();
+		var frontCard = $('.frontResult');
+		var secondCard = frontCard.next();
+		
 
-	frontCard.animate({
-       left: '-150%'
-    }, { duration: 500, queue: false, complete: function(){
-    	frontCard.removeClass('frontResult');
-    	secondCard.addClass('frontResult');
-    	frontCard.css({
-    		left: '',
-    		opacity: '0',
-    		display: 'none'
-    	});
-    	frontCard = frontCard.detach();
-    	resultsView.append(frontCard);
-    	// Update counter
-		currentCardNum = currentCardNum+1;
-		currentCardNum == totalCardNum+1 ? currentCardNum = 1: currentCardNum = currentCardNum;
-		updateCardNumText();
-    } });
+		frontCard.animate({
+	       left: '-150%'
+	    }, { duration: 500, queue: false, complete: function(){
+	    	frontCard.removeClass('frontResult');
+	    	secondCard.addClass('frontResult');
+	    	frontCard.css({
+	    		left: '',
+	    		opacity: '0',
+	    		display: 'none'
+	    	});
+	    	frontCard = frontCard.detach();
+	    	resultsView.append(frontCard);
+	    	// Update counter
+			currentCardNum = currentCardNum+1;
+			currentCardNum == totalCardNum+1 ? currentCardNum = 1: currentCardNum = currentCardNum;
+			updateCardNumText();
+			isTransitioningCard = false;
+	    } });
 
-	secondCard.css('display', 'block');
-    secondCard.animate({
-       opacity: '1'
-    }, { duration: 500, queue: false });
+		secondCard.css('display', 'block');
+	    secondCard.animate({
+	       opacity: '1'
+	    }, { duration: 500, queue: false });
+	};
 }
 
 function slideInBackAndReplace () {
-	smoothScroll();
-	var frontCard = $('.frontResult');
-	var backCard = frontCard.parent().children(":last");
+	if (!isTransitioningCard) {
+		isTransitioningCard = true;
+		smoothScroll();
+		var frontCard = $('.frontResult');
+		var backCard = frontCard.parent().children(":last");
 
 
-	frontCard.animate({
-       opacity: '0'
-    }, { duration: 500, queue: false, complete: function(){
-    	frontCard.removeClass('frontResult');
-    	backCard.addClass('frontResult');
-    	backCard.css({
-    		opacity: '',
-    		left: '',
-    		display: ''
-    	});
-    	frontCard.css({
-    		opacity: '',
-    		left: '',
-    		display: ''
-    	});
-    	backCard = backCard.detach();
-    	resultsView.children("a").last().after(backCard);
-    	// Update counter
-		currentCardNum = currentCardNum-1;
-		currentCardNum == 0 ? currentCardNum = totalCardNum: currentCardNum = currentCardNum;
-		updateCardNumText();
-    } });
+		frontCard.animate({
+	       opacity: '0'
+	    }, { duration: 500, queue: false, complete: function(){
+	    	frontCard.removeClass('frontResult');
+	    	backCard.addClass('frontResult');
+	    	backCard.css({
+	    		opacity: '',
+	    		left: '',
+	    		display: ''
+	    	});
+	    	frontCard.css({
+	    		opacity: '',
+	    		left: '',
+	    		display: ''
+	    	});
+	    	backCard = backCard.detach();
+	    	resultsView.children("a").last().after(backCard);
+	    	// Update counter
+			currentCardNum = currentCardNum-1;
+			currentCardNum == 0 ? currentCardNum = totalCardNum: currentCardNum = currentCardNum;
+			updateCardNumText();
+			isTransitioningCard = false;
+	    } });
 
-	backCard.css({
-		left:'-150%',
-		opacity: '1',
-		display: 'block'
-	});
-    backCard.animate({
-       left: '0%'
-    }, { duration: 500, queue: false });
+		backCard.css({
+			left:'-150%',
+			opacity: '1',
+			display: 'block'
+		});
+	    backCard.animate({
+	       left: '0%'
+	    }, { duration: 500, queue: false });
+	};
 }
 
 
