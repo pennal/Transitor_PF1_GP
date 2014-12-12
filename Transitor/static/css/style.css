@@ -90,6 +90,7 @@ body{
 	display: block;
 }
 
+
 /****************************************************/
 /*Overlay classes*/
 
@@ -106,6 +107,22 @@ body{
 
 #overlayView *{
 	padding: 5px 0 0 0;
+}
+
+/****************************************************/
+/*Home Button*/
+
+#homeButton{
+	/*padding: 50px;*/
+}
+
+#homeButton{
+	background-image: url("../images/homebutton.png");
+    background-size: cover;
+    float: left;
+    height: 42px;
+    margin: 2.5% 25px 50px 1.5%;
+    width: 42px;
 }
 
 
@@ -192,13 +209,15 @@ body{
 	display: inline-block;
 }
 
+
 /****************************************************/
 /*P2P input page*/
 
 .inputPageTitle{
-	padding: 50px;
+	padding: 2% 50px;
 	text-align: left;
 	font-size: 40px;
+	color: white;
 }
 
 #p2pInputContainer{
@@ -264,6 +283,8 @@ body{
 	text-decoration: none;
 }
 
+
+
 /****************************************************/
 /*Results View*/
 
@@ -291,8 +312,9 @@ body{
     opacity: 0;
 }
 
+
 /****************************************************/
-/* Results view */
+/* Results view returned */
 
 #result{
 	width: 50%;
@@ -402,6 +424,9 @@ body{
     top: 25px;
     z-index: 1000;
 }
+
+
+
 /***************************************************
 /* Departure Board - Input */
 

@@ -44,7 +44,7 @@ function sendDepTransitReq (params, callback) {
 	// Has the request finished?
 	xmlhttp.onreadystatechange=function(){
 	  
-	  if (xmlhttp.readyState==4 && (xmlhttp.status==200||xmlhttp.status==0)) { //The 0 is just because it seemed to not like it when run locally..
+	  if (xmlhttp.readyState==4 && xmlhttp.status==200) {
 	  	hideProgressBar();
 	  	updateProgressBar(0);
 	  	// Success - display results
@@ -99,6 +99,7 @@ function slideSearch (offScreen) {
 	        left: '25%'
 	    }, speed, "swing", function(){
 	    	$('#contentDiv').removeClass('noOverflow');
+	    	freezeArrows(false);
 	    });
 
 	}else{
@@ -109,6 +110,8 @@ function slideSearch (offScreen) {
 	    }, speed, "swing", function() {
 	        resultsView.addClass('hidden');
 	    });
+
+	    freezeArrows(true);
 
 	    searchDiv.animate({
 	        left: '0%'
@@ -154,6 +157,34 @@ function setPageTitle (from, to) {
 	}
 	
 	console.log('Title string: '+titleString);
+}
+
+
+function freezeArrows (freeze) {
+	var backButton = $('#backButton');
+
+	var speed = 175;
+
+	if (freeze) { //Animating results off screen
+		backButton.animate({
+			opacity: '0'
+		}, { 
+			duration: speed, queue: false, complete: function(){
+				backButton.css({
+					position: "absolute"
+				});
+			} 
+		});
+
+	}else{ //Animating results on screen
+
+		backButton.animate({
+			opacity: '1'
+		}, { 
+			duration: speed*2, queue: false 
+		});
+	};
+
 }
 
 

@@ -104,7 +104,7 @@ function sendP2PTransitReq (params, callback) {
 	// Has the request finished?
 	xmlhttp.onreadystatechange=function(){
 	  
-	  if (xmlhttp.readyState==4 && (xmlhttp.status==200||xmlhttp.status==0)) { //The 0 is just because it seemed to not like it when run locally..
+	  if (xmlhttp.readyState==4 && xmlhttp.status==200) {
 	  	hideProgressBar();
 	  	updateProgressBar(0);
 	  	// Success - display results
