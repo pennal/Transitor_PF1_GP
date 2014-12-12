@@ -333,7 +333,6 @@ body{
 }
 #result table td:first-child{
 	width: 15%;
-	padding-bottom: 30px;
 }
 #result table td:nth-child(2){
 	width: 30%;
@@ -353,6 +352,7 @@ body{
 }
 .date{
 	text-align: left;
+	padding-left: 10px;
 	padding-bottom: 30px;
 }
 .important{
@@ -361,6 +361,12 @@ body{
 .grey{
 	color: grey;
 }
+
+.greyDate{
+	color: grey;
+	padding-bottom: 30px;
+}
+
 .transfer{
 	padding-bottom: 20px;
 	border-bottom: 0.5px solid black;
