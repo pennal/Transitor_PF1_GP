@@ -1,7 +1,10 @@
-<div class="weatherBox">
-    <div id="{{ resultsNumber }}" class="basicInfo">
+<div id="{{ resultsNumber }}" class="weatherBox">
+    <div class="basicInfo">
         <p class="dayName">{{ dayName }} {{ dayNumber }}</p>
-        <div class="icon-sun"></div>
+        <div class="forecast">
+            <!-- NEED TO BE ENCODED IN A CERTAIN WAY -->
+            {{ forecastCode }}
+        </div>
         <div class="degree">
             {{ mainTemp }}
         </div>
@@ -28,6 +31,14 @@
             <tr>
                 <td>Evenig</td>
                 <td>{{ eveningTemp }}</td>
+            </tr>
+            <tr>
+                <td>Sunrise</td>
+                <td>{{ Sunrise }}</td>
+            </tr>
+            <tr>
+                <td>Sunset</td>
+                <td>{{ Sunset }}</td>
             </tr>
             <tr>
                 <td>Max</td>
