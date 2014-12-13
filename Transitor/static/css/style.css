@@ -135,7 +135,7 @@ body{
 	position: absolute;
 	left: 50%;
 	margin-left: -480px;
-	top: 0;
+	top: 10%;
 	width: 960px;
 	font-size: 70px;
 	text-align: left;
@@ -144,7 +144,7 @@ body{
 .projectTitle{
 	position: absolute;
 	left: 50%;
-	top: 10%;
+	top: 18%;
 	margin-left: -480px;
 	width: 960px;
 	font-size: 90px;
