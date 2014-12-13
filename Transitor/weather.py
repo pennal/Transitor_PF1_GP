@@ -20,8 +20,10 @@ def getFormattedTemperature(temperature):
         elif int(decimalPart) > 76 and int(decimalPart) <= 99:
             intPart += 1
             decimalPart = 0
-
-        correctTemperature = str(intPart) + "." + str(decimalPart)
+        if decimalPart != 0:
+            correctTemperature = str(intPart) + "." + str(decimalPart)
+        else:
+            correctTemperature = str(intPart)
     else:
         correctTemperature = temperature
 
