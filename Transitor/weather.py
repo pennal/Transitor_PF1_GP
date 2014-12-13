@@ -1,5 +1,6 @@
 import common
 import json
+import datetime
 
 baseURL = 'http://api.openweathermap.org/data/2.5/forecast/daily?'
 
@@ -9,11 +10,14 @@ def getFormattedTemperature(temperature):
     temperature = str(temperature)
     if "." in temperature:
         intPart,decimalPart = temperature.split(".")
-        if int(decimalPart) > 1 or int(decimalPart) <= 25:
+        intPart = int(intPart)
+        decimalPart = int(decimalPart)
+
+        if int(decimalPart) > 1 and int(decimalPart) <= 25:
             decimalPart = 0
-        elif int(decimalPart) > 26 or int(decimalPart) <= 75:
+        elif int(decimalPart) > 26 and int(decimalPart) <= 75:
             decimalPart = 5
-        elif int(decimalPart) > 76 or int(decimalPart) <= 99:
+        elif int(decimalPart) > 76 and int(decimalPart) <= 99:
             intPart += 1
             decimalPart = 0
 
@@ -30,11 +34,14 @@ def prepareHTMLContent(data):
     #DEBUG: Encoded weather icon
     forecastCode = "<ul><li class=\"icon-sun\"></li></ul>"
 
+
+
     for i in range(0,len(data)):
+        dayName, dayNumber = datetime.datetime.fromtimestamp(int(data[i]["dt"])).strftime('%A %d').split(" ")
         dictOfValues = {
             "resultsNumber" : i + 1,
-            "dayName" : "SOMENAME",
-            "dayNumber" : "XX",
+            "dayName" : dayName,
+            "dayNumber" : dayNumber,
             "forecastCode" : forecastCode,
             "mainTemp" : data[i]["dayTemperature"],
             "humidity" : data[i]["humidity"],
