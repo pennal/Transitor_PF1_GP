@@ -1,12 +1,17 @@
-	<div id="arrivalItem" class="clearfix">
-		<div class="lineNumber">
-			<p class="minuti">{{ lineNumber }}</p>
-		</div>
-		<div class="mainArrival">
-			<p class="arrivalText">{{ arrivalName }}</p>
-			<p class="arrivalSub">{{ departureName }}</p>
-		</div>
-		<div class="complArrival">
-			<p class="minuti">{{ time }}</p>
-		</div>
-	</div>
+<div id="arrivalMain" class="clearfix">
+	<table>
+		<tr>
+			<td class="grey">Line:</td>
+			<td>{{ lineNumber }}</td>
+		</tr>
+		<tr>
+			<td class="grey">Direction: </td>
+			<td>{{ arrivalName }}</td>
+		</tr>
+		<tr>
+			<td class="grey">From:</td>
+			<td>{{ departureName }}</td>
+		</tr>
+	</table>
+	<div class="minuti">{{ time }}</div>
+</div>
