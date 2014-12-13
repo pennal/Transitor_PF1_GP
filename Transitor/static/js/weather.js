@@ -48,8 +48,8 @@ function sendWeatherReq (params, callback) {
 	}
 
 	// Build request
-	// xmlhttp.open("GET",'api/weather?'+params,true); PUT THIS BACK LATERRRR!!!
-	xmlhttp.open("GET",'pages/weather/weather.html?'+params,true);
+	xmlhttp.open("GET",'api/weather?'+params,true);
+	// xmlhttp.open("GET",'pages/weather/weather.html?'+params,true); //This is a test
 
 	// Show the loading bar
 	showProgressBar();
