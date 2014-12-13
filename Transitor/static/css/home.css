@@ -13,6 +13,6 @@
 }
 .weather{
 	background-color: #5fb249;
-	/*background-image: url(../images/arrivalBoard.png);*/
+	background-image: url(../images/weather.png);
 	background-size: cover;	
 }
