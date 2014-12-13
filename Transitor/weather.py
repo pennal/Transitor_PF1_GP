@@ -5,6 +5,25 @@ baseURL = 'http://api.openweathermap.org/data/2.5/forecast/daily?'
 
 weatherAPIKey = '970f1415d7c8305f158b25b13c3f1c24'
 
+def getFormattedTemperature(temperature):
+    temperature = str(temperature)
+    if "." in temperature:
+        intPart,decimalPart = temperature.split(".")
+        if int(decimalPart) > 1 or int(decimalPart) <= 25:
+            decimalPart = 0
+        elif int(decimalPart) > 26 or int(decimalPart) <= 75:
+            decimalPart = 5
+        elif int(decimalPart) > 76 or int(decimalPart) <= 99:
+            intPart += 1
+            decimalPart = 0
+
+        correctTemperature = str(intPart) + "." + str(decimalPart)
+    else:
+        correctTemperature = temperature
+
+    return correctTemperature
+
+
 def prepareHTMLContent(data):
     insideContent = ""
 
@@ -49,12 +68,12 @@ def getForecast(location):
         humidity = data["list"][i]["humidity"]
         pressure = data["list"][i]["pressure"]
         windSpeed = data["list"][i]["speed"]
-        dayTemperature = data["list"][i]["temp"]["day"]
-        eveningTemperature = data["list"][i]["temp"]["eve"]
-        maxTemperature = data["list"][i]["temp"]["max"]
-        minTemperature = data["list"][i]["temp"]["min"]
-        morningTemperature = data["list"][i]["temp"]["morn"]
-        nightTemperature = data["list"][i]["temp"]["night"]
+        dayTemperature = getFormattedTemperature(data["list"][i]["temp"]["day"])
+        eveningTemperature = getFormattedTemperature(data["list"][i]["temp"]["eve"])
+        maxTemperature = getFormattedTemperature(data["list"][i]["temp"]["max"])
+        minTemperature = getFormattedTemperature(data["list"][i]["temp"]["min"])
+        morningTemperature = getFormattedTemperature(data["list"][i]["temp"]["morn"])
+        nightTemperature = getFormattedTemperature(data["list"][i]["temp"]["night"])
 
         currentSituation = data["list"][i]["weather"][0]["main"]
 
