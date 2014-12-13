@@ -132,22 +132,32 @@ body{
 /*Config*/
 
 .welcome{
-	padding: 0;
-	margin: 0;
+	position: absolute;
+	left: 50%;
+	margin-left: -480px;
+	top: 0;
+	width: 960px;
 	font-size: 70px;
 	text-align: left;
 }
 
 .projectTitle{
-	padding: 0 0 100px 0;
-	margin: -40px 0 0 0;
+	position: absolute;
+	left: 50%;
+	top: 10%;
+	margin-left: -480px;
+	width: 960px;
 	font-size: 90px;
 	text-align: center;
 }
 
 #button, #loadedContent{
+	position: absolute;
+	top: 50%;
+	margin-top: -70px;
+	left: 50%;
+	margin-left: -480px;
 	width: 960px;
-	margin: 0 auto 0 auto;
 }
 
 .buttonSet1{
@@ -202,6 +212,7 @@ body{
 #p2pInputContainer{
 	position: absolute;
 	width: 100%;
+	min-width: 500px;
 	height: 100%;
 	padding: 0;
 	margin: 0;
@@ -211,17 +222,17 @@ body{
 }
 
 #p2pInputForm{
-	width: 50%;
-	min-width: 500px;
-	margin: 0 auto;
-	margin-top: 20vh;
+	position: absolute;
+	margin-left: 50%;
+	top: 50%;
+	margin-top: -63px;
 	display: block;
 	color: white;
 }
 
 #p2pInputContainer table{
 	height: 80%;
-	margin: 0 22%;
+	margin-left: -240px;
 	padding: 0px;
 }
 
@@ -426,6 +437,7 @@ body{
 #depBoardInputContainer, #weatherInputContainer{
 	position: absolute;
 	width: 100%;
+	min-width: 500px;
 	height: 100%;
 	padding: 0;
 	margin: 0;
@@ -435,17 +447,18 @@ body{
 }
 
 #depBoardInputForm, #weatherInputForm{
-	width: 50%;
-	min-width: 500px;
-	margin: 0 auto;
-	margin-top: 30vh;
+	position: absolute;
+	margin-left: 50%;
+	top: 50%;
+	margin-top: -63px;
 	display: block;
+	color: white;
 
 }
 
 #depBoardInputContainer table, #weatherInputForm table{
 	height: 80%;
-	margin: 0 22%;
+	margin-left: -240px;
 	padding: 0px;
 }
 
