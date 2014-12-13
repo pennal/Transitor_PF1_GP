@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import pointToPoint
 import tableBoard
+import weather
 from flask import request,make_response
 from flask import Flask #Flask is the base server. use 'sudo pip3 install Flask' to install
 import calendarExport
@@ -54,6 +55,15 @@ def doTBRequest():
 
     return tableBoard.getTableBoard(station)
 
+@app.route("/api/weather")
+def doWeatherRequest():
+    location = request.args.get('location')
+
+    return weather.getForecast(location)
+
+
+
+
 @app.route("/api/calendarExport")
 def exportFromCalendar():
     htmlPage = request.args.get('htmlPage')
@@ -65,6 +75,7 @@ def exportFromCalendar():
     response.headers['Content-Type'] = 'application/ics'
 
     return response
+
 
 
     #return calendarExport.downloadEventForCalendar(htmlPage)
