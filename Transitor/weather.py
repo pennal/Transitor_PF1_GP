@@ -6,8 +6,8 @@ baseURL = 'http://api.openweathermap.org/data/2.5/forecast/daily?'
 weatherAPIKey = '970f1415d7c8305f158b25b13c3f1c24'
 
 forecastDict = {
-    "200":"<ul><li class=\"basethundercloud\"></li><li class=\"icon-thunder\"></li></ul>", # Fino a 232
-    "300":"<ul><li class=\"basecloud\"></li><li class=\"icon-drizzle\"></li></ul>", # fino a 321
+    "200":"<ul><li class=\"basethundercloud\"></li><li class=\"icon-thunder\"></li></ul>",
+    "300":"<ul><li class=\"basecloud\"></li><li class=\"icon-drizzle\"></li></ul>",
     "301":"<ul><li class=\"basecloud\"></li><li class=\"icon-drizzle\"></li></ul>",
     "302":"<ul><li class=\"basecloud\"></li><li class=\"icon-drizzle\"></li></ul>",
     "310":"<ul><li class=\"basecloud\"></li><li class=\"icon-drizzle\"></li></ul>",
@@ -15,7 +15,7 @@ forecastDict = {
     "313":"<ul><li class=\"basecloud\"></li><li class=\"icon-drizzle\"></li></ul>",
     "314":"<ul><li class=\"basecloud\"></li><li class=\"icon-drizzle\"></li></ul>",
     "321":"<ul><li class=\"basecloud\"></li><li class=\"icon-drizzle\"></li></ul>",
-    "500":"<ul><li class=\"basecloud\"></li><li class=\"icon-rainy\"></li></ul>", # fino a 504
+    "500":"<ul><li class=\"basecloud\"></li><li class=\"icon-rainy\"></li></ul>",
     "501":"<ul><li class=\"basecloud\"></li><li class=\"icon-rainy\"></li></ul>",
     "502":"<ul><li class=\"basecloud\"></li><li class=\"icon-rainy\"></li></ul>",
     "503":"<ul><li class=\"basecloud\"></li><li class=\"icon-rainy\"></li></ul>",
@@ -25,7 +25,7 @@ forecastDict = {
     "521":"<ul><li class=\"basecloud\"></li><li class=\"icon-showers\"></li></ul>",
     "522":"<ul><li class=\"basecloud\"></li><li class=\"icon-showers\"></li></ul>",
     "531":"<ul><li class=\"basecloud\"></li><li class=\"icon-rainy\"></li></ul>",
-    "600":"<ul><li class=\"basecloud\"></li><li class=\"icon-snowy\"></li></ul>",# fino a 622
+    "600":"<ul><li class=\"basecloud\"></li><li class=\"icon-snowy\"></li></ul>",
     "601":"<ul><li class=\"basecloud\"></li><li class=\"icon-snowy\"></li></ul>",
     "602":"<ul><li class=\"basecloud\"></li><li class=\"icon-frosty\"></li></ul>",
     "611":"<ul><li class=\"basecloud\"></li><li class=\"icon-snowy\"></li></ul>",
@@ -35,7 +35,7 @@ forecastDict = {
     "620":"<ul><li class=\"basecloud\"></li><li class=\"icon-snowy\"></li></ul>",
     "621":"<ul><li class=\"basecloud\"></li><li class=\"icon-snowy\"></li></ul>",
     "622":"<ul><li class=\"basecloud\"></li><li class=\"icon-snowy\"></li></ul>",
-    "701":"<ul><li class=\"icon-mist\"></li></ul>", # fino a 781
+    "701":"<ul><li class=\"icon-mist\"></li></ul>",
     "711":"<ul><li class=\"icon-mist\"></li></ul>",
     "721":"<ul><li class=\"icon-mist\"></li></ul>",
     "731":"<ul><li class=\"icon-mist\"></li></ul>",
