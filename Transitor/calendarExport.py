@@ -43,7 +43,7 @@ def downloadEventForCalendar(htmlPage):
     soup = BeautifulSoup(htmlPage)
 
     # Get the contents of the hidden tag
-    hiddenInformation = soup.find_all('tr', attrs={'class': 'calData'})[0].find_all('td')
+    hiddenInformation = soup.find_all('td')
 
     listOfData = []
 
