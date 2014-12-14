@@ -546,6 +546,7 @@ body{
 	min-width: 250px;
 	min-height: 250px;
 	margin: 10px;
+	cursor: pointer;
 }
 
 .basicInfo{

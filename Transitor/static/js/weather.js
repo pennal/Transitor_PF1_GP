@@ -66,6 +66,7 @@ function getResults (theLocation) {
 	updateHashWithoutTriggeringChange('pages/weather/weatherInput.html?'+queryString);
 	sendWeatherReq(queryString, function(data){
 		replaceHTMLOfElement(resultsView, data);
+		setupClickListeners();
 		resultsView.css('display', 'block');
 		slideSearch(true);
 	})
@@ -176,11 +177,74 @@ function freezeArrows (freeze) {
 
 }
 
+// Function to set up click listeners on .weatherBox
+function setupClickListeners () {
+	$(".weatherBox").click(function(){
+		if ($(this).hasClass("expanded")) {
+			closeHiddenInfo($(this).children('.expandedInfo'));
+		}else{
+			expandHiddenInfo($(this).children('.expandedInfo'));
+		}
+	});
+}
+
+// Function to animate expanded tile
+function expandHiddenInfo (expandedInfoDiv) {
+	var viewHeight = expandedInfoDiv.height();
+	var viewWidth = expandedInfoDiv.width();
+
+	expandedInfoDiv.parent().addClass('expanded');
+
+	expandedInfoDiv.css({
+		height: '0',
+		width: '0',
+		overflow: 'hidden'
+	});
+
+	expandedInfoDiv.removeClass("hidden");
+
+	$(".weatherBox").not('.expanded').animate({
+			opacity: '0'
+		}, { duration: 250, queue: false, complete: function(){
+			$(".weatherBox").not('.expanded').addClass('hidden');
+				expandedInfoDiv.animate({
+					height: viewHeight,
+					width: viewWidth
+				}, { duration: 350, queue: false });
+			} 
+		});
+}
+
+function closeHiddenInfo (expandedInfoDiv){
+
+
+	$(".weatherBox").not('.expanded').removeClass('hidden');
+
+	expandedInfoDiv.animate({
+			height: '0',
+			width: '0'
+		}, { duration: 350, queue: false, complete: function(){
+			expandedInfoDiv.addClass("hidden");
+				
+				expandedInfoDiv.css({
+					height: '',
+					width: ''
+				})
+
+				$(".weatherBox").not('.expanded').animate({
+					opacity: '1'
+				}, { duration: 250, queue: false, complete: function(){
+					expandedInfoDiv.parent().removeClass('expanded');
+				} });
+			} 
+		});
+}
 
 // Helper function to see if a parameter is empty. Returns true if not empty
 function checkParamValues (param) {
 	return !(param==''||param==undefined||param==null);
 }
+
 
 // These are executed on page load *****************************************
 
