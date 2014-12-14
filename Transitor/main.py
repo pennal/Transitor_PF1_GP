@@ -2,7 +2,7 @@
 import pointToPoint
 import tableBoard
 import weather
-from flask import request,make_response
+from flask import request,make_response,abort
 from flask import Flask #Flask is the base server. use 'sudo pip3 install Flask' to install
 import calendarExport
 
@@ -37,7 +37,7 @@ def doPTPRequest():
 
     if possibleParameters[0][1] == "" or possibleParameters[1][1] == "":
         print("No departure or arrival given")
-        #TODO: SHould throw a 404 error or something like it
+        return abort(404)
 
     for i in range(2,len(possibleParameters)):
         if possibleParameters[i][1] == "" or possibleParameters[i][1] == '0':

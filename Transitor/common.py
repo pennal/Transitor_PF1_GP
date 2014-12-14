@@ -2,6 +2,7 @@ import requests         # Used to request the data from the APIs
 import json             # Used to pretty print the incoming JSON data
 import jinja2 #Used to substitute the tags in the html
 import os
+import flask
 
 # Base URL for the API
 apiURL = 'http://transport.opendata.ch/v1/'
@@ -37,8 +38,11 @@ def doRequest(urlForQuery):
     """
     #We trigger a false positive, as to go into the while loop
     hasTimedOut = True
+    # Error counter
+    errorCounter = 0
+
     #While the text returned is a timeout, continue trying
-    while hasTimedOut:
+    while hasTimedOut and errorCounter < 5:
         try:
             response = requests.get(urlForQuery)
             data = json.loads(response.text)
@@ -47,14 +51,21 @@ def doRequest(urlForQuery):
                 if "Connection timed out" in data["errors"][0]["message"]:
                     hasTimedOut = True
                     print("Connection timed out. Retrying...")
+                    errorCounter += 1
             else:
                 hasTimedOut = False
         except ConnectionError:
             print("ConnectionError: Check your internet connection, and retry")
-        except:
-            print("UnknownError: An unknown error has occured")
+            errorCounter += 1
+        except Exception as e:
+            print("UnknownError: An unknown error has occured: ", e)
+            errorCounter += 1
 
+    if errorCounter >= 5:
+        print("==> ERROR COUNTER REACHED ITS MAX")
+        return flask.abort(404)
 
+    errorCounter = 0
 
     # Convert incoming data to JSON, and return it
     return json.loads(response.text)
