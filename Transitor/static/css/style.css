@@ -281,8 +281,8 @@ body{
 	border: 1px solid black;
 	background-image: url(../images/arrowSubmit.png);
 	background-size: cover;
-	height: 44px;
-	width: 44px;
+	height: 42px;
+	width: 42px;
 	float: right;
 	margin-right: 20px;
 }
