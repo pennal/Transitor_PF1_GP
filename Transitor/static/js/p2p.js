@@ -431,7 +431,9 @@ function setUpClickOnCalButton () {
 
 		var queryString = '/api/calendarExport?htmlPage=';
 
-		var htmlContent = $(this).parents("#result").html();
+		var htmlContent = $(this).parents("tr").parent().children('.calData').html();
+
+		// console.log(htmlContent);
 
 		window.open(queryString+encodeURIComponent(htmlContent), '_blank');
 
