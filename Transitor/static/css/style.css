@@ -659,7 +659,7 @@ body{
 
 .expandedInfo table td:nth-child(3){
 	width: 200px;
-	padding-left: 100px;
+	padding-left: 50px;
 }
 
 .expandedInfo table td:nth-child(2), .expandedInfo table td:nth-child(4){
