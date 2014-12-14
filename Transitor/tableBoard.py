@@ -8,9 +8,8 @@ def deltaTime(timeOfDeparture):
     :return:(int)time left until departure
     """
 
-    a = datetime.datetime.now(pytz.timezone("Europe/Berlin"))
+    a = datetime.datetime.now()
     c = timeOfDeparture - a
-    datetime.datetime.utcnow().replace(tzinfo = pytz.timezone("Europe/Berlin"))
     res = divmod(c.days * 86400 + c.seconds, 60)
     if res[0] > 59: #More than an hour
             return str(res[0]//60) + 'h'
