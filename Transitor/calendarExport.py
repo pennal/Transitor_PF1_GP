@@ -37,6 +37,8 @@ def prettyPrintInformation(listOfEntries):
 def downloadEventForCalendar(htmlPage):
     htmlPage = urllib.parse.unquote(urllib.parse.unquote(htmlPage))
 
+    print(htmlPage)
+
     # DEBUG
     #htmlPage = open("/Users/Lucas/Desktop/resultHTMLBF.html").read()
 
@@ -63,8 +65,7 @@ def downloadEventForCalendar(htmlPage):
 
     intermediateStops = listOfData[8][1].replace("\t","")
 
-    intermediateStops = intermediateStops.replace("&","\n\n")
-    intermediateStops = intermediateStops.replace("%","\n")
+    intermediateStops = intermediateStops.replace("<","\n")
     intermediateStops = intermediateStops.replace("()","")
 
     if departurePlatform != "":

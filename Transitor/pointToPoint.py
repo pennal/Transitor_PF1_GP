@@ -68,7 +68,7 @@ def returnHTMLTable(data):
                         intermediateArrivalTime, intermediateArrivalDate = getDateAntTimeSplit(newData[connection]['arrival']["arrival"])
                         intermediateArrivalPlatform = newData[connection]["arrival"]['platform']
                         # 20:11: Lugano (3)
-                        hiddenIntermediateStops += intermediateArrivalTime + ": " + intermediateArrivalName + " (" + intermediateArrivalPlatform + ")&"
+                        hiddenIntermediateStops += intermediateArrivalTime + ": " + intermediateArrivalName + " (" + intermediateArrivalPlatform + ")<<"
                         templateVars = { "intermediateStationArrival" : intermediateArrivalName,
                                          "arrivalTimeStep":intermediateArrivalTime,
                                          "arrivalPlatform":intermediateArrivalPlatform
@@ -111,7 +111,7 @@ def returnHTMLTable(data):
                                          "departureTimeStep":intermediateDepartureTime,
                                          "departurePlatform":intermediateDeparturePlatform
                                          }
-                        hiddenIntermediateStops += intermediateDepartureTime + ": " + intermediateDepartureName + " (" + intermediateDeparturePlatform + ")%" + intermediateArrivalTime + ": " + intermediateArrivalName + " (" + intermediateArrivalPlatform + ")&"
+                        hiddenIntermediateStops += intermediateDepartureTime + ": " + intermediateDepartureName + " (" + intermediateDeparturePlatform + ") <" + intermediateArrivalTime + ": " + intermediateArrivalName + " (" + intermediateArrivalPlatform + ")<<"
                         outputText = common.jinjaSubstitution(templateVars,"transfersTemplateCombined.jinja")
 
                     transfersTag += outputText
@@ -120,7 +120,7 @@ def returnHTMLTable(data):
                 print("No Connections: ", e)
 
 
-
+        print(hiddenIntermediateStops)
 
         # Specify any input variables to the template as a dictionary.
         templateVars = {
