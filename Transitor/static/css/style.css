@@ -59,7 +59,7 @@ body{
 
 #contentDiv{
 	margin: 2.5% auto;
-	overflow: scroll;
+	overflow: auto;
 	width: 90%;
 	height: 90%;
 }
@@ -251,7 +251,7 @@ body{
 	margin: 0;
 	left: 0;
 	top: 0;
-	overflow: scroll;
+	overflow: auto;
 }
 
 #p2pInputForm{
@@ -327,7 +327,7 @@ body{
 #resultsView{
 	height: 100%;
 	width: 100%;
-	overflow: scroll;
+	overflow: auto;
 	position: absolute;
 	left: 150%;
 	margin-left: -25%;
@@ -490,7 +490,7 @@ body{
 	margin: 0;
 	left: 0;
 	top: 0;
-	overflow: scroll;
+	overflow: auto;
 }
 
 #depBoardInputForm, #weatherInputForm{
