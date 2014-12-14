@@ -59,7 +59,7 @@ body{
 
 #contentDiv{
 	margin: 2.5% auto;
-	overflow: scroll;
+	/*overflow: scroll;*/
 	width: 90%;
 	height: 90%;
 }
