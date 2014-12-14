@@ -198,6 +198,39 @@ body{
 	display: inline-block;
 }
 
+@media (max-width: 980px) {
+	.welcome{
+		left: 10%;
+		margin-left: 0px;
+	}
+	#button, #loadedContent{
+		position: absolute;
+		top: 50%;
+		margin-top: -70px;
+		left: 10%;
+		margin-left: 0px;
+		width: 80%;
+		padding-bottom: 25%;
+	}
+	.box {
+		width: 31%;
+		margin: 1%;
+	}
+	.front.overlay{
+	    font-size: 15pt;
+	}
+}
+
+@media (max-width: 638px) {
+	.front.overlay{
+        height: 20%;
+	}
+	.front.overlay:before {
+		height: 20%;
+	}
+
+}
+
 
 /****************************************************/
 /*P2P input page*/
@@ -273,6 +306,19 @@ body{
 	text-decoration: none;
 }
 
+@media (max-width: 480px) {
+	.inputPageTitle{
+		font-size: 30px;
+	}
+	.p2pInput{
+		width: 300px;
+		line-height: 1.5em;
+	}
+	.inputButton{
+		height: 33px;
+		width: 33px;
+	}
+}
 
 
 /****************************************************/
@@ -467,6 +513,16 @@ body{
 	line-height: 2em;
 	font-size: 18px;
 	color: black; 
+}
+
+@media (max-width: 480px) {
+	.inputPageTitle{
+		font-size: 30px;
+	}
+	.depBoardInput, .weatherInput{
+		width: 300px;
+		line-height: 1.5em;
+	}
 }
 
 

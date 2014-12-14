@@ -1,6 +1,7 @@
 /*Home page*/
 
 /*BOX SPECIFICS*/
+
 .p2pBox{
 	background: #ca4431;
 	background-image: url(../images/p2p1.png);
@@ -15,4 +16,22 @@
 	background-color: #5fb249;
 	background-image: url(../images/weather.png);
 	background-size: cover;	
+}
+
+@media (max-width: 980px) {
+	.p2pBox{
+		background-size: 100%;
+	    background-repeat: no-repeat;
+	    background-position: center;
+	}
+	.arrivalBoard{
+		background-size: 100%;
+	    background-repeat: no-repeat;
+	    background-position: center;
+	}
+	.weather{
+		background-size: 100%;
+	    background-repeat: no-repeat;
+	    background-position: center;	
+	}
 }
