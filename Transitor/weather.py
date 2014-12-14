@@ -1,9 +1,7 @@
 import common
-import json
 import datetime
 
 baseURL = 'http://api.openweathermap.org/data/2.5/forecast/daily?'
-
 weatherAPIKey = '970f1415d7c8305f158b25b13c3f1c24'
 
 def getFormattedTemperature(temperature):
@@ -15,9 +13,9 @@ def getFormattedTemperature(temperature):
 
         if int(decimalPart) > 1 and int(decimalPart) <= 25:
             decimalPart = 0
-        elif int(decimalPart) > 26 and int(decimalPart) <= 75:
+        elif int(decimalPart) > 25 and int(decimalPart) <= 75:
             decimalPart = 5
-        elif int(decimalPart) > 76 and int(decimalPart) <= 99:
+        elif int(decimalPart) > 75 and int(decimalPart) <= 99:
             intPart += 1
             decimalPart = 0
         if decimalPart != 0:
@@ -60,7 +58,8 @@ def prepareHTMLContent(data):
         }
         insideContent += common.jinjaSubstitution(dictOfValues,"weatherResults.jinja")
     lastDict = {
-        "weatherResults" : insideContent
+        "weatherResults" : insideContent,
+        "location" : data[0]["locationOfWeather"]
     }
 
     return common.jinjaSubstitution(lastDict,"weatherMain.jinja")
@@ -71,6 +70,7 @@ def getForecast(location):
     print(currentWeatherURL)
     data = common.doRequest(currentWeatherURL)
     forecast = []
+    locationOfWeather = data["city"]["name"] + ", " + data["city"]["country"]
     for i in range(0,len(data["list"])):
         clouds = data["list"][i]["clouds"]
         dt = data["list"][i]["dt"]
@@ -86,6 +86,7 @@ def getForecast(location):
 
         currentSituation = data["list"][i]["weather"][0]["main"]
 
+
         forecast.append({
             "clouds" : clouds,
             "dt": dt,
@@ -98,7 +99,7 @@ def getForecast(location):
             "minTemperature" : minTemperature,
             "morningTemperature" : morningTemperature,
             "nightTemperature" : nightTemperature,
-            "currentSituation" : currentSituation
+            "currentSituation" : currentSituation,
+            "locationOfWeather" : locationOfWeather
         })
-
     return prepareHTMLContent(forecast)

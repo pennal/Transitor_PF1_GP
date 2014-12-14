@@ -1,6 +1,4 @@
 import common
-import datetime
-import json
 
 def getDateAntTimeSplit(inputString):
     splitInputData = inputString.split("T")

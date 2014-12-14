@@ -1,7 +1,6 @@
 from icalendar import Calendar, Event
 from datetime import datetime
 from bs4 import BeautifulSoup  # Pretty self explanatory...
-from prettytable import PrettyTable
 import urllib
 
 
