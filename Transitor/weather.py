@@ -1,5 +1,6 @@
 import common
 import datetime
+import countriesDict
 
 baseURL = 'http://api.openweathermap.org/data/2.5/forecast/daily?'
 weatherAPIKey = '970f1415d7c8305f158b25b13c3f1c24'
@@ -70,7 +71,7 @@ def getForecast(location):
     print(currentWeatherURL)
     data = common.doRequest(currentWeatherURL)
     forecast = []
-    locationOfWeather = data["city"]["name"] + ", " + data["city"]["country"]
+    locationOfWeather = data["city"]["name"] + ", " + countriesDict.getExtendedCountryName(data["city"]["country"])
     for i in range(0,len(data["list"])):
         clouds = data["list"][i]["clouds"]
         dt = data["list"][i]["dt"]
