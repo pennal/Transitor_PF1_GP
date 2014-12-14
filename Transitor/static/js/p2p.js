@@ -111,7 +111,7 @@ function sendP2PTransitReq (params, callback) {
 	  }else if(xmlhttp.readyState==4){
 	  	hideProgressBar();
 	  	// There was an error - display an error message
-	  	callback(additionalCode+"<span style='display:block; text-align: center; color: white;'>There was an error. Please check your input and try again later.</span>");
+	  	callback(backButtonCode+"<span style='display:block; text-align: center; color: white;'>There was an error. Please check your input and try again later.</span>");
 	  }
 
 	}
