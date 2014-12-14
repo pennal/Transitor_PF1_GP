@@ -299,7 +299,7 @@ if (objLength(getUrlParams()) > 0) {
 // Autocomplete setup
 $("input[name='weatherLocation']").autocomplete({
 	source: function (request, response) {
-		$.get('http://transport.opendata.ch/v1/locations', {query:request.term, type:'address'}, function(data) {
+		$.get('http://transport.opendata.ch/v1/locations', {query:request.term}, function(data) {
 			response($.map(data.stations, function(station) {
 				return {
 					label: station.name,
