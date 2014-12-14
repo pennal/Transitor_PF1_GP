@@ -413,7 +413,7 @@ body{
 
 .transfer{
 	padding-bottom: 20px;
-	border-bottom: 0.5px solid black;
+	border-bottom: 1px solid grey;
 }
 .duration{
 	text-align: right;
@@ -614,8 +614,7 @@ body{
 }
 
 .basicInfo{
-	float: left;
-	margin: 0px;
+	margin: 0 auto;
 	width: 250px;
 	height: 250px;
 }
@@ -642,30 +641,29 @@ body{
 }
 
 .expandedInfo{
-	width: 540px;
-	height: 510px;
-	float: right;
+	width: 810px;
+	height: 260px;
+	margin: 0 auto;
 }
 
 .expandedInfo table{
 	position: relative;
-	top: 50%;
-	margin-top: -210px;
-	margin-left: 50px;
+	margin: 0 auto;
 	font-size: 30px;
 }
 
 .expandedInfo table td:first-child{
-	/*font-size: 10px;*/
-	width: 0px;
-	/*text-align: right;*/
+	width: 200px;
 }
 
-.expandedInfo table td:nth-child(2){
-	width: 250px;
-}
 .expandedInfo table td:nth-child(3){
+	width: 200px;
+	padding-left: 100px;
+}
+
+.expandedInfo table td:nth-child(2), .expandedInfo table td:nth-child(4){
 	text-align: right;
 }
+
 /***************************************************
 /***************************************************
