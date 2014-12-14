@@ -52,19 +52,23 @@ def returnHTMLTable(data):
         departurePlatform = data["connections"][i]["from"]["platform"]
         arrivalPlatform = data["connections"][i]["to"]["platform"]
 
+        hiddenIntermediateStops = ""
 
         transfersTag = ""
         if len(data["connections"][i]["sections"]) != 1:
             try:
                 newData = data["connections"][i]["sections"]
+
+
+
                 for connection in range(0,len(newData)):
                     if connection == 0:
                         # we only need the arrival
                         intermediateArrivalName = newData[connection]["arrival"]['station']["name"]
                         intermediateArrivalTime, intermediateArrivalDate = getDateAntTimeSplit(newData[connection]['arrival']["arrival"])
                         intermediateArrivalPlatform = newData[connection]["arrival"]['platform']
-
-
+                        # 20:11: Lugano (3)
+                        hiddenIntermediateStops += intermediateArrivalTime + ": " + intermediateArrivalName + " (" + intermediateArrivalPlatform + ")&"
                         templateVars = { "intermediateStationArrival" : intermediateArrivalName,
                                          "arrivalTimeStep":intermediateArrivalTime,
                                          "arrivalPlatform":intermediateArrivalPlatform
@@ -87,7 +91,7 @@ def returnHTMLTable(data):
                                          "departureTimeStep":intermediateDepartureTime,
                                          "departurePlatform":intermediateDeparturePlatform
                                          }
-
+                        hiddenIntermediateStops += intermediateDepartureTime + ": " + intermediateDepartureName + " (" + intermediateDeparturePlatform + ")"
                         outputText = common.jinjaSubstitution(templateVars,"transfersTemplateDeparture.jinja")
 
                     else:
@@ -107,13 +111,13 @@ def returnHTMLTable(data):
                                          "departureTimeStep":intermediateDepartureTime,
                                          "departurePlatform":intermediateDeparturePlatform
                                          }
-
+                        hiddenIntermediateStops += intermediateDepartureTime + ": " + intermediateDepartureName + " (" + intermediateDeparturePlatform + ")%" + intermediateArrivalTime + ": " + intermediateArrivalName + " (" + intermediateArrivalPlatform + ")&"
                         outputText = common.jinjaSubstitution(templateVars,"transfersTemplateCombined.jinja")
 
                     transfersTag += outputText
 
-            except:
-                print("No Connections")
+            except Exception as e:
+                print("No Connections: ", e)
 
 
 
@@ -129,7 +133,8 @@ def returnHTMLTable(data):
              "arrivalDate" : arrivalDate,
              "departurePlatform":departurePlatform,
              "arrivalPlatform":arrivalPlatform,
-             "duration": duration
+             "duration": duration,
+             "intermediateStops" : hiddenIntermediateStops
         }
 
 

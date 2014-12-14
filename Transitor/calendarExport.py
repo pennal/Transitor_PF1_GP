@@ -43,7 +43,7 @@ def downloadEventForCalendar(htmlPage):
     soup = BeautifulSoup(htmlPage)
 
     # Get the contents of the hidden tag
-    hiddenInformation = soup.find_all('tr', attrs={'class': 'hidden'})[0].find_all('td')
+    hiddenInformation = soup.find_all('tr', attrs={'class': 'calData'})[0].find_all('td')
 
     listOfData = []
 
@@ -61,19 +61,28 @@ def downloadEventForCalendar(htmlPage):
     departurePlatform = listOfData[6][1]
     arrivalPlatform = listOfData[7][1]
 
+    intermediateStops = listOfData[8][1].replace("\t","")
 
-    transfersList = soup.find_all('tr')[4:-1]
+    intermediateStops = intermediateStops.replace("&","\n\n")
+    intermediateStops = intermediateStops.replace("%","\n")
+    intermediateStops = intermediateStops.replace("()","")
 
-    correctTransferInfo = []
-    for entry in range(0,len(transfersList)):
-        trEntries = transfersList[entry].find_all('td')
-        for n in range(0,len(trEntries)):
-            trEntries[n] = trEntries[n].text
-        correctTransferInfo.append(trEntries)
+    if departurePlatform != "":
+        stringForDepPlatform = "(" + departurePlatform + ")"
+    else:
+        stringForDepPlatform = ""
 
-    informationString = prettyPrintInformation(correctTransferInfo)
+    if arrivalPlatform != "":
+        stringForArrPlatform = "(" + arrivalPlatform + ")"
+    else:
+        stringForArrPlatform = ""
 
-    print(informationString)
+    intermediateStops = departureTime + ": " + stationFrom + " " + stringForDepPlatform + "\n" + intermediateStops
+
+    intermediateStops += arrivalTime + ": " + stationTo + " " + stringForArrPlatform + ""
+    print(intermediateStops)
+
+
 
 
     cal = Calendar()
@@ -101,13 +110,10 @@ def downloadEventForCalendar(htmlPage):
     event.add('summary', summaryString)
     event.add('dtstart', datetime(splitDate[2],splitDate[1],splitDate[0],splitTime[0],splitTime[1],0))
     event.add('dtend', datetime(splitArrivalDate[2],splitArrivalDate[1],splitArrivalDate[0],splitArrivalTime[0],splitArrivalTime[1],0))
-    event.add('description', informationString)
+    event.add('description', intermediateStops)
     event['uid'] = datetime.now().strftime('%s')
     event.add('priority', 5)
     cal.add_component(event)
 
 
     return cal.to_ical()
-
-
-#print(downloadEventForCalendar(""))
