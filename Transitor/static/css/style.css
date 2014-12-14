@@ -508,7 +508,7 @@ body{
 }
 
 /***************************************************
-/* Weather input -- See arrival board input */
+/* Weather input -- See arrival departure input */
 
 /***************************************************
 /* Weather */
@@ -570,14 +570,10 @@ body{
 	height: 100px;
 	text-align: center;
 	margin: 0 auto;
-	/*height: 10em;*/
 }
 
 .degree{
 	padding-top: 120px;
-	/*width: 250px;*/
-	/*height: 125px;*/
-	/*padding-left: 20px;*/
 	font-size: 60px;
 	text-align: center;
 }
@@ -593,15 +589,12 @@ body{
 	width: 540px;
 	height: 510px;
 	float: right;
-	/*margin: 10px;*/
-	/*background-color: red;*/
 }
 
 .expandedInfo table{
 	position: relative;
 	top: 50%;
 	margin-top: -210px;
-	/*left: 50%;*/
 	margin-left: 50px;
 	font-size: 30px;
 }
