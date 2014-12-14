@@ -513,6 +513,14 @@ body{
 /***************************************************
 /* Weather */
 
+.weatherTitle{
+	padding: 0 100px;
+	margin: -10px;
+	text-align: left;
+	font-size: 40px;
+	color: white;
+}
+
 #weatherContent{
 	position: absolute;
 	top: 50%;
@@ -569,7 +577,7 @@ body{
 	padding-top: 120px;
 	/*width: 250px;*/
 	/*height: 125px;*/
-	padding-left: 20px;
+	/*padding-left: 20px;*/
 	font-size: 60px;
 	text-align: center;
 }
