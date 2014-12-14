@@ -1,4 +1,6 @@
 var resultsView = $('#resultsView')
+var expandedInfoPosition;
+
 var backButtonCode = "<a id=\"backButton\" href=\"javascript:slideSearch(false);\"></a>\n";
 
 // Gets all the form's values and submits them. Also converts the values into the appropriate format
@@ -195,6 +197,15 @@ function expandHiddenInfo (expandedInfoDiv) {
 
 	expandedInfoDiv.parent().addClass('expanded');
 
+	expandedInfoPosition = expandedInfoDiv.parent().position();
+
+	expandedInfoDiv.parent().css({
+		position: 'absolute',
+		left: expandedInfoPosition.left,
+		top: expandedInfoPosition.top,
+		'z-index': '10000'
+	});
+
 	expandedInfoDiv.css({
 		height: '0',
 		width: '0',
@@ -204,15 +215,23 @@ function expandHiddenInfo (expandedInfoDiv) {
 	expandedInfoDiv.removeClass("hidden");
 
 	$(".weatherBox").not('.expanded').animate({
-			opacity: '0'
+		opacity: '0'
+	}, { duration: 250, queue: false, complete: function(){
+
+		expandedInfoDiv.parent().animate({
+			top: '0',
+			left: '0'
 		}, { duration: 250, queue: false, complete: function(){
 			$(".weatherBox").not('.expanded').addClass('hidden');
-				expandedInfoDiv.animate({
-					height: viewHeight,
-					width: viewWidth
-				}, { duration: 350, queue: false });
-			} 
-		});
+			expandedInfoDiv.animate({
+				height: viewHeight,
+				width: viewWidth
+			}, { duration: 350, queue: false });
+		}});
+		
+		} 
+	});
+
 }
 
 function closeHiddenInfo (expandedInfoDiv){
@@ -231,11 +250,24 @@ function closeHiddenInfo (expandedInfoDiv){
 					width: ''
 				})
 
-				$(".weatherBox").not('.expanded').animate({
-					opacity: '1'
+				expandedInfoDiv.parent().animate({
+					top: expandedInfoPosition.top,
+					left: expandedInfoPosition.left
 				}, { duration: 250, queue: false, complete: function(){
-					expandedInfoDiv.parent().removeClass('expanded');
-				} });
+					expandedInfoDiv.parent().css({
+						position: '',
+						left: '',
+						top: '',
+						'z-index': ''
+					});
+					$(".weatherBox").not('.expanded').animate({
+						opacity: '1'
+					}, { duration: 250, queue: false, complete: function(){
+						expandedInfoDiv.parent().removeClass('expanded');
+						} }
+					);
+					} 
+				});
 			} 
 		});
 }
