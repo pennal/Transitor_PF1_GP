@@ -435,7 +435,7 @@ function setUpClickOnCalButton () {
 
 		// console.log(htmlContent);
 
-		window.open(queryString+encodeURIComponent(htmlContent), '_blank');
+		window.open(queryString+encodeURIComponent(htmlContent.trim()), '_blank');
 
 	});
 }
