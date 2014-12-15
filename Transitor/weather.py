@@ -1,9 +1,9 @@
 import common
 import datetime
 import countriesDict
+from pygeocoder import Geocoder
 
-baseURL = 'http://api.openweathermap.org/data/2.5/forecast/daily?'
-weatherAPIKey = '970f1415d7c8305f158b25b13c3f1c24'
+baseURL = 'https://api.forecast.io/forecast/e59201f23f3889e65c456b9903db3309/'
 
 forecastDict = {
     "200":"<ul><li class=\"basethundercloud\"></li><li class=\"icon-thunder\"></li></ul>",
@@ -98,25 +98,24 @@ def getFormattedTemperature(temperature):
 def prepareHTMLContent(data):
     insideContent = ""
 
-    for i in range(0,len(data)):
-        dayName, dayNumber = datetime.datetime.fromtimestamp(int(data[i]["dt"])).strftime('%A %d').split(" ")
+    for i in range(0,6):
+        dayName, dayNumber = datetime.datetime.fromtimestamp(data[i]["dt"]).strftime('%A %d').split(" ")
+
         dictOfValues = {
             "resultsNumber" : i + 1,
             "dayName" : dayName,
             "dayNumber" : dayNumber,
             "forecastCode" : data[i]["forecastId"],
-            "mainTemp" : data[i]["dayTemperature"],
-            "humidity" : data[i]["humidity"],
+            "mainTemp" : getFormattedTemperature((float(data[i]["maxTemperature"]) + float(data[i]["minTemperature"]))/2),
+            "humidity" : str(int(float(data[i]["humidity"])*100)),
             "pressure" : data[i]["pressure"],
             "windSpeed" : data[i]["windSpeed"],
-            "dayTemp" : data[i]["dayTemperature"],
-            "eveningTemp" : data[i]["eveningTemperature"],
-            "Sunrise" : "REMOVE",
-            "Sunset" : "REMOVE",
+            "apparentTemperatureMax" : data[i]["apparentTemperatureMax"],
+            "apparentTemperatureMin" : data[i]["apparentTemperatureMin"],
             "maxTemp" : data[i]["maxTemperature"],
             "minTemp" : data[i]["minTemperature"],
-            "morningTemp" : data[i]["morningTemperature"],
-            "nightTemp" : data[i]["nightTemperature"]
+            "precipitationProbability" : data[i]["precipitationProbability"],
+            "precipitationIntensity" : "{0:.2f}".format(float(data[i]["precipitationIntensity"]))
         }
         insideContent += common.jinjaSubstitution(dictOfValues,"weatherResults.jinja")
     lastDict = {
@@ -128,42 +127,54 @@ def prepareHTMLContent(data):
 
 
 def getForecast(location):
-    currentWeatherURL = baseURL + "q=" + location + "&units=metric&cnt=6"
-    print(currentWeatherURL)
+
+
+    results = Geocoder.geocode(location)
+    print(results[0].coordinates)
+
+    currentWeatherURL = baseURL + str(results[0].coordinates[0]) + "," + str(results[0].coordinates[1]) + "?units=si"
+
     data = common.doRequest(currentWeatherURL)
     forecast = []
-    locationOfWeather = data["city"]["name"] + ", " + countriesDict.getExtendedCountryName(data["city"]["country"])
-    for i in range(0,len(data["list"])):
-        weatherId = str(data["list"][i]["weather"][0]["id"])
-        clouds = data["list"][i]["clouds"]
-        dt = data["list"][i]["dt"]
-        humidity = data["list"][i]["humidity"]
-        pressure = data["list"][i]["pressure"]
-        windSpeed = data["list"][i]["speed"]
-        dayTemperature = getFormattedTemperature(data["list"][i]["temp"]["day"])
-        eveningTemperature = getFormattedTemperature(data["list"][i]["temp"]["eve"])
-        maxTemperature = getFormattedTemperature(data["list"][i]["temp"]["max"])
-        minTemperature = getFormattedTemperature(data["list"][i]["temp"]["min"])
-        morningTemperature = getFormattedTemperature(data["list"][i]["temp"]["morn"])
-        nightTemperature = getFormattedTemperature(data["list"][i]["temp"]["night"])
+    locationOfWeather = results.formatted_address.split(",")[0] + "," + countriesDict.getExtendedCountryName(results.formatted_address.split(",")[1])
 
-        currentSituation = data["list"][i]["weather"][0]["main"]
+    for i in range(0,len(data["daily"]["data"])):
+        currentSituation = data["daily"]["data"][i]["icon"]
+        weatherId = currentSituation
+        #weatherId = str(data["list"][i]["weather"][0]["id"]) # WUT?
+        clouds = data["daily"]["data"][i]["cloudCover"]
+        dt = data["daily"]["data"][i]["time"]
+        humidity = data["daily"]["data"][i]["humidity"]
+        pressure = data["daily"]["data"][i]["pressure"]
+        windSpeed = data["daily"]["data"][i]["windSpeed"]
+        apparentTemperatureMax = getFormattedTemperature(data["daily"]["data"][i]["apparentTemperatureMax"])
+        apparentTemperatureMin = getFormattedTemperature(data["daily"]["data"][i]["apparentTemperatureMin"])
+        maxTemperature = getFormattedTemperature(data["daily"]["data"][i]["temperatureMax"])
+        minTemperature = getFormattedTemperature(data["daily"]["data"][i]["temperatureMin"])
+
+        precipitationProbability = data["daily"]["data"][i]["precipProbability"]
+        precipitationIntensity = data["daily"]["data"][i]["precipIntensity"]
+
+
 
 
         forecast.append({
-            "forecastId" : forecastDict[weatherId],
+            "forecastId" : forecastDict["802"],
             "clouds" : clouds,
             "dt": dt,
             "humidity" : humidity,
             "pressure" : pressure,
             "windSpeed" : windSpeed,
-            "dayTemperature" : dayTemperature,
-            "eveningTemperature" : eveningTemperature,
+            "apparentTemperatureMax" : apparentTemperatureMax,
+            "apparentTemperatureMin" : apparentTemperatureMin,
             "maxTemperature" : maxTemperature,
             "minTemperature" : minTemperature,
-            "morningTemperature" : morningTemperature,
-            "nightTemperature" : nightTemperature,
+            "precipitationProbability" : precipitationProbability,
+            "precipitationIntensity" : precipitationIntensity,
             "currentSituation" : currentSituation,
             "locationOfWeather" : locationOfWeather
         })
     return prepareHTMLContent(forecast)
+
+
+#print(getForecast("Lugano"))

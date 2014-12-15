@@ -1,6 +1,5 @@
 import common
 import datetime
-import pytz
 
 def deltaTime(timeOfDeparture):
     """
