@@ -21,6 +21,12 @@ forecastDict = {
     "tornado":"<ul><li class=\"windyraincloud\"></li><li class=\"icon-windyrain\"></li></ul>",
 }
 
+def getCorrectIconForForecast(iconName):
+    try:
+        return forecastDict[iconName]
+    except:
+        return ""
+
 def getFormattedTemperature(temperature):
     temperature = str(temperature)
     if "." in temperature:
@@ -55,7 +61,7 @@ def prepareHTMLContent(data):
             "resultsNumber" : i + 1,
             "dayName" : dayName,
             "dayNumber" : dayNumber,
-            "forecastCode" : data[i]["forecastId"],
+            "forecastCode" : getCorrectIconForForecast(data[i]["forecastId"]),
             "mainTemp" : getFormattedTemperature((float(data[i]["maxTemperature"]) + float(data[i]["minTemperature"]))/2),
             "humidity" : str(int(float(data[i]["humidity"])*100)),
             "pressure" : data[i]["pressure"],
@@ -64,7 +70,7 @@ def prepareHTMLContent(data):
             "apparentTemperatureMin" : data[i]["apparentTemperatureMin"],
             "maxTemp" : data[i]["maxTemperature"],
             "minTemp" : data[i]["minTemperature"],
-            "precipitationProbability" : data[i]["precipitationProbability"],
+            "precipitationProbability" : str(int(float(data[i]["precipitationProbability"]*100))),
             "precipitationIntensity" : "{0:.2f}".format(float(data[i]["precipitationIntensity"]))
         }
         insideContent += common.jinjaSubstitution(dictOfValues,"weatherResults.jinja")
@@ -86,12 +92,12 @@ def getForecast(location):
 
     data = common.doRequest(currentWeatherURL)
     forecast = []
-    locationOfWeather = results.formatted_address.split(",")[0] + "," + countriesDict.getExtendedCountryName(results.formatted_address.split(",")[1])
+    locationOfWeather = results.formatted_address.split(",")[0] + ", " + countriesDict.getExtendedCountryName(results.formatted_address.split(",")[1])
 
     for i in range(0,len(data["daily"]["data"])):
         currentSituation = data["daily"]["data"][i]["icon"]
-        weatherId = currentSituation
-        #weatherId = str(data["list"][i]["weather"][0]["id"]) # WUT?
+        weatherId = data["daily"]["data"][i]["icon"]
+
         clouds = data["daily"]["data"][i]["cloudCover"]
         dt = data["daily"]["data"][i]["time"]
         humidity = data["daily"]["data"][i]["humidity"]
@@ -104,27 +110,23 @@ def getForecast(location):
 
         precipitationProbability = data["daily"]["data"][i]["precipProbability"]
         precipitationIntensity = data["daily"]["data"][i]["precipIntensity"]
-
-
-
-
         forecast.append({
-            "forecastId" : forecastDict["802"],
-            "clouds" : clouds,
-            "dt": dt,
-            "humidity" : humidity,
-            "pressure" : pressure,
-            "windSpeed" : windSpeed,
-            "apparentTemperatureMax" : apparentTemperatureMax,
-            "apparentTemperatureMin" : apparentTemperatureMin,
-            "maxTemperature" : maxTemperature,
-            "minTemperature" : minTemperature,
-            "precipitationProbability" : precipitationProbability,
-            "precipitationIntensity" : precipitationIntensity,
-            "currentSituation" : currentSituation,
-            "locationOfWeather" : locationOfWeather
-        })
+        "forecastId" : weatherId,
+        "clouds" : clouds,
+        "dt": dt,
+        "humidity" : humidity,
+        "pressure" : pressure,
+        "windSpeed" : windSpeed,
+        "apparentTemperatureMax" : apparentTemperatureMax,
+        "apparentTemperatureMin" : apparentTemperatureMin,
+        "maxTemperature" : maxTemperature,
+        "minTemperature" : minTemperature,
+        "precipitationProbability" : precipitationProbability,
+        "precipitationIntensity" : precipitationIntensity,
+        "locationOfWeather" : locationOfWeather,
+        "currentSituation" : currentSituation
+    })
     return prepareHTMLContent(forecast)
 
 
-#print(getForecast("Lugano"))
+    #print(getForecast("Lugano"))
