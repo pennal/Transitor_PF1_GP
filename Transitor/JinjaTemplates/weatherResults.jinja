@@ -12,22 +12,22 @@
         <table>
 
             <tr>
+                <td class="grey">Apparent Min</td>
+                <td>{{ apparentTemperatureMin }}° C</td>
                 <td class="grey">Min</td>
                 <td>{{ minTemp }}° C</td>
-                <td class="grey">Evening</td>
-                <td>{{ eveningTemp }}° C</td>
             </tr>
             <tr>
+                <td class="grey">Apparent Max</td>
+                <td>{{ apparentTemperatureMax }}° C</td>
                 <td class="grey">Max</td>
                 <td>{{ maxTemp }}° C</td>
-                <td class="grey">Morning</td>
-                <td>{{ morningTemp }}° C</td>
             </tr>
             <tr>
-                <td class="grey">Day</td>
-                <td>{{ dayTemp }}° C</td>
-                <td class="grey">Night</td>
-                <td>{{ nightTemp }}° C</td>
+                <td class="grey">Rain Intensity</td>
+                <td>{{ precipitationIntensity }} mm/h</td>
+                <td class="grey">Rain Prob.</td>
+                <td>{{ precipitationProbability }} %</td>
             </tr>
             <tr>
                 <td class="grey">Humidity</td>
@@ -37,10 +37,10 @@
             </tr>
             <tr>
                 <td class="grey">Wind Speed</td>
-                <td>{{ windSpeed }} mps</td>
-
-
+                <td>{{ windSpeed }} m/s</td>
             </tr>
+            
         </table>
     </div>
 </div>
+

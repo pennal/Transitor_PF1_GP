@@ -236,6 +236,7 @@ short2long = {
     "UA":"Ukraine",
     "AE":"United Arab Emirates",
     "GB":"United Kingdom",
+    "UK":"United Kingdom",
     "US":"United States",
     "UM":"United States Minor Outlying Islands",
     "UY":"Uruguay",
@@ -254,6 +255,6 @@ short2long = {
 
 def getExtendedCountryName(acronym):
     try:
-        return short2long[acronym]
+        return short2long[acronym.strip()]
     except:
         return acronym
