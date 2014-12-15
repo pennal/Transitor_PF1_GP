@@ -160,16 +160,6 @@ body{
 	width: 960px;
 }
 
-.buttonSet1{
-	width: 640px;
-	float: left;
-}
-
-.buttonSet2{
-	width: 320px;
-	float: right;
-}
-
 .box {
 	box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.3);
 	float: left;
@@ -203,6 +193,7 @@ body{
 		left: 10%;
 		margin-left: 0px;
 	}
+
 	#button, #loadedContent{
 		position: absolute;
 		top: 50%;
@@ -212,10 +203,12 @@ body{
 		width: 80%;
 		padding-bottom: 25%;
 	}
+
 	.box {
 		width: 31%;
 		margin: 1%;
 	}
+
 	.front.overlay{
 	    font-size: 15pt;
 	}
@@ -225,6 +218,7 @@ body{
 	.front.overlay{
         height: 20%;
 	}
+
 	.front.overlay:before {
 		height: 20%;
 	}
@@ -310,10 +304,12 @@ body{
 	.inputPageTitle{
 		font-size: 30px;
 	}
+
 	.p2pInput{
 		width: 300px;
 		line-height: 1.5em;
 	}
+
 	.inputButton{
 		height: 33px;
 		width: 33px;
@@ -332,6 +328,7 @@ body{
 	left: 150%;
 	margin-left: -25%;
 }
+
 .inputField{
 	padding: 50px;
 	margin: 0 auto;
@@ -369,40 +366,50 @@ body{
 	box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);
 	position: relative;
 }
+
 #result table{
 	padding: 20px;
 	font-size: 30px;
 	border-spacing: 0px 20px;
 	width: 100%;
 }
+
 #result table td:first-child{
 	width: 15%;
 }
+
 #result table td:nth-child(2){
 	width: 25%;
 }
+
 #result table td:nth-child(4){
 	width: 30%;
 }
+
 .platform{
 	text-align: right;
 	padding-right: 30px;
 }
+
 .FromTo{
 	font-size: 60px;
 }
+
 .time{
 	text-align: right;
 	padding-right: 70px;
 }
+
 .date{
 	text-align: right;
 	padding-right: 70px;
 	padding-bottom: 30px;
 }
+
 .important{
 	font-size: 40px;
 }
+
 .grey{
 	color: grey;
 }
@@ -416,6 +423,7 @@ body{
 	padding-bottom: 20px;
 	border-bottom: 1px solid grey;
 }
+
 .duration{
 	text-align: right;
 	padding-right: 30px;
@@ -520,6 +528,7 @@ body{
 	.inputPageTitle{
 		font-size: 30px;
 	}
+
 	.depBoardInput, .weatherInput{
 		width: 300px;
 		line-height: 1.5em;
@@ -666,5 +675,4 @@ body{
 	text-align: right;
 }
 
-/***************************************************
 /***************************************************
