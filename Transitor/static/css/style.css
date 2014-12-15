@@ -638,7 +638,7 @@ body{
 }
 
 .degree{
-	padding-top: 120px;
+	padding-top: 130px;
 	font-size: 60px;
 	text-align: center;
 }
@@ -647,7 +647,7 @@ body{
 	font-size: 30px;
 	text-align: center;
 	padding: 0;
-	margin: 10px 0 -20px 0;
+	margin: 20px 0 -20px 0;
 }
 
 .expandedInfo{
@@ -668,7 +668,7 @@ body{
 
 .expandedInfo table td:nth-child(3){
 	width: 200px;
-	padding-left: 50px;
+	padding-left: 30px;
 }
 
 .expandedInfo table td:nth-child(2), .expandedInfo table td:nth-child(4){
