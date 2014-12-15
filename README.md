@@ -21,7 +21,7 @@ The program was designed to run on Python 3.4.1, so that is needed. In order to 
 | iCalendar        | pip3 install icalendar      |
 
 
-sudo is recommended when installing packages, but not needed. 
+sudo is recommended when installing packages, but not required. 
 
 Authors
 -------
