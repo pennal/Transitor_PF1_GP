@@ -638,7 +638,7 @@ body{
 }
 
 .degree{
-	padding-top: 130px;
+	padding-top: 120px;
 	font-size: 60px;
 	text-align: center;
 }
@@ -647,7 +647,7 @@ body{
 	font-size: 30px;
 	text-align: center;
 	padding: 0;
-	margin: 20px 0 -20px 0;
+	margin: 20px 0 -10px 0;
 }
 
 .expandedInfo{
