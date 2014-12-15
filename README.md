@@ -18,6 +18,8 @@ The program was designed to run on Python 3.4.1, so that is needed. In order to 
 | Flask            | pip3 install Flask          |
 | Beautiful Soup 4 | pip3 install beautifulsoup4 |
 | Requests         | pip3 install requests       |
+| iCalendar        | pip3 install icalendar      |
+
 
 sudo is recommended when installing packages, but not needed. 
 
