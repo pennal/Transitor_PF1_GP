@@ -104,7 +104,7 @@ def prepareHTMLContent(data):
             "resultsNumber" : i + 1,
             "dayName" : dayName,
             "dayNumber" : dayNumber,
-            "forecastCode" : data[i]["forecastId"], # Added variable
+            "forecastCode" : data[i]["forecastId"],
             "mainTemp" : data[i]["dayTemperature"],
             "humidity" : data[i]["humidity"],
             "pressure" : data[i]["pressure"],
@@ -134,7 +134,7 @@ def getForecast(location):
     forecast = []
     locationOfWeather = data["city"]["name"] + ", " + countriesDict.getExtendedCountryName(data["city"]["country"])
     for i in range(0,len(data["list"])):
-        weatherId = str(data["list"][i]["weather"][0]["id"]) #looking for id and convert to string
+        weatherId = str(data["list"][i]["weather"][0]["id"])
         clouds = data["list"][i]["clouds"]
         dt = data["list"][i]["dt"]
         humidity = data["list"][i]["humidity"]
@@ -151,7 +151,7 @@ def getForecast(location):
 
 
         forecast.append({
-            "forecastId" : forecastDict[weatherId], # addedd varible, call from dictionary
+            "forecastId" : forecastDict[weatherId],
             "clouds" : clouds,
             "dt": dt,
             "humidity" : humidity,
