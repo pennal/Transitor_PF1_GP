@@ -6,16 +6,16 @@ from pygeocoder import Geocoder
 baseURL = 'https://api.forecast.io/forecast/e59201f23f3889e65c456b9903db3309/'
 
 forecastDict = {
-    "clear-day":"<ul><li class=\"basecloud\"></li><li class=\"icon-sunny\"></li></ul>",
-    "clear-night":"<ul><li class=\"icon-moon\"></li></ul>",
+    "clear-day":"<ul><li class=\"icon-sun\"></li></ul>",
+    "clear-night":"<ul><li class=\"icon-sun\"></li></ul>",
     "rain":"<ul><li class=\"basecloud\"></li><li class=\"icon-drizzle\"></li></ul>",
     "snow":"<ul><li class=\"basecloud\"></li><li class=\"icon-snowy\"></li></ul>",
     "sleet":"<ul><li class=\"basecloud\"></li><li class=\"icon-sleet\"></li></ul>",
     "wind":"<ul><li class=\"basecloud\"></li><li class=\"icon-windy\"></ul>",
     "fog":"<ul><li class=\"icon-mist\"></li></ul>",
     "cloudy":"<ul><li class=\"icon-cloud\"></li></ul>",
-    "partly-cloudy-day":"<ul><li class=\"basecloud\"></li><li class=\"icon-drizzle icon-sunny\"></ul>",
-    "partly-cloudy-night":"<ul><li class=\"basecloud\"></li><li class=\"icon-drizzle icon-night\"></ul>",
+    "partly-cloudy-day":"<ul><li class=\"basecloud\"></li><li class=\"icon-rainy icon-sunny\"></ul>",
+    "partly-cloudy-night":"<ul><li class=\"basecloud\"></li><li class=\"icon-rainy icon-sunny\"></ul>",
     "hail":"<ul><li class=\"basecloud\"></li><li class=\"icon-hail\"></ul>",
     "thunderstorm":"<ul><li class=\"basethundercloud\"></li><li class=\"icon-thunder\"></ul>",
     "tornado":"<ul><li class=\"windyraincloud\"></li><li class=\"icon-windyrain\"></li></ul>",
