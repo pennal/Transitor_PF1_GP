@@ -334,15 +334,18 @@ body{
 	margin: 0 auto;
 }
 
+#buttonDiv{
+	left: 1.5%;
+    position: fixed;
+    z-index: 1000;
+    opacity: 0;
+}
+
 #backButton{
 	background-image: url("../images/backbutton.png");
     background-size: cover;
     height: 42px;
-    left: 1.5%;
-    position: fixed;
     width: 42px;
-    z-index: 1000;
-    opacity: 0;
 }
 
 #cardNumTag{
