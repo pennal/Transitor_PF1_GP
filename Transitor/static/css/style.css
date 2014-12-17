@@ -126,6 +126,15 @@ body{
     width: 42px;
 }
 
+#homeButtonAlternate{
+	background-image: url("../images/homebutton.png");
+    background-size: cover;
+    /*float: left;*/
+    height: 42px;
+    /*margin: 2.5% 25px 50px 1.5%;*/
+    width: 42px;
+}
+
 
 /****************************************************/
 /*Home page*/
@@ -339,6 +348,14 @@ body{
     position: fixed;
     z-index: 1000;
     opacity: 0;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+#buttonDiv a{
+	display: inline-block;
+	margin-right: 5px;
 }
 
 #backButton{
@@ -583,7 +600,7 @@ body{
 /* Weather */
 
 .weatherTitle{
-	padding: 0 100px;
+	padding: 0 140px;
 	margin: -10px;
 	text-align: left;
 	font-size: 40px;

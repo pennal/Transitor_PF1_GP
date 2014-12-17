@@ -7,11 +7,11 @@ var isTransitioningCard = false;
 
 // Additional code to add to results
 var cardNumCode = "<div id=\"cardNumTag\"></div>";
-var backButtonCode = "<a id=\"backButton\" href=\"javascript:slideSearch(false);\"></a>\n";
+var buttonDivCode = "<div id=\"buttonDiv\"><a id=\"backButton\" href=\"javascript:slideSearch(false);\"></a><a id=\"homeButtonAlternate\" class=\"internal\" href=\"pages/home.html\"></a></div>\n";
 var navRightArrowCode = "<a href=\"javascript:slideOutFrontAndReplace();\" id=\"rightarrow\"></a>";
 var navLeftArrowCode = "<a href=\"javascript:slideInBackAndReplace();\" id=\"leftarrow\"></a>";
 
-var additionalCode = cardNumCode+backButtonCode+navRightArrowCode+navLeftArrowCode;
+var additionalCode = cardNumCode+buttonDivCode+navRightArrowCode+navLeftArrowCode;
 
 // Formats the date for the user and also for the API
 function dateFormat (forURL, value) {
@@ -111,7 +111,7 @@ function sendP2PTransitReq (params, callback) {
 	  }else if(xmlhttp.readyState==4){
 	  	hideProgressBar();
 	  	// There was an error - display an error message
-	  	callback(backButtonCode+"<span style='display:block; text-align: center; color: white;'>There was an error. Please check your input and try again later.</span>");
+	  	callback(buttonDivCode+"<span style='display:block; text-align: center; color: white;'>There was an error. Please check your input and try again later.</span>");
 	  }
 
 	}
@@ -193,7 +193,7 @@ function slideSearch (offScreen) {
 function freezeArrows (freeze) {
 	var leftarrow = $('#leftarrow');
 	var rightarrow = $('#rightarrow');
-	var backButton = $('#backButton');
+	var buttonDiv = $('#buttonDiv');
 
 	var speed = 175;
 
@@ -221,11 +221,11 @@ function freezeArrows (freeze) {
 			} 
 		});
 
-		backButton.animate({
+		buttonDiv.animate({
 			opacity: '0'
 		}, { 
 			duration: speed, queue: false, complete: function(){
-				backButton.css({
+				buttonDiv.css({
 					position: "absolute"
 				});
 			} 
@@ -246,7 +246,7 @@ function freezeArrows (freeze) {
 			duration: speed*2, queue: false 
 		});
 
-		backButton.animate({
+		buttonDiv.animate({
 			opacity: '1'
 		}, { 
 			duration: speed*2, queue: false 

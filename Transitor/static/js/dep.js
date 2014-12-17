@@ -1,5 +1,5 @@
 var resultsView = $('#resultsView')
-var backButtonCode = "<a id=\"backButton\" href=\"javascript:slideSearch(false);\"></a>\n";
+var buttonDivCode = "<div id=\"buttonDiv\"><a id=\"backButton\" href=\"javascript:slideSearch(false);\"></a><a id=\"homeButtonAlternate\" class=\"internal\" href=\"pages/home.html\"></a></div>\n";
 
 // Gets all the form's values and submits them. Also converts the values into the appropriate format
 function submitDepBoardForm (form) {
@@ -39,11 +39,11 @@ function sendDepTransitReq (params, callback) {
 	  if (xmlhttp.readyState==4 && xmlhttp.status==200) {
 	  	hideProgressBar();
 	  	// Success - display results
-	  	callback(backButtonCode+xmlhttp.responseText);
+	  	callback(buttonDivCode+xmlhttp.responseText);
 	  }else if(xmlhttp.readyState==4){
 	  	hideProgressBar();
 	  	// There was an error - display an error message
-	  	callback(backButtonCode+"<span style='display:block; text-align: center; color: white;'>There was an error. Please check your input and try again later.</span>");
+	  	callback(buttonDivCode+"<span style='display:block; text-align: center; color: white;'>There was an error. Please check your input and try again later.</span>");
 	  }
 
 	}
@@ -151,16 +151,16 @@ function setPageTitle (from, to) {
 
 
 function freezeArrows (freeze) {
-	var backButton = $('#backButton');
+	var buttonDivElem = $('#buttonDiv');
 
 	var speed = 175;
 
 	if (freeze) { //Animating results off screen
-		backButton.animate({
+		buttonDivElem.animate({
 			opacity: '0'
 		}, { 
 			duration: speed, queue: false, complete: function(){
-				backButton.css({
+				buttonDivElem.css({
 					position: "absolute"
 				});
 			} 
@@ -168,7 +168,7 @@ function freezeArrows (freeze) {
 
 	}else{ //Animating results on screen
 
-		backButton.animate({
+		buttonDivElem.animate({
 			opacity: '1'
 		}, { 
 			duration: speed*2, queue: false 
