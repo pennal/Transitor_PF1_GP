@@ -199,13 +199,6 @@ function expandHiddenInfo (expandedInfoDiv) {
 
 	expandedInfoPosition = expandedInfoDiv.parent().position();
 
-	expandedInfoDiv.parent().css({
-		position: 'absolute',
-		left: expandedInfoPosition.left,
-		top: expandedInfoPosition.top,
-		'z-index': '10000'
-	});
-
 	expandedInfoDiv.css({
 		height: '0',
 		width: '0',
@@ -217,6 +210,13 @@ function expandHiddenInfo (expandedInfoDiv) {
 	$(".weatherBox").not('.expanded').animate({
 		opacity: '0'
 	}, { duration: 250, queue: false, complete: function(){
+
+		expandedInfoDiv.parent().css({
+			position: 'absolute',
+			left: expandedInfoPosition.left,
+			top: expandedInfoPosition.top,
+			'z-index': '10000'
+		});
 
 		expandedInfoDiv.parent().animate({
 			top: '0',
