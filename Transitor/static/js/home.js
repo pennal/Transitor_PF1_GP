@@ -80,3 +80,12 @@ function requestThenFadeOut (theLink) {
 		}, 1100);
 	});
 }
+
+setTimeout(function(){
+	$(".front.overlay").animate({
+	    opacity: '0'
+	}, {duration:500, queue: false, complete:function(){
+		$(".front.overlay").addClass("animationOver");
+		$(".front.overlay.animationOver").css('opacity', '');
+	}});
+}, 1000);

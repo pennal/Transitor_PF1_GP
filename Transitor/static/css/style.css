@@ -181,9 +181,13 @@ body{
 	background: rgba(25,25,25,0.7);
 	color: white;
 	text-align: center;
-	display: none;
+	display: inline-block
     vertical-align: middle;
     font-size: 20pt;
+}
+
+.front.overlay.animationOver{
+	display: none;
 }
 
 .front.overlay:before {
