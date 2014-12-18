@@ -234,6 +234,17 @@ body{
 
 }
 
+#githubLink{
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+}
+
+#githubLink a{
+	text-decoration: none;
+	color: white;
+	text-shadow: 0px 0px 3px #000000;
+}
 
 /****************************************************/
 /*P2P input page*/
